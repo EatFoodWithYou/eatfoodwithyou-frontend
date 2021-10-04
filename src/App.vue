@@ -8,7 +8,7 @@
       <router-link to="/logout" v-if="isAuthen()">LOG OUT</router-link> |
       <router-link to="/register" v-if="!isAuthen()">Register</router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
@@ -18,7 +18,6 @@ export default {
     isAuthen() {
       return AuthUser.getters.isAuthen;
     },
-    
   },
 };
 </script>
@@ -27,7 +26,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
