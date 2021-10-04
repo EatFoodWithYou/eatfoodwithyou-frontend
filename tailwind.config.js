@@ -7,6 +7,7 @@ module.exports = {
         // add color here by using - propertyName: "HEX,RGB,HSL", don't forget the quotes! ( Example -> color1: "#000000", next color..)
         backgroundColor: "#E5A478",
         backgroundButton: "#616265",
+        textRedColor: "#E76666",
       },
       fontFamily: {
         prompt: ["Prompt"],
