@@ -3,12 +3,25 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/recipe/add">Add new Recipe</router-link>
+      <router-link to="/recipe/add">Add new Recipe</router-link> |
+      <router-link to="/login" v-if="!isAuthen()">Login</router-link> |
+      <router-link to="/logout" v-if="isAuthen()">LOG OUT</router-link> |
+      <router-link to="/register" v-if="!isAuthen()">Register</router-link>
     </div>
     <router-view/>
   </div>
 </template>
-
+<script>
+import AuthUser from "@/store/AuthUser";
+export default {
+  methods: {
+    isAuthen() {
+      return AuthUser.getters.isAuthen;
+    },
+    
+  },
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

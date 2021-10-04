@@ -1,0 +1,194 @@
+<template>
+    <div class="main-container">
+        <h2 class="title">Register</h2>
+        <form @submit.prevent="register" class="custom-form">
+            <div class="container">
+                <div>
+                    <label>Email : </label>
+                    <input
+                        type="text"
+                        name="username"
+                        v-model="registerForm.email"
+                        autocomplete="off"
+                        placeholder="username"
+                    />
+                </div>
+                <div>
+                    <label>Password :</label>
+                    <input
+                        type="password"
+                        name="password"
+                        v-model="registerForm.password"
+                        autocomplete="off"
+                        placeholder="password"
+                    />
+                </div>
+                <div>
+                    <label>Confrim Password :</label>
+                    <input
+                        type="password"
+                        name="confrimPass"
+                        v-model="confirm_password"
+                        autocomplete="off"
+                        placeholder="confirm password"
+                    />
+                </div>
+                
+                <div>
+                    <label>Firstname :</label>
+                    <input
+                        type="text"
+                        name="firstname"
+                        v-model="registerForm.firstname"
+                        autocomplete="off"
+                        place
+                        holder="firstname"
+                    />
+                  
+                </div>
+                <div>
+                    <label>Lastname :</label>
+                    <input
+                        type="text"
+                        name="lastname"
+                        v-model="registerForm.lastname"
+                        autocomplete="off"
+                        placeholder="lastname"
+                    />
+                </div>
+                <div>
+                    <label>age :</label>
+                    <input
+                        type="text"
+                        name="age"
+                        v-model="registerForm.age"
+                        autocomplete="off"
+                        placeholder="address"
+                    />
+                </div>
+                <div>
+                    <label>gender :</label>
+                    <input
+                        type="text"
+                        name="lastname"
+                        v-model="registerForm.gender"
+                        autocomplete="off"
+                        placeholder="address"
+                    />
+                </div>
+            </div>
+            <div class="btn">
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
+</template>
+
+<script>
+import AuthUser from '@/store/AuthUser'
+export default {
+    data() {
+        return {
+            allUser: [],
+            currentUser: '',
+            edit: false,
+            confirm_password: '',
+            registerForm: {
+                email: '',
+                password: '',
+                firstname: '',
+                lastname: '',
+                age: 0,
+                gender : '',
+                role: 'USER' ,
+                
+            },
+        };
+    },
+    methods: {
+        async register() {
+            if (this.checkNull()) {
+                if (this.registerForm.password === this.confirm_password) {
+                    let res = await AuthUser.dispatch('register', this.registerForm);
+                    console.log(56);
+                    console.log(res);
+                    if (res.success) {
+                        this.$swal('Register Success', `Welcome ${res.user.username}`, 'success');
+                        this.$router.push('/');
+                    } else {
+                        this.$swal('Register Failed', res.message, 'error');
+                    }
+                } else {
+                    this.$swal(
+                        'Register Failed',
+                        'Your password and confirm password is not match!',
+                        'error',
+                    );
+                }
+            } else {
+                this.$swal(
+                    'Register Failed',
+                    'Please check that the information you have entered is complete.',
+                    'error',
+                );
+            }
+        },
+        checkNull() {
+            return (
+                this.registerForm.email !== '' &&
+                this.registerForm.password !== '' &&
+                this.registerForm.confirm_password !== '' &&
+                this.registerForm.firstname !== '' &&
+                this.registerForm.lastname !== '' &&
+                this.registerForm.age !== 0 &&
+                this.registerForm.gender !== '' &&
+                this.registerForm.role !== ''
+            );
+        },
+    },
+};
+</script>
+
+<style lang="scss" scoped>
+.title {
+    text-align: center;
+}
+.custom-form {
+    padding: 0;
+    div {
+        margin: 0;
+    }
+    .btn {
+        display: block;
+        text-align: center;
+        margin: 0;
+        button {
+            margin: 0 0 0.5em 0;
+        }
+    }
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    div {
+        display: flex;
+        flex-direction: column;
+        margin: 0.4em auto;
+        
+        input {
+            width: 100%;
+        }
+        &:last-child {
+            padding: 0 1em;
+            width: 100%;
+            input {
+                width: 435px;
+            }
+        }
+        label {
+            margin: 0;
+        }
+    }
+}</style
+>>

@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import AddFoodRecipe from '@/views/FoodRecipe/AddRecipe.vue'
+import Login from '@/views/Login.vue';
+import Logout from '@/views/Logout.vue'
+import Register from '@/views/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +26,23 @@ const routes = [
     path: '/recipe/add',
     name: 'AddRecipe',
     component: AddFoodRecipe
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout,
+  },
+
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
   },
 ]
 
