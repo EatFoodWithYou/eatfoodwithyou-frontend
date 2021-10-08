@@ -6,7 +6,8 @@
       <img class="h-48 w-full object-cover md:w-48" v-bind:src="this.foodRecipe.photo_url" alt="Man looking at item at a store">
     </div>
     <div class="p-8">
-      <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ this.foodRecipe.name }}</a>
+      <router-link :to="{ name: 'FoodRecipeInfor', params: { id: this.foodRecipe.id}}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ this.foodRecipe.name }}</router-link>
+      <!-- <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ this.foodRecipe.name }}</a> -->
       <p class="mt-2 text-gray-500">{{ this.foodRecipe.detail }}</p>
     </div>
         </div>

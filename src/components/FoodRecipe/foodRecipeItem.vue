@@ -5,7 +5,8 @@
             <img v-bind:src="imageURL" width="250" height="250" class="m-10 h-48">
         </div>
         <div class="ml-25">
-            <a href="">{{ name }}</a>
+            <router-link :to="{ name: 'FoodRecipeInfor', params: { id: this.id}}">{{ name }}</router-link>
+            <!-- <a href="">{{ name }}</a> -->
             <h5>สูตรอาหารโดย : {{ user_name }}</h5>
         </div>
     </div>
@@ -31,10 +32,12 @@ export default {
       datail:"",
       user_name:"",
       imageURL:"",
+      id:""
     }
   },
   methods:{
     async validProductData() {
+      this.id = this.FoodRecipes.id
       this.name = this.FoodRecipes.name || "FOODRECIPE NAME";
       this.user_name = this.FoodRecipes.user_name
       if(this.FoodRecipes.photo_url !== 'http://localhost:8000/storage/foodRecipe/')
