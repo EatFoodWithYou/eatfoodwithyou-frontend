@@ -1,4 +1,5 @@
 import Axios from "axios"
+import AuthService from "./AuthService"
 const api_endpoint = process.env.VUE_APP_SHOP_ENDPOINT || 'http://localhost:8000'
 
 export default {
@@ -12,6 +13,7 @@ export default {
     async createCookingProcess(data){
         try {
             let url = `${api_endpoint}/api/processes/`
+            let jwt = AuthService.getJwt();
             // let body = {
             //     process: process,
             //     photo: photo,
@@ -21,6 +23,7 @@ export default {
             let res = await Axios.post(url, data,{headers: {
                 'Content-Type': "multipart/form-data" ,  
                 'Accept' : "application/json",
+                Authorization: `Bearer ${jwt}`
             }
             })
             console.log(res);

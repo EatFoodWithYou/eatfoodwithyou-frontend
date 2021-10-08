@@ -1,4 +1,5 @@
 import Axios from "axios"
+import AuthService from "./AuthService"
 const api_endpoint = process.env.VUE_APP_SHOP_ENDPOINT || 'http://localhost:8000'
 
 export default {
@@ -18,8 +19,8 @@ export default {
                 unit: unit,
                 food_recipe_id:food_recipe_id
             }
-            // let header = AuthService.getApiHeader()
-            let res = await Axios.post(url, body)
+            let header = AuthService.getApiHeader()
+            let res = await Axios.post(url, body,header)
             console.log(res);
             if(res.status === 201){
                 return {
@@ -30,6 +31,7 @@ export default {
                 console.log("NOT 200", res);
             }
         } catch (e) {
+            console.log(e);
             if(e.response.status === 400){
                 // console.log(e.response.data.message[0].messages[0].message);
                 return {

@@ -2,8 +2,8 @@ import Axios from 'axios';
 
 const auth_key = 'auth-shop';
 let auth = JSON.parse(localStorage.getItem(auth_key));
-const user = auth ? auth.user : '';
-const jwt = auth ? auth.jwt : '';
+const user = auth ? auth.data.user : '';
+const jwt = auth ? auth.data.access_token : '';
 const api_endpoint = process.env.VUE_APP_SHOP_ENDPOINT || 'http://localhost:8000' ;
 
 export default {
@@ -25,6 +25,7 @@ export default {
     },
 
     getJwt() {
+        console.log(jwt);
         return jwt;
     },
     async login({ email, password }) {

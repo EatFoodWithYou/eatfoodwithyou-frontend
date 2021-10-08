@@ -76,6 +76,9 @@ export default {
       this.loginFrom.email = "";
       this.loginFrom.password = "";
     },
+    register(){
+      this.$router.push('/register');
+    }
   },
 };
 </script>
