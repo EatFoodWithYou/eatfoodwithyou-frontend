@@ -11,8 +11,8 @@ Vue.use(Vuex);
 let auth_key = 'auth-shop';
 let auth = JSON.parse(localStorage.getItem(auth_key));
 const initialStateUser = {
-    user: auth ? auth.user : '',
-    jwt: auth ? auth.jwt : '',
+    user: auth ? auth.data.user : '',
+    jwt: auth ? auth.data.access_token : '',
     isAuthen: auth ? true : false,
 };
 
