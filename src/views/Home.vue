@@ -8,13 +8,13 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import RandomFoodRecipe from '../../../patrolpolice-frontend/src/components/randomFoodRecipe.vue'
+import HelloWorld from "@/components/HelloWorld.vue";
+import RandomFoodRecipe from "@/components/FoodRecipe/randomFoodRecipe.vue";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     HelloWorld,
-    RandomFoodRecipe
-  }
-}
+    RandomFoodRecipe,
+  },
+};
 </script>
