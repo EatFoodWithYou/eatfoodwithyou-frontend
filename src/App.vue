@@ -5,6 +5,8 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/recipe/add">Add new Recipe</router-link> |
       <router-link to="/login" v-if="!isAuthen()">Login</router-link> |
+      <router-link to="/userinformation">User Information</router-link> |
+      <router-link to="/editinformation">Edit Information</router-link> |
       <router-link to="/logout" v-if="isAuthen()">LOG OUT</router-link> |
       <router-link to="/register" v-if="!isAuthen()">Register</router-link>
     </div>

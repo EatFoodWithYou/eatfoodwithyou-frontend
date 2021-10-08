@@ -5,6 +5,8 @@ import AddFoodRecipe from '@/views/FoodRecipe/AddRecipe.vue'
 import Login from '@/views/Login.vue';
 import Logout from '@/views/Logout.vue'
 import Register from '@/views/Register.vue'
+import UserInfo from '@/views/UserInfo.vue'
+import EditInfo from '@/views/EditInfo.vue'
 import FoodRecipeInfomarion from '@/views/FoodRecipe/foodRecipeInformation.vue'
 
 Vue.use(VueRouter)
@@ -45,6 +47,19 @@ const routes = [
     name: 'Register',
     component: Register,
   },
+
+  {
+    path: '/userinformation',
+    name: 'UserInfo',
+    component: UserInfo,
+  },
+
+  {
+    path: '/editinformation',
+    name: 'EditInfo',
+    component: EditInfo,
+  },
+
   {
     path: '/recipe/:id/information',
     name: 'FoodRecipeInfor',

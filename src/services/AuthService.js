@@ -113,6 +113,32 @@ export default {
         let res = await Axios.get(url, header);
         return res.data;
     },
+
+    async fetchRecipes(){
+        let url = api_endpoint +'/api/auth/me'
+        // console.log(url)
+        // console.log(jwt)
+        // console.log(user)
+        let header = this.getApiHeader();
+        // console.log(header)
+        // console.log("__________")
+        let res = await Axios.post(url, "",header);
+        // console.log(res)
+        // console.log("______________")
+        return res;
+    },
+
+    async editInformation({name, age, gender}){
+        let url = `${api_endpoint}/api/auth/me`
+        let body = {
+            name: name,
+            age: age,
+            gender: gender,
+        }
+        let header = this.getApiHeader();
+        let res = await Axios.post(url, body, header)
+        return res
+    }
 };
 
 // export const
