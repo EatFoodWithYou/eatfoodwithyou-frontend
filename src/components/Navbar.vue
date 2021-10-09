@@ -17,7 +17,7 @@
             EFWY
           </div>
         </a>
-        <button @click="isOpen = !isOpen" class="sm:absolute sm:hidden">
+        <button @click="isOpen = !isOpen" class="flex sm:hidden mt-4">
           <font-awesome-icon
             :icon="['fas', 'bars']"
             class="text-white text-3xl"
@@ -32,19 +32,21 @@
       </div>
       <div :class="isOpen ? 'block' : 'hidden'" class="sm:block pt-1">
         <div
-          class="md:space-x-5 sm:text-2xl text-xl relative sm:flex font-prompt"
+          class="md:space-x-5 sm:text-2xl text-xl text-center relative sm:flex font-prompt"
         >
           <a
-            class="p-3 block text-yellow-50 sm:hover:text-hoverColor sm:hover:bg-navbarColor hover:bg-navbarColor transition duration-250"
+            class="p-3 block text-yellow-50 hover:text-hoverColor sm:hover:bg-navbarColor hover:bg-navbarColor transition duration-250"
             href="http://localhost:8080/"
             >Home</a
           >
-          <button
-            class="p-3 block text-yellow-50 sm:hover:text-hoverColor sm:hover:bg-navbarColor hover:bg-navbarColor transition duration-250"
-            @click="recipes()"
-          >
-            Recipes
-          </button>
+          <div class="flex justify-center">
+            <button
+              class="p-3 block text-yellow-50 hover:text-hoverColor sm:hover:bg-navbarColor hover:bg-navbarColor transition duration-250"
+              @click="recipes()"
+            >
+              Recipes
+            </button>
+          </div>
           <Account class="hidden sm:block" v-if="isAuthen()" />
           <button
             @click="login()"
@@ -56,44 +58,34 @@
         </div>
         <div class="relative sm:hidden" v-if="isAuthen()">
           <div tabindex="-1" class="relative z-10 my-1 ">
-            <div class="flex items-center mt-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="absolute h-12 w-12 ml-2 rounded-full text-yellow-50 "
-                fill="none"
-                viewBox="0 -1.5 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span
-                class="ml-16 pl-2 mt-1 text-white font-prompt text-xl truncate"
-                >Yean Arj
-              </span>
+            <div class="flex justify-center">
+              <div class="flex items-center mt-3">
+                <div class="flex justify-center text-center">
+                  <span
+                    class="pl-2 mt-1 text-bgColor font-prompt text-xl truncate"
+                    >{{ currentUser.user.name }}
+                  </span>
+                </div>
+              </div>
             </div>
             <div
               class="absolute top-auto right-0 mt-2 w-full text-left font-prompt text-white rounded-b-lg bg-navbarColor shadow-xl text-xl "
             >
               <button
-                class="block px-3 py-2.5 mt-2 text-white hover:bg-bgColor hover:text-white transition duration-250"
+                class="block w-full px-3 py-2.5 mt-2 text-white hover:bg-bgColor hover:text-white transition duration-250"
                 @click="info()"
               >
                 Profile
               </button>
               <button
-                class="block px-3 py-2.5 text-white hover:bg-bgColor hover:text-white transition duration-250 "
+                class="block w-full px-3 py-2.5 text-white hover:bg-bgColor hover:text-white transition duration-250 "
                 @click="edit()"
               >
                 Setting
               </button>
               <button
                 @click="logout()"
-                class="block px-4 py-2.5 text-red-50 bg-red-500 hover:bg-red-600 transition duration-250"
+                class="block w-full px-4 py-2.5 text-red-50 bg-red-500 hover:bg-red-600 transition duration-250"
               >
                 Log out
               </button>
@@ -108,16 +100,32 @@
 <script>
 import AuthUser from "@/store/AuthUser";
 import Account from "@/components/Account.vue";
+import AuthService from "@/services/AuthService";
+
 export default {
-  components: {
-    Account,
-  },
   data() {
     return {
       isOpen: false,
+      currentUser: "",
+      currentUserWithFoodRecipe: "",
     };
   },
+
+  components: {
+    Account,
+  },
+
   methods: {
+    async fetchCurrentUser() {
+      this.currentUser = JSON.parse(
+        JSON.stringify(AuthUser.getters.getCurrentUser)
+      );
+      // console.log("CurrentUser", this.currentUser);
+      // console.log("_______________");
+      // let res = await AuthService.fetchRecipes();
+      // this.currentUserWithFoodRecipe = res.data;
+      // console.log(this.currentUserWithFoodRecipe);
+    },
     isAuthen() {
       return AuthUser.getters.isAuthen;
     },
@@ -136,6 +144,9 @@ export default {
     recipes() {
       this.$router.push("/recipe");
     },
+  },
+  created() {
+    this.fetchCurrentUser();
   },
 };
 </script>

@@ -1,9 +1,6 @@
 <template>
   <div class="bg-bgColor main-container min-h-screen">
     <div class="font-prompt">
-      <div>
-        <Navbar />
-      </div>
       <div class="mt-20">
         <div class="text-center py-4 text-white">
           <h2 class="text-7xl">
@@ -71,7 +68,7 @@
                   <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 text-xl border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     type="text"
-                    v-model="registerForm.Firstname"
+                    v-model="registerForm.firstname"
                     autocomplete="off"
                     placeholder="Firstname"
                   />
@@ -120,8 +117,8 @@
                     class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 text-xl py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     v-model="registerForm.gender"
                   >
-                    <option>Male</option>
-                    <option>Female</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
                     <option>Unspecified</option>
                   </select>
                   <div
@@ -161,98 +158,11 @@
       </div>
     </div>
   </div>
-  <!-- <div class="main-container">
-        <h2 class="title">Register</h2>
-        <form @submit.prevent="register" class="custom-form">
-            <div class="container">
-                <div>
-                    <label>Email : </label>
-                    <input
-                        type="text"
-                        name="username"
-                        v-model="registerForm.email"
-                        autocomplete="off"
-                        placeholder="username"
-                    />
-                </div>
-                <div>
-                    <label>Password :</label>
-                    <input
-                        type="password"
-                        name="password"
-                        v-model="registerForm.password"
-                        autocomplete="off"
-                        placeholder="password"
-                    />
-                </div>
-                <div>
-                    <label>Confrim Password :</label>
-                    <input
-                        type="password"
-                        name="confrimPass"
-                        v-model="confirm_password"
-                        autocomplete="off"
-                        placeholder="confirm password"
-                    />
-                </div>
-                
-                <div>
-                    <label>Firstname :</label>
-                    <input
-                        type="text"
-                        name="firstname"
-                        v-model="registerForm.firstname"
-                        autocomplete="off"
-                        place
-                        holder="firstname"
-                    />
-                  
-                </div>
-                <div>
-                    <label>Lastname :</label>
-                    <input
-                        type="text"
-                        name="lastname"
-                        v-model="registerForm.lastname"
-                        autocomplete="off"
-                        placeholder="lastname"
-                    />
-                </div>
-                <div>
-                    <label>age :</label>
-                    <input
-                        type="text"
-                        name="age"
-                        v-model="registerForm.age"
-                        autocomplete="off"
-                        placeholder="address"
-                    />
-                </div>
-                <div>
-                    <label>gender :</label>
-                    <input
-                        type="text"
-                        name="lastname"
-                        v-model="registerForm.gender"
-                        autocomplete="off"
-                        placeholder="address"
-                    />
-                </div>
-            </div>
-            <div class="btn">
-                <button>Submit</button>
-            </div>
-        </form>
-    </div> -->
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
 import AuthUser from "@/store/AuthUser";
 export default {
-  components: {
-    Navbar,
-  },
   data() {
     return {
       allUser: [],
@@ -272,6 +182,7 @@ export default {
   },
   methods: {
     async register() {
+      console.log(this.registerForm);
       if (this.checkNull()) {
         if (this.registerForm.password === this.confirm_password) {
           let res = await AuthUser.dispatch("register", this.registerForm);

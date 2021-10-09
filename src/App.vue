@@ -1,9 +1,24 @@
 <template>
   <div id="app" class="overflow-hidden">
-    <navbar> </navbar>
-    <router-view />
+    <div class="bg-bgColor main-container min-h-screen">
+      <div class="font-prompt">
+        <div>
+          <Navbar />
+          <router-view />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<script>
+import Navbar from "@/components/Navbar.vue";
+export default {
+  components: {
+    Navbar,
+  },
+};
+</script>
 
 <style lang="scss">
 * {

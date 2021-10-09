@@ -1,9 +1,6 @@
 <template>
   <div class="bg-bgColor main-container min-h-screen">
     <div class="font-prompt">
-      <div>
-        <Navbar />
-      </div>
       <div class="mt-48">
         <div class="text-center py-4 text-white">
           <h2 class="text-7xl">
@@ -69,12 +66,8 @@
 
 <script>
 // import ShopStore from '@/store/Shop'
-import Navbar from "@/components/Navbar.vue";
 import AuthUser from "@/store/AuthUser";
 export default {
-  components: {
-    Navbar,
-  },
   data() {
     return {
       currentUser: "",
