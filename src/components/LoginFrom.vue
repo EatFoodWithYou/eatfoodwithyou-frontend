@@ -1,50 +1,80 @@
 <template>
-  <div
-    class="h-full w-full font-sans font-semibold text-white bg-backgroundColor items-center justify-center"
-  >
-    <div class="my-80">
-      <h2 class="title text-6xl flex justify-center items-center">Log in</h2>
-      <form class="my-10" @submit.prevent="login">
-        <div class="flex text-2xl justify-center items-center text-black">
-          <input
-            class="py-2 px-4 rounded-lg w-1/5 min-w-max focus:outline-none focus:ring focus:border-backgroundButton"
-            type="username"
-            v-model="loginFrom.email"
-            placeholder="Email"
-          />
+  <div class="bg-bgColor main-container min-h-screen">
+    <div class="font-prompt">
+      <div>
+        <Navbar />
+      </div>
+      <div class="mt-48">
+        <div class="text-center py-4 text-white">
+          <h2 class="text-7xl">
+            Log in
+          </h2>
         </div>
-        <div class="flex text-2xl justify-center items-center text-black mt-4">
-          <input
-            class="py-2 px-4 rounded-lg w-1/5 min-w-max focus:outline-none focus:ring focus:border-backgroundButton"
-            type="password"
-            v-model="loginFrom.password"
-            placeholder="Password"
-          />
+        <div class="flex justify-center">
+          <form class="w-3/12 max-w-4xl" @submit.prevent="login">
+            <div class="flex flex-wrap -mx-3 mb-5 mt-4">
+              <div class="w-full md:w-full px-3 md:mb-0">
+                <label
+                  class="block uppercase tracking-wide text-white text-xl mb-2"
+                >
+                  Email
+                </label>
+                <div class="relative">
+                  <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 text-xl border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    type="text"
+                    v-model="loginFrom.email"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+              <div class="w-full md:w-full px-3 md:mb-0">
+                <label
+                  class="block uppercase tracking-wide text-white text-xl mb-2"
+                >
+                  Password
+                </label>
+                <div class="relative">
+                  <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 text-xl border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                    type="password"
+                    v-model="loginFrom.password"
+                    placeholder="Password"
+                  />
+                </div>
+              </div>
+            </div>
+            <span
+              class="lg:flex text-base lg:text-lg text-white float-right -mt-3 cursor-default"
+              >Don’t have an account?&nbsp;<button
+                @click="signup()"
+                class="text-red-700 font-semibold hover:text-red-500 hover:underline"
+              >
+                Sign up
+              </button>
+            </span>
+            <div class=" py-3 text-center mt-10 text-black">
+              <button
+                class="font-normal rounded-full text-2xl p-2 w-44 bg-navbarColor text-white hover:bg-gray-800 transition duration-250"
+              >
+                Log in
+              </button>
+            </div>
+          </form>
         </div>
-        <p class="flex text-lg justify-center items-center ml-28 mt-2">
-          Don't have an account?&nbsp;
-          <a @click="register"
-            ><strong class="text-red-600 cursor-pointer hover:underline"
-              >Sign Up</strong
-            ></a
-          >
-        </p>
-        <div class="flex text-2xl justify-center items-center">
-          <button
-            class="text-white my-3 bg-backgroundButton mt-5 p-1 pb-2 px-8 content-center rounded-full hover:bg-gray-500 transition duration-50 ease-in-out"
-          >
-            Login
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 // import ShopStore from '@/store/Shop'
+import Navbar from "@/components/Navbar.vue";
 import AuthUser from "@/store/AuthUser";
 export default {
+  components: {
+    Navbar,
+  },
   data() {
     return {
       currentUser: "",
@@ -76,9 +106,9 @@ export default {
       this.loginFrom.email = "";
       this.loginFrom.password = "";
     },
-    register(){
-      this.$router.push('/register');
-    }
+    signup() {
+      this.$router.push("/register");
+    },
   },
 };
 </script>

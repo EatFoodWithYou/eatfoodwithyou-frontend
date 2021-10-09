@@ -5,9 +5,9 @@ module.exports = {
     extend: {
       colors: {
         // add color here by using - propertyName: "HEX,RGB,HSL", don't forget the quotes! ( Example -> color1: "#000000", next color..)
-        backgroundColor: "#E5A478",
-        backgroundButton: "#616265",
-        textRedColor: "#E76666",
+        navbarColor: "#616265",
+        hoverColor: "#F0D582",
+        bgColor: "#E5A478",
       },
       fontFamily: {
         prompt: ["Prompt"],

@@ -1,15 +1,12 @@
 <template>
-    <add-food-recipe></add-food-recipe>
+  <AddFoodRecipe />
 </template>
 
 <script>
-import AddFoodRecipe from '../../components/FoodRecipe/AddFoodRecipe.vue'
+import AddFoodRecipe from "../../components/FoodRecipe/AddFoodRecipe.vue";
 export default {
   components: { AddFoodRecipe },
-
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
