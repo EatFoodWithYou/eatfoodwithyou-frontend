@@ -6,7 +6,9 @@
       <router-link to="/recipe/add">Add new Recipe</router-link> |
       <router-link to="/login" v-if="!isAuthen()">Login</router-link> |
       <router-link to="/logout" v-if="isAuthen()">LOG OUT</router-link> |
-      <router-link to="/register" v-if="!isAuthen()">Register</router-link>
+      <router-link to="/register" v-if="!isAuthen()">Register</router-link> |
+      <router-link to="/admin/foodRecipes" v-if="isAuthen() && isAdmin() ">FoodRecipes</router-link> |
+      
     </div>
     <router-view/>
   </div>
@@ -18,6 +20,10 @@ export default {
     isAuthen() {
       return AuthUser.getters.isAuthen;
     },
+    isAdmin()
+    {
+      return AuthUser.getters.isAdmin ;
+    }
     
   },
 };

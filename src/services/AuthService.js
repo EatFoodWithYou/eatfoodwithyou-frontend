@@ -2,13 +2,18 @@ import Axios from 'axios';
 
 const auth_key = 'auth-shop';
 let auth = JSON.parse(localStorage.getItem(auth_key));
-const user = auth ? auth.user : '';
-const jwt = auth ? auth.jwt : '';
+const user = auth ? auth.data.user : '';
+const jwt = auth ? auth.data.access_token : '';
 const api_endpoint = process.env.VUE_APP_SHOP_ENDPOINT || 'http://localhost:8000' ;
 
 export default {
     isAuthen() {
         return user !== '' && jwt !== '';
+    },
+    isAdmin(role) {
+        // console.log("sohead")
+        // console.log(user);
+        return role ==='ADMIN';
     },
     getApiHeader() {
         if (jwt !== '') {
@@ -39,9 +44,12 @@ export default {
             console.log(body)
             let res = await Axios.post(url, body);
             
-            console.log(res)
+            console.log(res.data.user.role + "55555")
             if (res.status === 200) {
                 // console.log(res.data);
+                console.log(88);
+                console.log(res);
+                console.log(88);
                 localStorage.setItem(auth_key, JSON.stringify(res));
                 return {
                     success: true,
@@ -102,6 +110,7 @@ export default {
 
     async logout() {
         localStorage.removeItem(auth_key)
+        // let url = `${api_endpoint}/api/auth/logout`;
     },
 
     

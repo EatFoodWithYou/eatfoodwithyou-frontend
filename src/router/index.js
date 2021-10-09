@@ -5,6 +5,8 @@ import AddFoodRecipe from '@/views/FoodRecipe/AddRecipe.vue'
 import Login from '@/views/Login.vue';
 import Logout from '@/views/Logout.vue'
 import Register from '@/views/Register.vue'
+import AdminFoodRecipes from '@/views/Admin/AdminFoodRecipes.vue'
+import IsFoodRecipe from '@/views/Admin/IsFoodRecipe.vue'
 
 Vue.use(VueRouter)
 
@@ -44,6 +46,18 @@ const routes = [
     name: 'Register',
     component: Register,
   },
+  {
+    path: '/admin/foodrecipes',
+    name: 'AdminFoodRecipes',
+    component: AdminFoodRecipes,
+  },
+
+  {
+    path: '/admin/foodrecipes/:id',
+    name: 'IsFoodRecipe',
+    component: IsFoodRecipe,
+  },
+  
 ]
 
 const router = new VueRouter({

@@ -1,13 +1,13 @@
 <template>
     <div>
-        <user-register-from class="center mb-5"></user-register-from>
+        <is-food-recipe class=""></is-food-recipe>
     </div>
 </template>
 
 <script>
-import UserRegisterFrom from '@/components/UserRegisterFrom.vue';
+import IsFoodRecipe from '@/components/Admin/IsFoodRecipe';
 export default {
-    components: { UserRegisterFrom },
+    components: { IsFoodRecipe },
 };
 </script>
 

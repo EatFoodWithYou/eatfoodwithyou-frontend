@@ -14,6 +14,7 @@ const initialStateUser = {
     user: auth ? auth.user : '',
     jwt: auth ? auth.jwt : '',
     isAuthen: auth ? true : false,
+    isAdmin: auth ? true : false,
 };
 
 export default new Vuex.Store({
@@ -22,7 +23,8 @@ export default new Vuex.Store({
     },
     getters:{
         getCurrentUser : state => state.currentUser,
-        isAuthen : state => state.currentUser.isAuthen
+        isAuthen : state => state.currentUser.isAuthen,
+        isAdmin : state => state.currentUser.isAdmin
     },
     mutations: {
         setCurrentUser(state, body) 
@@ -30,8 +32,18 @@ export default new Vuex.Store({
             state.currentUser.user = body.user,
             state.currentUser.jwt = body.jwt,
             state.currentUser.isAuthen = true;
-            console.log(3)
-            console.log(state.currentUser)
+            // if (body.user.role === "ADMIN")
+            // {
+            //     state.currentUser.isAdmin = true
+            // }
+            // else
+            // {
+            //     state.currentUser.isAdmin = false
+            // }
+            state.currentUser.isAdmin = AuthService.isAdmin(body.user.role)
+            console.log(36)
+            //console.log(state.currentUser)
+            console.log(state.currentUser.isAdmin);
         },
 
         logoutSuccess(state)
@@ -42,6 +54,7 @@ export default new Vuex.Store({
             state.currentUser.user = '',
             state.currentUser.jwt = '',
             state.currentUser.isAuthen = false;
+            state.currentUser.isAdmin = false;
             // console.log(state.currentUser);
         }   
     },

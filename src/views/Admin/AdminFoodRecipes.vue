@@ -1,22 +1,22 @@
 <template>
     <div>
-        <user-register-from class="center mb-5"></user-register-from>
+        <admin-food-recipes class=""></admin-food-recipes>
     </div>
 </template>
 
 <script>
-import UserRegisterFrom from '@/components/UserRegisterFrom.vue';
+import AdminFoodRecipes from '@/components/Admin/AdminFoodRecipes';
 export default {
-    components: { UserRegisterFrom },
+    components: { AdminFoodRecipes },
 };
 </script>
 
 <style>
-.center {
+/* .center {
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+} */
 </style>
