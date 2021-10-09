@@ -1,11 +1,14 @@
 <template>
-  <div class="bg-bgColor min-h-screen font-prompt">
+  <div>
     <div>
-      <Navbar />
+      <button
+        @click="add()"
+        class="py-4 w-auto transition duration-200 bg-red-400 text-text-white hover:bg-red-500 hover:text-white cursor-pointer"
+      >
+        Add Recipes
+      </button>
     </div>
-    <div>
-      <Random />
-    </div>
+    <Random />
   </div>
 </template>
 
@@ -16,6 +19,12 @@ export default {
   components: {
     Navbar,
     Random,
+  },
+
+  methods: {
+    add() {
+      this.$router.push("/recipe/add");
+    },
   },
 };
 </script>

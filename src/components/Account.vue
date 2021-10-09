@@ -50,7 +50,7 @@
             class="flex flex-wrap text-center py-2 w-full pointer-events-auto"
           >
             <span class="py-4 w-full transition text-bgColor duration-200">
-              Yean Arj
+              {{ currentUser.user.name }}
             </span>
             <button
               class="py-4 w-full transition duration-200 text-white hover:bg-bgColor hover:text-white cursor-pointer"
@@ -76,13 +76,27 @@
 </template>
 
 <script>
+import AuthUser from "@/store/AuthUser";
+import AuthService from "@/services/AuthService";
 export default {
   data() {
     return {
       isOpen: false,
+      currentUser: "",
+      currentUserWithFoodRecipe: "",
     };
   },
   methods: {
+    async fetchCurrentUser() {
+      this.currentUser = JSON.parse(
+        JSON.stringify(AuthUser.getters.getCurrentUser)
+      );
+      console.log("CurrentUser", this.currentUser);
+      console.log("_______________");
+      let res = await AuthService.fetchRecipes();
+      this.currentUserWithFoodRecipe = res.data;
+      console.log(this.currentUserWithFoodRecipe);
+    },
     isAuthen() {
       return AuthUser.getters.isAuthen;
     },
@@ -91,6 +105,7 @@ export default {
     },
   },
   created() {
+    this.fetchCurrentUser();
     const btn = document.querySelector(".mobile-menu-button");
     const sidebar = document.querySelector(".sidebar");
 
