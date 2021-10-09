@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="overflow-hidden">
+    <navbar> </navbar>
     <router-view />
   </div>
 </template>
