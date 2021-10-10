@@ -27,15 +27,21 @@ export default new Vuex.Store({
         fetch(state , res)
         {
             state.allFoodRecipes = res.data
-        }
+        },
+        fetchAfterDelete(state)
+        {
+            state.allFoodRecipes = state.allFoodRecipes
+        },
+        
+
     },
     actions: {
 
         async fetchFoodRecipes({commit})
         {
             let res = await FoodRecipe.getFoodRecipe()
-            console.log("123");
-            console.log(res.foodRecipe.data);
+            // console.log("123");
+            // console.log(res.foodRecipe.data);
             commit("fetch" , res)
 
             return res.foodRecipe.data
@@ -44,11 +50,19 @@ export default new Vuex.Store({
         async fetchCurrentRecipes({commit},id)
         {
             let res = await FoodRecipe.getCurrentRecipe(id)
-            console.log("123");
-            console.log(res);
+            // console.log("123");
+            // console.log(res);
             commit("fetch" , res)
 
             return res.foodRecipe.data
+        }  ,
+
+        async deleteCurrentRecipes({commit},isid)
+        {
+            console.log("123");
+            console.log(isid);
+            await FoodRecipe.deleteCurrent(isid)
+            
         }
     },
     modules: {

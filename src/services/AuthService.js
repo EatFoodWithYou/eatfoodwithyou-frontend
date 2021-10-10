@@ -11,8 +11,6 @@ export default {
         return user !== '' && jwt !== '';
     },
     isAdmin(role) {
-        // console.log("sohead")
-        // console.log(user);
         return role ==='ADMIN';
     },
     getApiHeader() {
@@ -30,26 +28,25 @@ export default {
     },
 
     getJwt() {
+       
         return jwt;
     },
     async login({ email, password }) {
         try {
-            console.log(api_endpoint);
+           
             let url = api_endpoint +'/api/auth/login';
-            console.log(url);
+           
             let body = {
                 email : email,
                 password: password,
             };
-            console.log(body)
+           
             let res = await Axios.post(url, body);
             
-            console.log(res.data.user.role + "55555")
+            
             if (res.status === 200) {
                 // console.log(res.data);
-                console.log(88);
-                console.log(res);
-                console.log(88);
+                
                 localStorage.setItem(auth_key, JSON.stringify(res));
                 return {
                     success: true,
@@ -83,7 +80,7 @@ export default {
                 role : role
             };
 
-            console.log(body);
+           
             let res = await Axios.post(url, body);
             if (res.status === 201) {
                 localStorage.setItem(auth_key, JSON.stringify(res.data));
@@ -121,6 +118,32 @@ export default {
         let res = await Axios.get(url, header);
         return res.data;
     },
+
+    async fetchRecipes(){
+        let url = api_endpoint +'/api/auth/me'
+        // console.log(url)
+        // console.log(jwt)
+        // console.log(user)
+        let header = this.getApiHeader();
+        // console.log(header)
+        // console.log("__________")
+        let res = await Axios.post(url, "",header);
+        // console.log(res)
+        // console.log("______________")
+        return res;
+    },
+
+    async editInformation({name, age, gender}){
+        let url = `${api_endpoint}/api/auth/me`
+        let body = {
+            name: name,
+            age: age,
+            gender: gender,
+        }
+        let header = this.getApiHeader();
+        let res = await Axios.post(url, body, header)
+        return res
+    }
 };
 
 // export const

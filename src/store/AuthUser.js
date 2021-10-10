@@ -11,10 +11,10 @@ Vue.use(Vuex);
 let auth_key = 'auth-shop';
 let auth = JSON.parse(localStorage.getItem(auth_key));
 const initialStateUser = {
-    user: auth ? auth.user : '',
-    jwt: auth ? auth.jwt : '',
+    user: auth ? auth.data.user : '',
+    jwt: auth ? auth.data.access_token : '',
     isAuthen: auth ? true : false,
-    isAdmin: auth ? true : false,
+    isAdmin: auth ? auth.data.user.role === 'ADMIN' : false,
 };
 
 export default new Vuex.Store({
@@ -41,16 +41,16 @@ export default new Vuex.Store({
             //     state.currentUser.isAdmin = false
             // }
             state.currentUser.isAdmin = AuthService.isAdmin(body.user.role)
-            console.log(36)
+            //console.log(36)
             //console.log(state.currentUser)
-            console.log(state.currentUser.isAdmin);
+            //console.log(state.currentUser.isAdmin);
         },
 
         logoutSuccess(state)
         {
             
-            console.log(1);
-            console.log(state.currentUser);
+            // console.log(1);
+            // console.log(state.currentUser);
             state.currentUser.user = '',
             state.currentUser.jwt = '',
             state.currentUser.isAuthen = false;
@@ -61,17 +61,17 @@ export default new Vuex.Store({
     actions: {
         async login ({commit} ,{email , password})
         {
-          console.log("is mail " + email + "and " + password);
+          //console.log("is mail " + email + "and " + password);
           let res = await AuthService.login({ email , password})
-          console.log(5);
-          console.log(res);
-          console.log(6);
+        //   console.log(5);
+        //   console.log(res);
+        //   console.log(6);
           let body = {
             user : res.user ,
             jwt: res.jwt
             }
             
-          console.log(res.success);  
+          //console.log(res.success);  
           if (res.success)
           {
               commit('setCurrentUser' , body)
