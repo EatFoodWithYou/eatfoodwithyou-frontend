@@ -144,11 +144,8 @@ export default {
     {
         // try 
         // {
-            console.log("111");
-            console.log();
             let url = `${api_endpoint}/api/recipes/${id}`
             let jwt = AuthService.getJwt();
-           
             console.log(jwt);
             await Axios.delete(url,{
                 headers: {
