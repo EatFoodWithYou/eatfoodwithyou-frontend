@@ -2,7 +2,7 @@
   <div class="home">
     <search-form></search-form>
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <random-food-recipe></random-food-recipe>
+    <HelloWorld />
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
 </template>

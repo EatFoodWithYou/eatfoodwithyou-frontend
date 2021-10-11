@@ -1,8 +1,7 @@
 <template>
   <div>
-    <user-information></user-information>
+    <UserInformation />
   </div>
-
 </template>
 
 <script>
@@ -12,6 +11,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

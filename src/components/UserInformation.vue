@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div>
       <label for="name">ชื่อ :</label>
       {{ currentUserWithFoodRecipe.name }}
@@ -21,29 +20,30 @@
       {{ currentUserWithFoodRecipe.email }}
     </div>
 
-
     <div>
       <button @click="goToEdit()">
         editInformation
       </button>
     </div>
 
-    <h4> สูตรอาหารของคุณ </h4>
+    <h4>สูตรอาหารของคุณ</h4>
     <thead>
-        <tr>
-          <th>No.</th>
-          <th>name</th>
-          <th>detail</th>
-          <th>photo</th>
-        </tr>
+      <tr>
+        <th>No.</th>
+        <th>name</th>
+        <th>detail</th>
+        <th>photo</th>
+      </tr>
     </thead>
     <tbody>
-        <tr v-for = "(food, index) in currentUserWithFoodRecipe.food_recipes" :key = "index">
-          <td> {{ index+1 }}</td>
-          <td> {{ food.name }}</td>
-          <td> {{ food.detail }}</td>
-          <td><img v-bind:src="food.photo_url" width="100" height="100"></td>
-        </tr>
+      <tr
+        v-for="(food, index) in currentUserWithFoodRecipe.food_recipes"
+        :key="index">
+        <td>{{ index + 1 }}</td>
+        <td><router-link :to="{ name: 'FoodRecipeInfor', params: { id: food.id}}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ food.name }}</router-link></td>
+        <td>{{ food.detail }}</td>
+        <td><img v-bind:src="food.photo_url" width="100" height="100" /></td>
+      </tr>
     </tbody>
 
     <div>
@@ -51,7 +51,6 @@
         editRecipeForPreawEiei
       </button>
     </div>
-
   </div>
 </template>
 
@@ -62,31 +61,30 @@ import AuthService from "@/services/AuthService";
 export default {
   data() {
     return {
-      currentUser: '',
-      currentUserWithFoodRecipe:"",
+      currentUser: "",
+      currentUserWithFoodRecipe: "",
     };
   },
   methods: {
-    async fetchCurrentUser () {
-      this.currentUser = JSON.parse(JSON.stringify(AuthUser.getters.getCurrentUser));
+    async fetchCurrentUser() {
+      this.currentUser = JSON.parse(
+        JSON.stringify(AuthUser.getters.getCurrentUser)
+      );
       console.log("CurrentUser", this.currentUser);
-      console.log("_______________")
-      let res = await AuthService.fetchRecipes()
+      console.log("_______________");
+      let res = await AuthService.fetchRecipes();
       this.currentUserWithFoodRecipe = res.data;
-      console.log(this.currentUserWithFoodRecipe)
+      console.log(this.currentUserWithFoodRecipe);
     },
 
     goToEdit() {
-      this.$router.push('/editinformation');
-    }
-
+      this.$router.push("/edit-information");
+    },
   },
   created() {
     this.fetchCurrentUser();
-  }
+  },
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

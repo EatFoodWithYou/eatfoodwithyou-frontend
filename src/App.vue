@@ -1,29 +1,31 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/recipe/add">Add new Recipe</router-link> |
-      <router-link to="/login" v-if="!isAuthen()">Login</router-link> |
-      <router-link to="/userinformation">User Information</router-link> |
-      <router-link to="/editinformation">Edit Information</router-link> |
-      <router-link to="/logout" v-if="isAuthen()">LOG OUT</router-link> |
-      <router-link to="/register" v-if="!isAuthen()">Register</router-link>
+  <div id="app" class="overflow-hidden">
+    <div class="bg-bgColor main-container min-h-screen">
+      <div class="font-prompt">
+        <div>
+          <Navbar />
+          <router-view />
+        </div>
+      </div>
     </div>
-    <router-view />
   </div>
 </template>
+
 <script>
-import AuthUser from "@/store/AuthUser";
+import Navbar from "@/components/Navbar.vue";
 export default {
-  methods: {
-    isAuthen() {
-      return AuthUser.getters.isAuthen;
-    },
+  components: {
+    Navbar,
   },
 };
 </script>
+
 <style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,8 +34,6 @@ export default {
 }
 
 #nav {
-  padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;
