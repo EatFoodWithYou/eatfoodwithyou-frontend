@@ -1,19 +1,25 @@
 <template>
   <div>
-    <h2>Food Recipe ID : {{ this.id }}</h2>
+    <!-- <h2>Food Recipe ID : {{ this.id }}</h2> -->
+    <food-recipe-information></food-recipe-information>
   </div>
 </template>
 
 <script>
+import FoodRecipeInformation from '../../components/FoodRecipe/FoodRecipeInformation.vue'
 export default {
-    data(){
-      return {
-        id:""
-      }
-    },
-    created(){
-      this.id = this.$route.params.id
+    components: {
+      FoodRecipeInformation
     }
+
+    // data(){
+    //   return {
+    //     id:""
+    //   }
+    // },
+    // created(){
+    //   this.id = this.$route.params.id
+    // }
 }
 </script>
 
