@@ -11,6 +11,8 @@ import FoodRecipeInfomarion from "@/views/FoodRecipe/foodRecipeInformation.vue";
 import foodRecipeItem from "@/views/FoodRecipe/foodRecipeItem.vue";
 import SearchRecipes from "@/views/FoodRecipe/SearchRecipes";
 import AdminFoodRecipes from '@/views/Admin/AdminFoodRecipes.vue'
+import EditFoodRecipe from '@/views/FoodRecipe/EditRecipe.vue'
+
 // import IsFoodRecipe from '@/views/Admin/IsFoodRecipe.vue'
 
 Vue.use(VueRouter);
@@ -35,6 +37,13 @@ const routes = [
     name: "AddRecipe",
     component: AddFoodRecipe,
   },
+
+  {
+    path: '/recipe/edit/:id',
+    name: 'EditRecipe',
+    component: EditFoodRecipe
+  }, 
+
   {
     path: "/login",
     name: "Login",

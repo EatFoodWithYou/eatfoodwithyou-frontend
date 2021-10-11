@@ -1,3 +1,4 @@
+import axios from "axios"
 import Axios from "axios"
 import AuthService from "./AuthService"
 const api_endpoint = process.env.VUE_APP_SHOP_ENDPOINT || 'http://localhost:8000'
@@ -7,13 +8,6 @@ export default {
         try {
             let url = `${api_endpoint}/api/recipes/`
             let jwt = AuthService.getJwt();
-            // let body = {
-            //     name: name,
-            //     detail: detail,
-            //     photo: photo,
-            //     user_id: user_id
-            // }
-            // console.log(body);
             let res = await Axios.post(url, data,{
                 headers: {
                   'Content-Type': "multipart/form-data" ,
@@ -98,6 +92,27 @@ export default {
                     message: error
                 }
             }
+        }
+    },
+
+    async fetchAllRecipes(){
+        try{
+            const url = api_endpoint + "/api/recipes";
+            const headers = AuthService.getApiHeader();
+            const res = await Axios.get(url, headers);
+            return res.data;
+        }catch(e){
+            console.log(e.message);
+        }
+    },
+    async fetchRecipeById(id){
+        try{
+            const url = api_endpoint + `/api/recipes/${id}`;
+            const headers = AuthService.getApiHeader();
+            const res = await Axios.get(url, headers);
+            return res.data;
+        }catch(e){
+            console.log(e.message);
         }
     },
 
