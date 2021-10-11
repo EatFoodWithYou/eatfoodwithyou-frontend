@@ -149,7 +149,6 @@ export default {
       this.$router.push("/logout");
     },
     info() {
-      console.log("info");
       this.$router.push("/user-information");
     },
     edit() {
