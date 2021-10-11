@@ -2,22 +2,22 @@
   <div>
     <div>
       <label for="name">ชื่อ :</label>
-      {{ currentUserWithFoodRecipe.name }}
+      {{ currentUser.name }}
     </div>
 
     <div>
       <label for="age">อายุ :</label>
-      {{ currentUserWithFoodRecipe.age }}
+      {{ currentUser.age }}
     </div>
 
     <div>
       <label for="gender">เพศ :</label>
-      {{ currentUserWithFoodRecipe.gender }}
+      {{ this.currentUser.gender }}
     </div>
 
     <div>
       <label for="email">อีเมล :</label>
-      {{ currentUserWithFoodRecipe.email }}
+      {{ currentUser.email }}
     </div>
 
     <div>
@@ -37,52 +37,94 @@
     </thead>
     <tbody>
       <tr
-        v-for="(food, index) in currentUserWithFoodRecipe.food_recipes"
+        v-for="(food, index) in currentUserWithFoodRecipe"
         :key="index">
         <td>{{ index + 1 }}</td>
         <td><router-link :to="{ name: 'FoodRecipeInfor', params: { id: food.id}}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ food.name }}</router-link></td>
         <td>{{ food.detail }}</td>
         <td><img v-bind:src="food.photo_url" width="100" height="100" /></td>
+        <td v-if="index !== editIndex">
+          <button @click="goToEditRecipe(food)">Edit</button>
+          <button @click="deleteRecipe">Delete</button>
+
+        </td>
       </tr>
     </tbody>
 
-    <div>
+    <!-- <div>
       <button>
-        editRecipeForPreawEiei
+        editRecipe
       </button>
-    </div>
+    </div> -->
+
   </div>
 </template>
 
 <script>
 import AuthUser from "@/store/AuthUser";
 import AuthService from "@/services/AuthService";
+import FoodRecipe from "@/services/FoodRecipe";
 
 export default {
   data() {
     return {
-      currentUser: "",
+      currentUser: '',
       currentUserWithFoodRecipe: "",
+      editIndex: -1,
     };
+  },
+  created() {
+    this.fetchCurrentUser();
   },
   methods: {
     async fetchCurrentUser() {
       this.currentUser = JSON.parse(
         JSON.stringify(AuthUser.getters.getCurrentUser)
       );
-      console.log("CurrentUser", this.currentUser);
-      console.log("_______________");
-      let res = await AuthService.fetchRecipes();
+      this.currentUser = this.currentUser.user;
+      console.log("CurrentUser2", this.currentUser);
+      // console.log("_______________")
+      const res = await FoodRecipe.fetchAllRecipes();
+      // console.log(res);
       this.currentUserWithFoodRecipe = res.data;
-      console.log(this.currentUserWithFoodRecipe);
+      console.log("food",this.currentUserWithFoodRecipe);
+      this.currentUserWithFoodRecipe = res.data.filter((recipe) => {
+        return recipe.user_id === this.currentUser.id;
+      })
     },
 
     goToEdit() {
-      this.$router.push("/edit-information");
+      this.$router.push('/edit-information');
     },
+
+    goToEditRecipe(food){
+      this.$router.push(`/recipe/edit/${food.id}`);
+    },
+
+    deleteRecipe(food){
+    this.$swal({
+      title: "Delete this recipe?",
+      icon: "warning",
+      buttons: true,
+    }).then((willDelete)=>{
+      if(willDelete){
+        this.deleteInStore(food)
+        location.reload()
+        swal("Delete success",{
+          icon: "success",
+        });
+      }else{
+        swal("can not delete ")
+      }
+    });
   },
-  created() {
-    this.fetchCurrentUser();
+
+  },
+
+  
+  async deleteInStore(food){
+    await FoodRecipe.dispatch("deleteRecipe", food)
+    
   },
 };
 </script>

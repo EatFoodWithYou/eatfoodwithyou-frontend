@@ -129,10 +129,10 @@ export default {
         JSON.stringify(AuthUser.getters.getCurrentUser)
       );
       console.log("CurrentUser", this.currentUser);
-      console.log("_______________");
-      let res = await AuthService.fetchRecipes();
-      this.currentUserWithFoodRecipe = res.data;
-      console.log(this.currentUserWithFoodRecipe);
+      // console.log("_______________");
+      // let res = await AuthService.fetchRecipes();
+      // this.currentUserWithFoodRecipe = res.data;
+      // console.log(this.currentUserWithFoodRecipe);
     },
     isAuthen() {
       return AuthUser.getters.isAuthen;

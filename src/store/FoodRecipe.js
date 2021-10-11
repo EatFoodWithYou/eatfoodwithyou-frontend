@@ -14,13 +14,16 @@ export default new Vuex.Store({
         newIngredient: [],
         allFoodRecipes : [] ,
         currentFoodRecipe : "" ,
+        currentFood: "",
     },
     getters:{
         getNewFoodRecipe: state => state.newFoodRecipe,
         getNewCookingProcess: state => state.newCookingProcess,
         getNewIngredient: state => state.newIngredient,
         getAllFoodRecipes: state => state.allFoodRecipes ,
-        getCurrentFoodRecipe : state => state.currentFoodRecipe
+        getCurrentFoodRecipe : state => state.currentFoodRecipe,
+        getCurrentFood: state=>state.currentFood
+
     },
     mutations: {
 
@@ -32,6 +35,10 @@ export default new Vuex.Store({
         {
             state.allFoodRecipes = state.allFoodRecipes
         },
+        fetchCurrentRecipe(state, {res}){
+            state.currentFood = res.data.data;
+            // console.log("cur",state.currentFood);
+        }
         
 
     },
@@ -63,9 +70,25 @@ export default new Vuex.Store({
             console.log(isid);
             await FoodRecipe.deleteCurrent(isid)
             
-        }
+        },
+        async fetchFood({commit}, id){
+            try{
+                const url = end_point + `/api/recipes/${id}`;
+                console.log(url)
+                //const headers = AuthService.getApiHeader();
+                //console.log("find", res)
+
+                let res = await axios.get(url);
+                commit('fetchCurrentRecipe',{res})
+                // console.log("find", res.data)
+            }catch(e){
+                console.log(e.message);
+            }
     },
-    modules: {
-    }
+    },
+    
+   
+modules: {
+}
 })
-  
+   
