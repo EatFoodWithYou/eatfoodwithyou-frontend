@@ -7,8 +7,11 @@ import Logout from "@/views/Logout.vue";
 import Register from "@/views/Register.vue";
 import UserInfo from "@/views/UserInfo.vue";
 import EditInfo from "@/views/EditInfo.vue";
-import FoodRecipeInformation from "@/views/FoodRecipe/foodRecipeInformation.vue";
+import FoodRecipeInfomarion from "@/views/FoodRecipe/foodRecipeInformation.vue";
 import foodRecipeItem from "@/views/FoodRecipe/foodRecipeItem.vue";
+import SearchRecipes from "@/views/FoodRecipe/SearchRecipes";
+import AdminFoodRecipes from '@/views/Admin/AdminFoodRecipes.vue'
+// import IsFoodRecipe from '@/views/Admin/IsFoodRecipe.vue'
 
 Vue.use(VueRouter);
 
@@ -49,6 +52,19 @@ const routes = [
     name: "Register",
     component: Register,
   },
+  {
+    path: '/admin/foodrecipes',
+    name: 'AdminFoodRecipes',
+    component: AdminFoodRecipes,
+  },
+
+  // {
+  //   path: '/admin/foodrecipes/:id',
+  //   name: 'IsFoodRecipe',
+  //   component: IsFoodRecipe,
+  // },
+  
+
 
   {
     path: "/user-information",
@@ -63,9 +79,16 @@ const routes = [
   },
 
   {
-    path: "/recipe/:id/information",
-    name: "FoodRecipeInformation",
-    component: FoodRecipeInformation,
+    path: '/recipe/:name',
+    name: 'SearchRecipes',
+    component: SearchRecipes,
+  },
+
+
+  {
+    path: '/recipe/:id/information',
+    name: 'FoodRecipeInfor',
+    component: FoodRecipeInfomarion,
   },
 
   {

@@ -47,6 +47,14 @@
               Recipes
             </button>
           </div>
+           <div class="flex justify-center" v-if="isAuthen() && isAdmin()">
+            <button
+              class="p-3 block text-yellow-50 hover:text-hoverColor sm:hover:bg-navbarColor hover:bg-navbarColor transition duration-250"
+              @click="allRecipes()"
+            >
+              ALL Recipes
+            </button>
+          </div>
           <Account class="hidden sm:block" v-if="isAuthen()" />
           <button
             @click="login()"
@@ -129,6 +137,11 @@ export default {
     isAuthen() {
       return AuthUser.getters.isAuthen;
     },
+    isAdmin()
+    {
+      return AuthUser.getters.isAdmin ;
+    },
+    
     login() {
       this.$router.push("/login");
     },
@@ -143,6 +156,9 @@ export default {
     },
     recipes() {
       this.$router.push("/recipe");
+    },
+    allRecipes(){
+      this.$router.push("/admin/foodrecipes");
     },
   },
   created() {

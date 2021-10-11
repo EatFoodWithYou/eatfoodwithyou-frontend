@@ -10,6 +10,9 @@ export default {
     isAuthen() {
         return user !== '' && jwt !== '';
     },
+    isAdmin(role) {
+        return role ==='ADMIN';
+    },
     getApiHeader() {
         if (jwt !== '') {
             return {
@@ -25,24 +28,25 @@ export default {
     },
 
     getJwt() {
-        console.log(jwt);
+       
         return jwt;
     },
     async login({ email, password }) {
         try {
-            console.log(api_endpoint);
+           
             let url = api_endpoint +'/api/auth/login';
-            console.log(url);
+           
             let body = {
                 email : email,
                 password: password,
             };
-            console.log(body)
+           
             let res = await Axios.post(url, body);
             
-            console.log(res)
+            
             if (res.status === 200) {
                 // console.log(res.data);
+                
                 localStorage.setItem(auth_key, JSON.stringify(res));
                 return {
                     success: true,
@@ -76,7 +80,7 @@ export default {
                 role : role
             };
 
-            console.log(body);
+           
             let res = await Axios.post(url, body);
             if (res.status === 201) {
                 localStorage.setItem(auth_key, JSON.stringify(res.data));
@@ -103,6 +107,7 @@ export default {
 
     async logout() {
         localStorage.removeItem(auth_key)
+        // let url = `${api_endpoint}/api/auth/logout`;
     },
 
     
@@ -129,14 +134,14 @@ export default {
     },
 
     async editInformation({name, age, gender}){
-        let url = `${api_endpoint}/api/auth/me`
+        let url = `${api_endpoint}/api/auth/update`
         let body = {
             name: name,
             age: age,
             gender: gender,
         }
         let header = this.getApiHeader();
-        let res = await Axios.post(url, body, header)
+        let res = await Axios.put(url, body, header)
         return res
     }
 };

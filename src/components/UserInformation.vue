@@ -2,22 +2,22 @@
   <div>
     <div>
       <label for="name">ชื่อ :</label>
-      {{ currentUser.user.name }}
+      {{ currentUserWithFoodRecipe.name }}
     </div>
 
     <div>
       <label for="age">อายุ :</label>
-      {{ currentUser.user.age }}
+      {{ currentUserWithFoodRecipe.age }}
     </div>
 
     <div>
       <label for="gender">เพศ :</label>
-      {{ currentUser.user.gender }}
+      {{ currentUserWithFoodRecipe.gender }}
     </div>
 
     <div>
       <label for="email">อีเมล :</label>
-      {{ currentUser.user.email }}
+      {{ currentUserWithFoodRecipe.email }}
     </div>
 
     <div>
@@ -38,10 +38,9 @@
     <tbody>
       <tr
         v-for="(food, index) in currentUserWithFoodRecipe.food_recipes"
-        :key="index"
-      >
+        :key="index">
         <td>{{ index + 1 }}</td>
-        <td>{{ food.name }}</td>
+        <td><router-link :to="{ name: 'FoodRecipeInfor', params: { id: food.id}}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ food.name }}</router-link></td>
         <td>{{ food.detail }}</td>
         <td><img v-bind:src="food.photo_url" width="100" height="100" /></td>
       </tr>
