@@ -114,19 +114,19 @@ export default {
         return res.data;
     },
 
-    async fetchRecipes(){
-        let url = api_endpoint +'/api/auth/me'
-        // console.log(url)
-        // console.log(jwt)
-        // console.log(user)
-        let header = this.getApiHeader();
-        // console.log(header)
-        // console.log("__________")
-        let res = await Axios.post(url, "",header);
-        // console.log(res)
-        // console.log("______________")
-        return res;
-    },
+    // async fetchRecipes(){
+    //     let url = api_endpoint +'/api/auth/me'
+    //     // console.log(url)
+    //     // console.log(jwt)
+    //     // console.log(user)
+    //     let header = this.getApiHeader();
+    //     // console.log(header)
+    //     // console.log("__________")
+    //     let res = await Axios.post(url, "",header);
+    //     // console.log(res)
+    //     // console.log("______________")
+    //     return res;
+    // },
 
     async editInformation({name, age, gender}){
         let url = `${api_endpoint}/api/auth/me`

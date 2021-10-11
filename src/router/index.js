@@ -8,6 +8,7 @@ import Register from '@/views/Register.vue'
 import UserInfo from '@/views/UserInfo.vue'
 import EditInfo from '@/views/EditInfo.vue'
 import FoodRecipeInfomarion from '@/views/FoodRecipe/foodRecipeInformation.vue'
+import EditFoodRecipe from '@/views/FoodRecipe/EditRecipe.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,13 @@ const routes = [
     name: 'AddRecipe',
     component: AddFoodRecipe
   },
+
+  {
+    path: '/recipe/edit/:id',
+    name: 'EditRecipe',
+    component: EditFoodRecipe
+  }, 
+
   {
     path: '/login',
     name: 'Login',
