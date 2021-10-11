@@ -52,5 +52,10 @@ export default {
             }
         }
     },
+    async getRecipesFromName( name ){
+        let url = `${api_endpoint}/api/recipes/search/${name}`
+        let res = await Axios.get(url)
+        return res.data
+    }
 
 }

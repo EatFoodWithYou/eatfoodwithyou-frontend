@@ -3,22 +3,22 @@
 
     <div>
       <label for="name">ชื่อ :</label>
-      {{ currentUser.user.name }}
+      {{ currentUserWithFoodRecipe.name }}
     </div>
 
     <div>
       <label for="age">อายุ :</label>
-      {{ currentUser.user.age }}
+      {{ currentUserWithFoodRecipe.age }}
     </div>
 
     <div>
       <label for="gender">เพศ :</label>
-      {{ currentUser.user.gender }}
+      {{ currentUserWithFoodRecipe.gender }}
     </div>
 
     <div>
       <label for="email">อีเมล :</label>
-      {{ currentUser.user.email }}
+      {{ currentUserWithFoodRecipe.email }}
     </div>
 
 

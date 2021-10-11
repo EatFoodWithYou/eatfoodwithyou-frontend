@@ -5,7 +5,7 @@
     <form @submit.prevent="edit">
       <div>
         <label for="name">ชื่อ : </label>
-        <input type="name" v-model="form.name" placeholder="ชื่อ">
+        <input type="name" v-model="form.name" placeholder="ชื่อ" >
       </div>
       <div>
         <label for="age">อายุ : </label>
@@ -43,17 +43,28 @@ export default {
     };
   },
   methods: {
-    fetchCurrentUser () {
-      this.currentUser = JSON.parse(JSON.stringify(AuthUser.getters.getCurrentUser));
-      console.log("CurrentUserInEdit", this.currentUser);
+    async fetchCurrentUser () {
+      let res = await AuthService.fetchRecipes()
+      this.currentUser = res.data;
+      console.log(this.currentUser)
     },
 
     async edit(){
-      let res = await AuthService.editInformation(this.form)
-      console.log(this.form.name)
-      console.log(this.form.age)
-      console.log(this.form.gender)
-      console.log(res.data)
+
+      if(this.form.name !== "" && this.form.age !== "" && this.form.gender !== "" )
+      {
+        let res = await AuthService.editInformation(this.form)
+        console.log(this.currentUser)
+        console.log(2)
+        console.log(res.data)
+        AuthUser.dispatch("setUser", res.data)
+        this.$swal("Edit Success", " ", "success");
+        this.$router.push('/userinfomation');
+      }
+      else {
+        this.$swal("Edit Failed","Fill up this form!", "error");
+      }
+
 
     }
 

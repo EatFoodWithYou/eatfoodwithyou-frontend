@@ -129,14 +129,14 @@ export default {
     },
 
     async editInformation({name, age, gender}){
-        let url = `${api_endpoint}/api/auth/me`
+        let url = `${api_endpoint}/api/auth/update`
         let body = {
             name: name,
             age: age,
             gender: gender,
         }
         let header = this.getApiHeader();
-        let res = await Axios.post(url, body, header)
+        let res = await Axios.put(url, body, header)
         return res
     }
 };

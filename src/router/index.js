@@ -8,6 +8,7 @@ import Register from '@/views/Register.vue'
 import UserInfo from '@/views/UserInfo.vue'
 import EditInfo from '@/views/EditInfo.vue'
 import FoodRecipeInfomarion from '@/views/FoodRecipe/foodRecipeInformation.vue'
+import SearchRecipes from "@/views/FoodRecipe/SearchRecipes";
 
 Vue.use(VueRouter)
 
@@ -59,6 +60,13 @@ const routes = [
     name: 'EditInfo',
     component: EditInfo,
   },
+
+  {
+    path: '/recipe/:name',
+    name: 'SearchRecipes',
+    component: SearchRecipes,
+  },
+
 
   {
     path: '/recipe/:id/information',

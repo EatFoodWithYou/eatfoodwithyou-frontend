@@ -34,6 +34,15 @@ export default new Vuex.Store({
             console.log(state.currentUser)
         },
 
+        setUser(state, body)
+        {
+            console.log(state.currentUser)
+            state.currentUser.user = body.user,
+            console.log(3)
+            console.log(state.currentUser)
+        },
+
+
         logoutSuccess(state)
         {
             
@@ -72,7 +81,7 @@ export default new Vuex.Store({
         },
 
         async register({ commit },{email, password, firstname, lastname ,gender, role , age})
-      {
+        {
         let res = await AuthService.register({email, password, firstname, lastname ,gender, role ,age})
 
 
@@ -80,7 +89,12 @@ export default new Vuex.Store({
             commit("loginSuccess", res)
         }
         return res
-      }
+        },
+
+        async setUser({ commit }, user) {
+            commit('setUser', user);
+        }
+
     },
     modules: {
     }
