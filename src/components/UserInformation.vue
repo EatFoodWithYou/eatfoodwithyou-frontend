@@ -2,22 +2,22 @@
   <div>
     <div>
       <label for="name">ชื่อ :</label>
-      {{ currentUser.name }}
+      {{ currentUserWithFoodRecipe.name }}
     </div>
 
     <div>
       <label for="age">อายุ :</label>
-      {{ currentUser.age }}
+      {{ currentUserWithFoodRecipe.age }}
     </div>
 
     <div>
       <label for="gender">เพศ :</label>
-      {{ this.currentUser.gender }}
+      {{ this.currentUserWithFoodRecipe.gender }}
     </div>
 
     <div>
       <label for="email">อีเมล :</label>
-      {{ currentUser.email }}
+      {{ currentUserWithFoodRecipe.email }}
     </div>
 
     <div>
@@ -37,7 +37,7 @@
     </thead>
     <tbody>
       <tr
-        v-for="(food, index) in currentUserWithFoodRecipe"
+        v-for="(food, index) in currentUserWithFoodRecipe.food_recipes"
         :key="index">
         <td>{{ index + 1 }}</td>
         <td><router-link :to="{ name: 'FoodRecipeInfor', params: { id: food.id}}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ food.name }}</router-link></td>
@@ -84,13 +84,9 @@ export default {
       this.currentUser = this.currentUser.user;
       console.log("CurrentUser2", this.currentUser);
       // console.log("_______________")
-      const res = await FoodRecipe.fetchAllRecipes();
+      let res = await AuthService.fetchRecipes();
       // console.log(res);
       this.currentUserWithFoodRecipe = res.data;
-      console.log("food",this.currentUserWithFoodRecipe);
-      this.currentUserWithFoodRecipe = res.data.filter((recipe) => {
-        return recipe.user_id === this.currentUser.id;
-      })
     },
 
     goToEdit() {
