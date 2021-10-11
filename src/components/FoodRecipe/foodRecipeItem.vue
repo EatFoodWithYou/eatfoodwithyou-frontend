@@ -12,7 +12,7 @@
         </div>
         <div class="ml-25">
           <router-link
-            :to="{ name: 'FoodRecipeInformation', params: { id: this.id } }"
+            :to="{ name: 'FoodRecipeInfor', params: { id: this.id } }"
             >{{ name }}</router-link
           >
           <!-- <a href="">{{ name }}</a> -->
