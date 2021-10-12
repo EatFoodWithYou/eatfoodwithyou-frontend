@@ -1,5 +1,5 @@
 <template>
-	<div class="sm:flex">
+	<div class="sm:flex z-30">
 		<div
 			class="
 				sm:flex sm:justify-between
@@ -7,9 +7,10 @@
 				bg-navbarColor
 				w-full
 				py-1
+				
 			"
 		>
-			<div class="flex justify-between px-4 text-yellow-50 text-3xl">
+			<div class="flex justify-between px-4 text-yellow-50 text-2xl">
 				<a class="flex mb-3" href="http://localhost:8080/">
 					<img
 						class="block h-12 w-auto mt-1.5"
@@ -216,12 +217,12 @@ export default {
 		return {
 			isOpen: false,
 			currentUser: "",
-			currentUserWithFoodRecipe: "",
+			currentUserWithFoodRecipe: ""
 		};
 	},
 
 	components: {
-		Account,
+		Account
 	},
 
 	methods: {
@@ -259,11 +260,11 @@ export default {
 		},
 		allRecipes() {
 			this.$router.push("/admin/foodrecipes");
-		},
+		}
 	},
 	created() {
 		this.fetchCurrentUser();
-	},
+	}
 };
 </script>
 
