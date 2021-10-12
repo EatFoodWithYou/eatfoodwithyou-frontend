@@ -3,7 +3,8 @@
 		<div class="flex justify-center ml-12 mt-10">
 			<div class=" w-5/6 h-full lg:flex justify-end">
 				<div
-					class="h-48 lg:h-80 lg:w-80 flex-none bg-cover bg-center rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden "
+					class="h-48 lg:h-80 lg:w-80 flex-none bg-cover bg-center rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden cursor-pointer"
+					@click="goToRecipe()"
 					v-bind:style="{
 						backgroundImage:
 							'url(' + this.foodRecipe.photo_url + ')'
@@ -11,7 +12,8 @@
 					title="Mountain"
 				></div>
 				<div
-					class="lg:w-3/5 w-autof bordor-0 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
+					class="lg:w-3/5 w-autof bordor-0 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal cursor-pointer"
+					@click="goToRecipe()"
 				>
 					<div class="mb-8">
 						<p class="text-lg text-gray-600 flex items-center">
@@ -34,7 +36,8 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div
+	</div>
+	<!-- <div
 			class="
 					flex flex-warp
 					bg-white
@@ -51,7 +54,7 @@
 			>
 			</food-recipe-item>
 		</div> -->
-	</div>
+	<!-- </div> -->
 	<!-- <div class="container">
 		<div
 			class="
@@ -154,8 +157,16 @@ export default {
 				this.foodRecipe.photo_url =
 					"https://via.placeholder.com/250x250";
 			// console.log(this.randomFoodRecipe);
+		},
+
+		goToRecipe() {
+			this.$router.push({
+				name: "FoodRecipeInfor",
+				params: { id: this.foodRecipe.id }
+			});
 		}
 	},
+
 	async created() {
 		await this.fetchRandomFoodRecipes();
 		await this.fetchRandomFoodRecipe();

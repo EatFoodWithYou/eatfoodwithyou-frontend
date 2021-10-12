@@ -11,12 +11,13 @@
 				opacity-20
 				h-full
 				w-screen
+				z-10
 			"
 		></button>
 		<button
 			@click="isOpen = !isOpen"
 			tabindex="-1"
-			class="relative z-10 my-1"
+			class="relative z-40 my-1"
 		>
 			<div>
 				<svg
@@ -48,6 +49,7 @@
 				transition
 				duration-200
 				ease-in-out
+				z-40
 			"
 		>
 			<div
@@ -56,9 +58,10 @@
 					min-h-screen
 					ml-16
 					left-2
-					z-50
+					
 					cursor-default
 					pointer-events-none
+					
 				"
 			>
 				<!-- sidebar -->
@@ -74,6 +77,7 @@
 						absolute
 						inset-y-0
 						left-0
+						
 					"
 				>
 					<!-- logo -->
@@ -117,6 +121,7 @@
 							{{ currentUser.user.name }}
 						</span>
 						<button
+							@click="info()"
 							class="
 								py-4
 								w-full
@@ -129,19 +134,7 @@
 						>
 							Profile
 						</button>
-						<a
-							class="
-								py-4
-								w-full
-								transition
-								duration-200
-								text-white
-								hover:bg-bgColor hover:text-white
-								cursor-pointer
-							"
-						>
-							Setting
-						</a>
+
 						<button
 							@click="logout()"
 							class="
@@ -172,7 +165,7 @@ export default {
 		return {
 			isOpen: false,
 			currentUser: "",
-			currentUserWithFoodRecipe: "",
+			currentUserWithFoodRecipe: ""
 		};
 	},
 	methods: {
@@ -192,6 +185,9 @@ export default {
 		logout() {
 			this.$router.push("/logout");
 		},
+		info() {
+			this.$router.push("/user-information");
+		}
 	},
 	created() {
 		this.fetchCurrentUser();
@@ -202,7 +198,7 @@ export default {
 		// btn.addEventListener("click", () => {
 		//   sidebar.classList.toggle("-translate-x-full");
 		// });
-	},
+	}
 };
 </script>
 

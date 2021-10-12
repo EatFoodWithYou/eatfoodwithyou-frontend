@@ -168,21 +168,7 @@
 							>
 								Profile
 							</button>
-							<button
-								class="
-									block
-									w-full
-									px-3
-									py-2.5
-									text-white
-									hover:bg-bgColor hover:text-white
-									transition
-									duration-250
-								"
-								@click="edit()"
-							>
-								Setting
-							</button>
+
 							<button
 								@click="logout()"
 								class="
@@ -251,9 +237,6 @@ export default {
 		},
 		info() {
 			this.$router.push("/user-information");
-		},
-		edit() {
-			this.$router.push("/edit-information");
 		},
 		recipes() {
 			this.$router.push("/recipe");
