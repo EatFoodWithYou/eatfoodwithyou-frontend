@@ -5,7 +5,14 @@
 			<div class="flex flex-row">
 				<div>
 					<img
+						v-if="this.foodRecipeForm.photo"
 						v-bind:src="this.foodRecipeForm.photo_url"
+						ref="foodRecipeRef"
+						width="250"
+						height="200"
+					/><img
+						v-else
+						src=""
 						ref="foodRecipeRef"
 						width="250"
 						height="200"
@@ -89,7 +96,15 @@
 					</div>
 					<div>
 						<img
+							v-if="cookingProcess.photo"
 							v-bind:src="cookingProcess.photo_url"
+							ref="processRef"
+							width="150"
+							height="200"
+						/>
+						<img
+							v-else
+							src=""
 							ref="processRef"
 							width="150"
 							height="200"
@@ -113,7 +128,7 @@
 				<button @click="addProcess()">เพิ่มวัตถุดิบ</button>
 			</div>
 		</div>
-		<!-- <div>
+		<div>
 			<div>
 				<h3>เลือกประเภทของอาหาร</h3>
 			</div>
@@ -137,11 +152,11 @@
 			<div>
 				<span>
 					ประเภทของอาหารที่เลือกแล้ว :
-					<p>{{ this.foodRecipeForm.categories }}</p>
+					<p>{{ this.foodRecipeForm.category_names }}</p>
 				</span>
 				<button @click="clearSelectedCategories">ลบทั้งหมด</button>
 			</div>
-		</div> -->
+		</div>
 		<div>
 			<button type="submit" @click="updateFoodRecipe()">Update</button>
 		</div>
@@ -167,6 +182,7 @@ export default {
 				user_id: "",
 				photo: "",
 				photo_url: "",
+				category_names: "",
 			},
 			ingredientForm: [
 				{
@@ -186,6 +202,9 @@ export default {
 			],
 			formData: "",
 			ProcessDataForm: "",
+			selectedCategory: "",
+			allCategory: [],
+			allSelectedCategory: [],
 		};
 	},
 	async created() {
@@ -198,15 +217,15 @@ export default {
 			return this.$router.push("/login");
 		}
 		this.getCurrentUser();
-
 		const res = await FoodRecipeService.fetchRecipeById(
 			this.$route.params.id
 		);
-		console.log("res", res.data);
 		this.setFoodRecipeForm(res.data);
+		this.fetchCategories();
+		console.log("res", res.data);
+		// console.log("recipeForm", this.foodRecipeForm);
 		this.ingredientForm = res.data.ingredients;
 		this.cookingProcessForm = res.data.cooking_processes;
-		console.log("recipeForm", this.foodRecipeForm);
 	},
 	methods: {
 		isAuthen() {
@@ -219,13 +238,14 @@ export default {
 			this.foodRecipeForm.photo = this.$refs.recipePhoto.files[0];
 			let url = URL.createObjectURL(this.foodRecipeForm.photo);
 			this.$refs.foodRecipeRef.src = url;
-			console.log("after select photo", this.foodRecipeForm);
+			// console.log("after select photo", this.foodRecipeForm);
 		},
 		setFoodRecipeForm(res) {
 			this.foodRecipeForm.id = res.id;
 			this.foodRecipeForm.name = res.name;
 			this.foodRecipeForm.detail = res.detail;
 			this.foodRecipeForm.user_id = res.user_id;
+			this.foodRecipeForm.category_names = res.category_names;
 			this.foodRecipeForm.photo = res.photo;
 			this.foodRecipeForm.photo_url = res.photo_url;
 		},
@@ -380,7 +400,6 @@ export default {
 					let res1 = false;
 					for (let item of this.ingredientForm) {
 						item.food_recipe_id = this.foodRecipeForm.id;
-						console.log("item", item);
 						if (item.id !== undefined) {
 							res1 = await IngredientService.updateIngredient(
 								item
@@ -431,6 +450,7 @@ export default {
 							`${this.foodRecipeForm.name}`,
 							"success"
 						);
+						this.$router.push("/user-information");
 					}
 				} else {
 					this.$swal(
@@ -448,12 +468,15 @@ export default {
 			}
 		},
 		createDataForm() {
-			console.log("currentRecipes", this.foodRecipeForm);
 			this.formData = new FormData();
 			this.formData.append("id", this.foodRecipeForm.id);
 			this.formData.append("name", this.foodRecipeForm.name);
 			this.formData.append("detail", this.foodRecipeForm.detail);
 			this.formData.append("photo", this.foodRecipeForm.photo);
+			this.formData.append(
+				"categories",
+				this.foodRecipeForm.category_names
+			);
 		},
 		createProcessDataFrom(item) {
 			this.ProcessDataForm = new FormData();
@@ -461,7 +484,30 @@ export default {
 			this.ProcessDataForm.append("process", item.process);
 			this.ProcessDataForm.append("food_recipe_id", item.food_recipe_id);
 			this.ProcessDataForm.append("photo", item.photo);
-			console.log("formData", this.formData);
+			// console.log("formData", this.formData);
+		},
+		async fetchCategories() {
+			const categories = await CategoriesService.getAllCategories();
+			this.allCategory = categories.categories;
+		},
+		selectCategory() {
+			if (
+				!this.foodRecipeForm.category_names.includes(
+					this.selectedCategory
+				)
+			) {
+				if (this.foodRecipeForm.category_names === "") {
+					this.foodRecipeForm.category_names = this.selectedCategory;
+				} else {
+					this.foodRecipeForm.category_names =
+						this.foodRecipeForm.category_names +
+						", " +
+						this.selectedCategory;
+				}
+			}
+		},
+		clearSelectedCategories() {
+			this.foodRecipeForm.category_names = "";
 		},
 	},
 };

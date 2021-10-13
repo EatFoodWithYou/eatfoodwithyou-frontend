@@ -58,8 +58,11 @@
 					>
 				</td>
 				<td>{{ food.detail }}</td>
-				<td>
+				<td v-if="food.photo">
 					<img v-bind:src="food.photo_url" width="100" height="100" />
+				</td>
+				<td v-else>
+					<img src="" width="100" height="100" />
 				</td>
 				<td v-if="index !== editIndex">
 					<button @click="goToEditRecipe(food)">Edit</button>
@@ -67,12 +70,6 @@
 				</td>
 			</tr>
 		</tbody>
-
-		<!-- <div>
-      <button>
-        editRecipe
-      </button>
-    </div> -->
 	</div>
 </template>
 

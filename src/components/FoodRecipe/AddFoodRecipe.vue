@@ -404,7 +404,7 @@ export default {
 				} else {
 					this.foodRecipeForm.categories =
 						this.foodRecipeForm.categories +
-						" ," +
+						", " +
 						this.selectedCategory;
 				}
 			}
