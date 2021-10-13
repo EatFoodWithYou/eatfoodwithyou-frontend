@@ -53,4 +53,55 @@ export default {
 			}
 		}
 	},
+	async updateIngredient(payload) {
+		try {
+			const url = `${api_endpoint}/api/ingredients/${payload.id}`;
+			const headers = AuthService.getApiHeader();
+			const res = await Axios.put(url, payload, headers);
+			return {
+				success: true,
+				ingredient: res,
+			};
+		} catch (e) {
+			if (e.response.status === 400) {
+				return {
+					success: false,
+					message: res.message,
+				};
+			} else {
+				let error = "";
+				for (let items in e.response.data.errors) {
+					error = error + `${e.response.data.errors[items]}` + "\n";
+				}
+				return {
+					success: false,
+					message: error,
+				};
+			}
+		}
+	},
+	async deleteIngredient(id) {
+		try {
+			const url = `${api_endpoint}/api/ingredients/${id}`;
+			const headers = AuthService.getApiHeader();
+			const res = await Axios.delete(url, headers);
+			return { success: true };
+		} catch (e) {
+			if (e.response.status === 400) {
+				return {
+					success: false,
+					message: res.message,
+				};
+			} else {
+				let error = "";
+				for (let items in e.response.data.errors) {
+					error = error + `${e.response.data.errors[items]}` + "\n";
+				}
+				return {
+					success: false,
+					message: error,
+				};
+			}
+		}
+	},
 };

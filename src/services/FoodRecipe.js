@@ -153,8 +153,6 @@ export default {
 	},
 
 	async deleteCurrent(id) {
-		// try
-		// {
 		let url = `${api_endpoint}/api/recipes/${id}`;
 		let jwt = AuthService.getJwt();
 		console.log(jwt);
@@ -163,39 +161,40 @@ export default {
 				Authorization: `Bearer ${jwt}`,
 			},
 		});
+	},
 
-		// if(res.status === 200){
-		//     return {
-		//         success: true,
-		//         foodRecipe: res.data,
-		//     }
-		// }else{
-		//     console.log("NOT 200", res);
-		// }
-
-		// }
-		// catch (e)
-		// {
-		//     console.log(e.response.data.errors);
-		//     if(e.response.status === 401){
-		//         // console.log(e.response.data.message[0].messages[0].message);
-		//         return {
-		//             success: false,
-		//             message: res.message
-		//         }
-		//     } else {
-		//         let error = ""
-		//         for (let items in e.response.data.errors)
-		//         {
-		//             // console.log(`${e.response.data.errors[items]}`);
-		//             error = error  +`${e.response.data.errors[items]}` + "\n";
-		//         }
-		//         // console.log(error);
-		//         return {
-		//             success: false,
-		//             message: error
-		//         }
-		//     }
-		// }
+	async updateFoodRecipe(payload) {
+		try {
+			const url = `${api_endpoint}/api/recipes/${payload.get(
+				"id"
+			)}?_method=PUT`;
+			const jwt = AuthService.getJwt();
+			const res = await Axios.post(url, payload, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+					Authorization: `Bearer ${jwt}`,
+				},
+			});
+			return {
+				success: true,
+				foodRecipe: res,
+			};
+		} catch (e) {
+			if (e.response.status === 400) {
+				return {
+					success: false,
+					message: res.message,
+				};
+			} else {
+				let error = "";
+				for (let items in e.response.data.errors) {
+					error = error + `${e.response.data.errors[items]}` + "\n";
+				}
+				return {
+					success: false,
+					message: error,
+				};
+			}
+		}
 	},
 };
