@@ -238,6 +238,7 @@ export default {
 			this.foodRecipeForm.photo = this.$refs.recipePhoto.files[0];
 			let url = URL.createObjectURL(this.foodRecipeForm.photo);
 			this.$refs.foodRecipeRef.src = url;
+			this.foodRecipeForm.photo_url = url;
 			// console.log("after select photo", this.foodRecipeForm);
 		},
 		setFoodRecipeForm(res) {
@@ -360,6 +361,7 @@ export default {
 				this.$refs.photo[index].files[0];
 			let url = URL.createObjectURL(this.cookingProcessForm[index].photo);
 			this.$refs.processRef[index].src = url;
+			this.cookingProcessForm[index].photo_url = url;
 		},
 		checkNullValue() {
 			return (

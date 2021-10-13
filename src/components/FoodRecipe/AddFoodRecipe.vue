@@ -307,6 +307,7 @@ export default {
 							`${this.newFoodRecipe.name}`,
 							"success"
 						);
+						this.$router.push("/");
 					}
 				} else {
 					console.log(res);
