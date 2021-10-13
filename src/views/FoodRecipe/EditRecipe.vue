@@ -1,17 +1,14 @@
 <template>
-  <edit-food-recipe></edit-food-recipe>
+	<edit-food-recipe></edit-food-recipe>
 </template>
 
 <script>
-
-import EditFoodRecipe from '../../components/FoodRecipe/EditFoodRecipe.vue'
+import EditFoodRecipe from "../../components/FoodRecipe/EditFoodRecipe.vue";
 export default {
-    components: {
-        EditFoodRecipe
-    }
-}
+	components: {
+		EditFoodRecipe,
+	},
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
