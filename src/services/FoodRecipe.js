@@ -163,6 +163,31 @@ export default {
 		});
 	},
 
+	async deleteFoodRecipe(id) {
+		try {
+			const url = `${api_endpoint}/api/recipes/${id}`;
+			const headers = AuthService.getApiHeader();
+			await Axios.delete(url, headers);
+			return { success: true };
+		} catch (e) {
+			if (e.response.status === 400) {
+				return {
+					success: false,
+					message: res.message,
+				};
+			} else {
+				let error = "";
+				for (let items in e.response.data.errors) {
+					error = error + `${e.response.data.errors[items]}` + "\n";
+				}
+				return {
+					success: false,
+					message: error,
+				};
+			}
+		}
+	},
+
 	async updateFoodRecipe(payload) {
 		try {
 			const url = `${api_endpoint}/api/recipes/${payload.get(

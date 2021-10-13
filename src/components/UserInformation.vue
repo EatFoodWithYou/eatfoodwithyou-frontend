@@ -87,7 +87,7 @@
 							>
 								Your Recipes
 							</label>
-							<!-- <thead>
+							<thead>
 								<tr>
 									<th>No.</th>
 									<th>name</th>
@@ -97,8 +97,9 @@
 							</thead>
 							<tbody>
 								<tr
-									v-for="(food,
-									index) in currentUserWithFoodRecipe.food_recipes"
+									v-for="(
+										food, index
+									) in currentUserWithFoodRecipe.food_recipes"
 									:key="index"
 								>
 									<td>{{ index + 1 }}</td>
@@ -106,24 +107,31 @@
 										<router-link
 											:to="{
 												name: 'FoodRecipeInfor',
-												params: { id: food.id }
+												params: { id: food.id },
 											}"
 											class="
-							block
-							mt-1
-							text-lg
-							leading-tight
-							font-medium
-							text-black
-							hover:underline
-						"
+												block
+												mt-1
+												text-lg
+												leading-tight
+												font-medium
+												text-black
+												hover:underline
+											"
 											>{{ food.name }}</router-link
 										>
 									</td>
 									<td>{{ food.detail }}</td>
 									<td>
 										<img
+											v-if="food.photo"
 											v-bind:src="food.photo_url"
+											width="100"
+											height="100"
+										/>
+										<img
+											v-else
+											src=""
 											width="100"
 											height="100"
 										/>
@@ -132,12 +140,12 @@
 										<button @click="goToEditRecipe(food)">
 											Edit
 										</button>
-										<button @click="deleteRecipe">
+										<button @click="deleteRecipe(food)">
 											Delete
 										</button>
 									</td>
 								</tr>
-							</tbody> -->
+							</tbody>
 						</div>
 					</div>
 				</div>
@@ -149,7 +157,7 @@
 <script>
 import AuthUser from "@/store/AuthUser";
 import AuthService from "@/services/AuthService";
-import FoodRecipe from "@/services/FoodRecipe";
+import FoodRecipeService from "@/services/FoodRecipe";
 
 export default {
 	data() {
@@ -184,26 +192,27 @@ export default {
 		},
 
 		deleteRecipe(food) {
+			var deleteFoodId = food.id;
 			this.$swal({
 				title: "Delete this recipe?",
 				icon: "warning",
 				buttons: true,
-			}).then((willDelete) => {
+			}).then(async (willDelete) => {
 				if (willDelete) {
-					this.deleteInStore(food);
-					location.reload();
-					swal("Delete success", {
-						icon: "success",
-					});
-				} else {
-					swal("can not delete ");
+					const res = await FoodRecipeService.deleteFoodRecipe(
+						deleteFoodId
+					);
+					if (res.success) {
+						swal("Delete success", {
+							icon: "success",
+						});
+						this.$router.go();
+					} else {
+						this.$swal("Cannot Delete This Recipe.", "error");
+					}
 				}
 			});
 		},
-	},
-
-	async deleteInStore(food) {
-		await FoodRecipe.dispatch("deleteRecipe", food);
 	},
 };
 </script>
