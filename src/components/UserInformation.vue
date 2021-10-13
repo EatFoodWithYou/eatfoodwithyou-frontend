@@ -1,51 +1,114 @@
 <template>
-	<div>
+	<div class="bg-bgColor font-prompt">
 		<div>
-			<label for="name">ชื่อ :</label>
-			{{ currentUserWithFoodRecipe.name }}
-		</div>
-
-		<div>
-			<label for="age">อายุ :</label>
-			{{ currentUserWithFoodRecipe.age }}
-		</div>
-
-		<div>
-			<label for="gender">เพศ :</label>
-			{{ this.currentUserWithFoodRecipe.gender }}
-		</div>
-
-		<div>
-			<label for="email">อีเมล :</label>
-			{{ currentUserWithFoodRecipe.email }}
-		</div>
-
-		<div>
-			<button @click="goToEdit()">editInformation</button>
-		</div>
-
-		<h4>สูตรอาหารของคุณ</h4>
-		<thead>
-			<tr>
-				<th>No.</th>
-				<th>name</th>
-				<th>detail</th>
-				<th>photo</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr
-				v-for="(food, index) in currentUserWithFoodRecipe.food_recipes"
-				:key="index"
-			>
-				<td>{{ index + 1 }}</td>
-				<td>
-					<router-link
-						:to="{
-							name: 'FoodRecipeInfor',
-							params: { id: food.id },
-						}"
-						class="
+			<div>
+				<div class="text-center py-10 pt-16">
+					<h2 class="text-6xl font-bold text-white">
+						{{ currentUserWithFoodRecipe.name }}
+						<button
+							@click="goToEdit()"
+							class="
+								p-3
+								text-2xl
+								absolute
+								right-24
+								cursor-pointer
+								bg-white
+								text-navbarColor
+								hover:bg-gray-200
+								transition
+								duration-250
+							"
+						>
+							<font-awesome-icon :icon="['fas', 'edit']" />
+							แก้ไขข้อมูล
+						</button>
+					</h2>
+				</div>
+				<div class="flex justify-center">
+					<div class="w-1/4 max-w-4xl text-center">
+						<div class="flex flex-wrap -mx-3 mb-5 mt-4">
+							<div class="w-full px-3 md:mb-0">
+								<label
+									class="
+										block
+										tracking-wide
+										text-gray-100 text-3xl
+										font-bold
+										mb-2
+									"
+								>
+									Age :
+									{{ currentUserWithFoodRecipe.age }} yrs
+								</label>
+							</div>
+						</div>
+						<div class="flex flex-wrap -mx-3 mb-5 mt-4">
+							<div class="w-full px-3 md:mb-0">
+								<label
+									class="
+										block
+										tracking-wide
+										text-gray-100 text-3xl
+										font-bold
+										mb-2
+									"
+								>
+									Gender :
+									{{ this.currentUserWithFoodRecipe.gender }}
+								</label>
+							</div>
+						</div>
+						<div class="flex flex-wrap -mx-3 mb-5 mt-4">
+							<div class="w-full px-3 md:mb-0">
+								<label
+									class="
+										block
+										tracking-wide
+										text-gray-100 text-3xl
+										font-bold
+										mb-2
+									"
+								>
+									Email :
+									{{ currentUserWithFoodRecipe.email }}
+								</label>
+							</div>
+						</div>
+						<div class="w-full px-3 md:mb-0">
+							<label
+								class="
+									block
+									tracking-wide
+									text-white text-2xl
+									font-bold
+									mt-10
+								"
+							>
+								Your Recipes
+							</label>
+							<!-- <thead>
+								<tr>
+									<th>No.</th>
+									<th>name</th>
+									<th>detail</th>
+									<th>photo</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									v-for="(food,
+									index) in currentUserWithFoodRecipe.food_recipes"
+									:key="index"
+								>
+									<td>{{ index + 1 }}</td>
+									<td>
+										<router-link
+											:to="{
+												name: 'FoodRecipeInfor',
+												params: { id: food.id }
+											}"
+											class="
 							block
 							mt-1
 							text-lg
@@ -54,22 +117,32 @@
 							text-black
 							hover:underline
 						"
-						>{{ food.name }}</router-link
-					>
-				</td>
-				<td>{{ food.detail }}</td>
-				<td v-if="food.photo">
-					<img v-bind:src="food.photo_url" width="100" height="100" />
-				</td>
-				<td v-else>
-					<img src="" width="100" height="100" />
-				</td>
-				<td v-if="index !== editIndex">
-					<button @click="goToEditRecipe(food)">Edit</button>
-					<button @click="deleteRecipe">Delete</button>
-				</td>
-			</tr>
-		</tbody>
+											>{{ food.name }}</router-link
+										>
+									</td>
+									<td>{{ food.detail }}</td>
+									<td>
+										<img
+											v-bind:src="food.photo_url"
+											width="100"
+											height="100"
+										/>
+									</td>
+									<td v-if="index !== editIndex">
+										<button @click="goToEditRecipe(food)">
+											Edit
+										</button>
+										<button @click="deleteRecipe">
+											Delete
+										</button>
+									</td>
+								</tr>
+							</tbody> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 

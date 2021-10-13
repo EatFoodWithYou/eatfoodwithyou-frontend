@@ -1,5 +1,5 @@
 <template>
-	<div class="sm:flex">
+	<div class="sm:flex z-30">
 		<div
 			class="
 				sm:flex sm:justify-between
@@ -9,7 +9,7 @@
 				py-1
 			"
 		>
-			<div class="flex justify-between px-4 text-yellow-50 text-3xl">
+			<div class="flex justify-between px-4 text-yellow-50 text-2xl">
 				<a class="flex mb-3" href="http://localhost:8080/">
 					<img
 						class="block h-12 w-auto mt-1.5"
@@ -167,21 +167,7 @@
 							>
 								Profile
 							</button>
-							<button
-								class="
-									block
-									w-full
-									px-3
-									py-2.5
-									text-white
-									hover:bg-bgColor hover:text-white
-									transition
-									duration-250
-								"
-								@click="edit()"
-							>
-								Setting
-							</button>
+
 							<button
 								@click="logout()"
 								class="
@@ -250,9 +236,6 @@ export default {
 		},
 		info() {
 			this.$router.push("/user-information");
-		},
-		edit() {
-			this.$router.push("/edit-information");
 		},
 		recipes() {
 			this.$router.push("/recipe");
