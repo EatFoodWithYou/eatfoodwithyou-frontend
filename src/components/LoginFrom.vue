@@ -92,7 +92,7 @@ export default {
         // ShopStore.dispatch('setCurrentUser',this.currentUser)
         this.$router.push("/");
       } else {
-        this.$swal("Login Failed", res.error, "error");
+        this.$swal("Login Failed", res.message, "error");
       }
     },
     clearFrom() {

@@ -11,7 +11,9 @@ import FoodRecipeInfomarion from "@/views/FoodRecipe/foodRecipeInformation.vue";
 import foodRecipeItem from "@/views/FoodRecipe/foodRecipeItem.vue";
 import SearchRecipes from "@/views/FoodRecipe/SearchRecipes";
 import AdminFoodRecipes from '@/views/Admin/AdminFoodRecipes.vue'
+import UserManage from '@/views/Admin/UserManagement.vue'
 import EditFoodRecipe from '@/views/FoodRecipe/EditRecipe.vue'
+
 
 // import IsFoodRecipe from '@/views/Admin/IsFoodRecipe.vue'
 
@@ -72,6 +74,11 @@ const routes = [
   //   name: 'IsFoodRecipe',
   //   component: IsFoodRecipe,
   // },
+  {
+    path: '/admin/user-manage',
+    name: 'UserManage',
+    component: UserManage,
+  },
   
 
 

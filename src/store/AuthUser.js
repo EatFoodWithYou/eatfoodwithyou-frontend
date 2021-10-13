@@ -20,9 +20,11 @@ const initialStateUser = {
 export default new Vuex.Store({
     state: {
         currentUser: initialStateUser,
+        allUser:[]
     },
     getters:{
         getCurrentUser : state => state.currentUser,
+        getAllUser: state => state.AllUser ,
         isAuthen : state => state.currentUser.isAuthen,
         isAdmin : state => state.currentUser.isAdmin
     },
@@ -65,6 +67,12 @@ export default new Vuex.Store({
             state.currentUser.isAuthen = false;
             state.currentUser.isAdmin = false;
             // console.log(state.currentUser);
+        },
+        fetchAllUser(state , body)
+        {
+            state.allUser = body
+            // console.log("123");
+            // console.log(state.allUser);
         }   
     },
     actions: {
@@ -106,6 +114,21 @@ export default new Vuex.Store({
 
         async setUser({ commit }, user) {
             commit('setUser', user);
+        },
+        
+        async fetchAllUser({ commit })
+        {
+            let res = await AuthService.allUser()
+            console.log("123");
+            console.log(res);
+            commit("fetchAllUser" , res)
+
+            return res
+        },
+
+        async activeUser({commit} , id)
+        {
+            
         }
 
     },
