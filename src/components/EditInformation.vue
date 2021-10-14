@@ -31,7 +31,7 @@
 					<h2 class="text-6xl font-bold text-white">Edit</h2>
 				</div>
 				<div class="flex justify-center">
-					<form class="w-1/4 max-w-4xl">
+					<form @submit.prevent="edit" class="w-1/4 max-w-4xl">
 						<div class="flex flex-wrap -mx-3 mb-5 mt-4">
 							<div class="w-full px-3 md:mb-0">
 								<label
@@ -62,7 +62,7 @@
 									"
 									type="text"
 									v-model="form.name"
-									placeholder="Name"
+
 								/>
 							</div>
 							<div class="w-full md:w-2/4 px-3 md:mb-0">
@@ -95,7 +95,6 @@
 									"
 									type="number"
 									v-model="form.age"
-									placeholder="Age"
 								/>
 							</div>
 
@@ -216,7 +215,10 @@ export default {
 		async fetchCurrentUser() {
 			let res = await AuthService.fetchRecipes();
 			this.currentUser = res.data;
-			console.log(this.currentUser);
+			console.log("USERID",this.currentUser.id);
+			this.form.name = this.currentUser.name;
+			this.form.age = this.currentUser.age;
+			this.form.gender = this.currentUser.gender;
 		},
 
 		async edit() {
@@ -225,13 +227,13 @@ export default {
 				this.form.age !== "" &&
 				this.form.gender !== ""
 			) {
-				let res = await AuthService.editInformation(this.form);
+				let res = await AuthService.editInformation(this.form, this.currentUser.id);
 				console.log(this.currentUser);
 				console.log(2);
 				console.log(res.data);
 				AuthUser.dispatch("setUser", res.data);
 				this.$swal("Edit Success", " ", "success");
-				this.$router.push("/userinfomation");
+				this.$router.push("/user-information");
 			} else {
 				this.$swal("Edit Failed", "Fill up this form!", "error");
 			}

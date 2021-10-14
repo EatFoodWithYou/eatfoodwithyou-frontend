@@ -159,20 +159,15 @@ export default {
 
 	async fetchRecipes() {
 		let url = api_endpoint + "/api/auth/me";
-		// console.log(url)
-		// console.log(jwt)
-		// console.log(user)
 		let header = this.getApiHeader();
-		// console.log(header)
-		// console.log("__________")
 		let res = await Axios.post(url, "", header);
-		// console.log(res)
-		// console.log("______________")
+
 		return res;
 	},
 
-	async editInformation({ name, age, gender }) {
-		let url = `${api_endpoint}/api/auth/update`;
+	async editInformation({ name, age, gender }, id) {
+		let url = `${api_endpoint}/api/auth/update/${id}`;
+		console.log(url)
 		let body = {
 			name: name,
 			age: age,

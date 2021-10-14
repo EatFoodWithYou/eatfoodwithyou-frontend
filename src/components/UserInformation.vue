@@ -175,11 +175,10 @@ export default {
 			this.currentUser = JSON.parse(
 				JSON.stringify(AuthUser.getters.getCurrentUser)
 			);
-			this.currentUser = this.currentUser.user;
+			this.currentUser = this.currentUser;
 			console.log("CurrentUser2", this.currentUser);
-			// console.log("_______________")
 			let res = await AuthService.fetchRecipes();
-			// console.log(res);
+			console.log("RESDATA", this.res)
 			this.currentUserWithFoodRecipe = res.data;
 		},
 
