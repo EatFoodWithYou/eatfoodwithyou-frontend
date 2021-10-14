@@ -28,4 +28,10 @@ export default {
 			};
 		}
 	},
+
+	async getCategoriesFromName(category) {
+		let url = `${api_endpoint}/api/recepies/search/category/${category}`;
+		let res = await Axios.get(url);
+		return res.data;
+	},
 };

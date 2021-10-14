@@ -9,9 +9,10 @@ import UserInfo from "@/views/UserInfo.vue";
 import EditInfo from "@/views/EditInfo.vue";
 import FoodRecipeInfomarion from "@/views/FoodRecipe/foodRecipeInformation.vue";
 import foodRecipeItem from "@/views/FoodRecipe/foodRecipeItem.vue";
-import SearchRecipes from "@/views/FoodRecipe/SearchRecipes";
+import SearchRecipes from "@/views/FoodRecipe/SearchRecipes.vue";
 import AdminFoodRecipes from "@/views/Admin/AdminFoodRecipes.vue";
 import EditFoodRecipe from "@/views/FoodRecipe/EditRecipe.vue";
+import SearchCategories from "@/views/FoodRecipe/SearchCategories.vue";
 
 // import IsFoodRecipe from '@/views/Admin/IsFoodRecipe.vue'
 
@@ -101,6 +102,12 @@ const routes = [
 		path: "/recipe",
 		name: "foodRecipeItem",
 		component: foodRecipeItem,
+	},
+
+	{
+		path: "/category/:name",
+		name: "SearchCategories",
+		component: SearchCategories,
 	},
 ];
 

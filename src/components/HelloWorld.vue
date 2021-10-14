@@ -7,25 +7,75 @@
 						Food Category
 					</div>
 					<form class="text-lg font-normal">
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="1"
+							value="lnwza"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 1</label><br />
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="2"
+							value="2"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 2</label><br />
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="3"
+							value="3"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 3</label><br />
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="4"
+							value="4"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 4</label><br />
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="5"
+							value="5"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 5</label><br />
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="6"
+							value="6"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 6</label><br />
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="7"
+							value="7"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 7</label><br />
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="8"
+							value="8"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 8</label><br />
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="9"
+							value="9"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 9</label><br />
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							id="10"
+							value="10"
+							v-model="form.categoriesForSearch"
+						/>
 						<label class="px-4"> food 10</label><br />
 					</form>
 					<div class="text-xl font-semibold mt-7 pb-6">Budget</div>
@@ -42,6 +92,26 @@
 						<label class="px-4"> 1000 > </label><br />
 					</form>
 				</nav>
+
+				<router-link
+					class="
+						absolute
+						font-base
+						bg-gray-600
+						text-white
+						px-4
+						py-2
+						mt-2
+						hover:bg-gray-700
+						transition
+						duration-200
+					"
+					:to="{
+						name: 'SearchCategories',
+						params: { category: this.form.categoriesForSearch },
+					}"
+					>ค้นหา</router-link
+				>
 			</div>
 			<div class="flex justify-center mt-10 mr-44">
 				<div class="text-5xl font-bold px-6">Menu</div>
@@ -80,6 +150,14 @@ export default {
 		Navbar,
 		Random,
 		SearchBar,
+	},
+
+	data() {
+		return {
+			form: {
+				categoriesForSearch: [],
+			},
+		};
 	},
 
 	methods: {
