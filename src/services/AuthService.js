@@ -92,7 +92,7 @@ export default {
                 console.log("sohard");
                 return {
                     success: false,
-                    message: e.response.data.error
+                    message: e.response.data.password[0]
                 };
             }
             // throw e
@@ -188,6 +188,16 @@ export default {
         let header = this.getApiHeader();
         let res = await Axios.get(url, header);
         return res.data;
+    },
+
+    async updateStatus({id , status})
+    {
+        // console.log("is id" ,id);
+        // console.log("is status" ,status);
+        let url = `${api_endpoint}/api/auth/updateStatus/${id}`
+        let header = this.getApiHeader();
+        let res = await Axios.put(url, {status : status} ,header);
+        console.log("is res" ,res);
     }
 };
 

@@ -6,7 +6,12 @@
 					<h2 class="text-7xl">Log in</h2>
 				</div>
 				<div class="flex justify-center">
-					<form class="w-3/12 max-w-4xl" @submit.prevent="login">
+					<form
+						class="w-3/12 max-w-4xl"
+						@submit.prevent="
+							login(loginFrom.email, loginFrom.password)
+						"
+					>
 						<div class="flex flex-wrap -mx-3 mb-5 mt-4">
 							<div class="w-full md:w-full px-3 md:mb-0">
 								<label
@@ -126,41 +131,54 @@
 // import ShopStore from '@/store/Shop'
 import AuthUser from "@/store/AuthUser";
 export default {
-  data() {
-    return {
-      currentUser: "",
-      loginFrom: {
-        email: "",
-        password: "",
-      },
-    };
-  },
-  methods: {
-    async login() {
-      let res = await AuthUser.dispatch("login", this.loginFrom);
-      console.log(1);
-      console.log(res);
-      console.log(2);
-      if (res.success) {
-        this.$swal("Login Success", `Welcome, ${res.user.name}`, "success");
-        // console.log(res.user);
-        this.currentUser = res.user;
-        console.log(this.currentUser);
-        // console.log(this.currentUser);
-        // ShopStore.dispatch('setCurrentUser',this.currentUser)
-        this.$router.push("/");
-      } else {
-        this.$swal("Login Failed", res.message, "error");
-      }
-    },
-    clearFrom() {
-      this.loginFrom.email = "";
-      this.loginFrom.password = "";
-    },
-    signup() {
-      this.$router.push("/register");
-    },
-  },
+	data() {
+		return {
+			currentUser: "",
+			loginFrom: {
+				email: "",
+				password: ""
+			}
+		};
+	},
+	methods: {
+		async login() {
+			//  console.log("it is loginform" ,this.loginFrom);
+			if (this.loginFrom.email !== "" && this.loginFrom.password !== "")
+			{
+				let res = await AuthUser.dispatch("login", this.loginFrom);
+				console.log(1);
+				console.log(res);
+				console.log(2);
+				if (res.success) {
+					this.$swal(
+						"Login Success",
+						`Welcome, ${res.user.name}`,
+						"success"
+					);
+					// console.log(res.user);
+					this.currentUser = res.user;
+					console.log(this.currentUser);
+					// console.log(this.currentUser);
+					// ShopStore.dispatch('setCurrentUser',this.currentUser)
+					this.$router.push("/");
+				} else {
+					this.$swal("Login Failed", res.message, "error");
+				}
+			}
+			else
+			{
+				this.$swal("Login Failed", "please enter you email or password", "error");
+			}
+			
+		},
+		clearFrom() {
+			this.loginFrom.email = "";
+			this.loginFrom.password = "";
+		},
+		signup() {
+			this.$router.push("/register");
+		}
+	}
 };
 </script>
 
