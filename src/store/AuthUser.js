@@ -19,32 +19,33 @@ const initialStateUser = {
 };
 
 export default new Vuex.Store({
-	state: {
-		currentUser: initialStateUser,
-	},
-	getters: {
-		getCurrentUser: (state) => state.currentUser,
-		isAuthen: (state) => state.currentUser.isAuthen,
-		isAdmin: (state) => state.currentUser.isAdmin,
-	},
-	mutations: {
-		setCurrentUser(state, body) {
-			(state.currentUser.user = body.user),
-				(state.currentUser.jwt = body.jwt),
-				(state.currentUser.isAuthen = true);
-			// if (body.user.role === "ADMIN")
-			// {
-			//     state.currentUser.isAdmin = true
-			// }
-			// else
-			// {
-			//     state.currentUser.isAdmin = false
-			// }
-			state.currentUser.isAdmin = AuthService.isAdmin(body.user.role);
-			//console.log(36)
-			//console.log(state.currentUser)
-			//console.log(state.currentUser.isAdmin);
-		},
+    state: {
+        currentUser: initialStateUser,
+        allUser:[]
+    },
+    getters:{
+        getCurrentUser : state => state.currentUser,
+        getAllUser: state => state.AllUser ,
+        isAuthen : state => state.currentUser.isAuthen,
+        isAdmin : state => state.currentUser.isAdmin
+    },
+    mutations: {
+        setCurrentUser(state, body) 
+        {
+            state.currentUser.user = body.user,
+            state.currentUser.jwt = body.jwt,
+            state.currentUser.isAuthen = true;
+            // if (body.user.role === "ADMIN")
+            // {
+            //     state.currentUser.isAdmin = true
+            // }
+            // else
+            // {
+            //     state.currentUser.isAdmin = false
+            // }
+            state.currentUser.isAdmin = AuthService.isAdmin(body.user.role)
+            
+        },
 
 		setUser(state, body) {
 			console.log(state.currentUser);
@@ -53,22 +54,24 @@ export default new Vuex.Store({
 		},
 
 		logoutSuccess(state) {
-			// console.log(1);
-			// console.log(state.currentUser);
-			(state.currentUser.user = ""),
-				(state.currentUser.jwt = ""),
-				(state.currentUser.isAuthen = false);
+			
+			state.currentUser.user = "",
+			state.currentUser.jwt = "",
+			state.currentUser.isAuthen = false,
 			state.currentUser.isAdmin = false;
-			// console.log(state.currentUser);
+			
 		},
+        setAllUser(state , body)
+        {
+            state.allUser = body
+        }
+
 	},
 	actions: {
 		async login({ commit }, { email, password }) {
-			//console.log("is mail " + email + "and " + password);
+		
 			let res = await AuthService.login({ email, password });
-			//   console.log(5);
-			//   console.log(res);
-			//   console.log(6);
+		
 			let body = {
 				user: res.user,
 				jwt: res.jwt,
@@ -109,6 +112,30 @@ export default new Vuex.Store({
 		async setUser({ commit }, user) {
 			commit("setUser", user);
 		},
+        async fetchAllUser({ commit })
+        {
+            let res = await AuthService.allUser()
+            console.log("123");
+            console.log(res);
+            commit("setAllUser" , res)
+
+            return res
+        },
+
+        async activeUser({commit} , {id , status})
+        {
+            console.log("123");
+			console.log(id);
+			await AuthService.updateStatus({id,status});
+        },
+
+        async banUser({commit} , {id , status})
+        {
+            console.log("123");
+			console.log(id);
+			await AuthService.updateStatus({id,status});
+        }
+
 	},
 	modules: {},
 });
