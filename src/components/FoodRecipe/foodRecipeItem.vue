@@ -3,7 +3,7 @@
 		<div class="font-prompt">
 			<div class="flex-auto">
 				<div>
-					<div class="bg-red-400">
+					<div>
 						<img
 							v-bind:src="imageURL"
 							width="250"

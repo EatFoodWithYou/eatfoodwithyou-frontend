@@ -1,151 +1,406 @@
 <template>
-	<div>
-		<h1>เพิ่มสูตรอาหารใหม่</h1>
-		<div>
-			<div class="flex flex-row">
-				<div>
-					<img
-						src="https://via.placeholder.com/250x200"
-						ref="foodRecipeRef"
-						width="250"
-						height="200"
-					/>
-				</div>
-				<div>
-					<div>
-						<input
-							type="text"
-							v-model="foodRecipeForm.name"
-							placeholder="ชื่ออาหาร"
-						/>
-					</div>
-					<div>
-						<textarea
-							name="detail"
-							id=""
-							cols="30"
-							rows="5"
-							v-model="foodRecipeForm.detail"
-							placeholder="รายละเอียดของสูตรอาหาร"
-						></textarea>
-					</div>
-					<div>
-						<input
-							type="file"
-							ref="recipePhoto"
-							id="recipePhoto"
-							@change="selectedRecipePhoto()"
-						/>
-					</div>
-				</div>
-			</div>
-			<div>
-				<h3>วัตถุดิบ</h3>
-				<p>โดยปริมาณที่ใส่จะต้องเป็นปริมาณการทำต่อ 1 ที่</p>
-				<div v-for="(input, k) in allIngredient" :key="k">
-					<label for="number">{{ k + 1 }} </label>
-					<span>
-						<input
-							type="text"
-							v-model="input.name"
-							placeholder="ชื่อวัตถุดิบ"
-						/>
-						<input
-							type="number"
-							v-model="input.quantity"
-							placeholder="ปริมาณ"
-							min="0"
-						/>
-						<input
-							type="text"
-							v-model="input.unit"
-							placeholder="หน่วย"
-						/>
-						<button
-							@click="removeIngredient(k)"
-							v-show="k || (!k && allIngredient.length > 1)"
-						>
-							ลบ
-						</button>
-					</span>
-				</div>
-				<button @click="addIngredient()">เพิ่มวัตถุดิบ</button>
-			</div>
-			<div>
-				<h3>ขั้นตอนการทำ</h3>
-				<div
-					v-for="(input, k) in allCookingProcess"
-					:key="k"
-					class="flex flex-row"
-				>
-					<div>
-						<label for="number">{{ k + 1 }} </label>
-						<textarea
-							cols="30"
-							rows="5"
-							v-model="input.process"
-							placeholder="ขั้นตอนการทำ"
-						></textarea>
-					</div>
-					<div>
-						<img
-							src="https://via.placeholder.com/200x150"
-							ref="processRef"
-							width="150"
-							height="200"
-						/>
-						<input
-							type="file"
-							ref="photo"
-							id="processPhoto"
-							@change="selectedFileProcess(k)"
-						/>
-					</div>
-					<div>
-						<button
-							@click="removeProcess(k)"
-							v-show="k || (!k && allIngredient.length > 1)"
-						>
-							ลบ
-						</button>
-					</div>
-				</div>
-				<button @click="addProcess()">เพิ่มวัตถุดิบ</button>
-			</div>
-		</div>
+	<div class="min-h-screen font-prompt">
 		<div>
 			<div>
-				<h3>เลือกประเภทของอาหาร</h3>
-			</div>
-			<div>
-				<select
-					name="categories"
-					id="category"
-					v-model="selectedCategory"
-				>
-					<option value="">กรุณาเลือกประเภทที่ต้องการ</option>
-					<option
-						v-for="(item, k) in allCategory"
-						:key="k"
-						:value="item.name"
+				<div class="text-center py-16">
+					<h2 class="text-6xl font-bold text-white">
+						Add New Recipe
+					</h2>
+				</div>
+				<div class="flex justify-center">
+					<div class="w-7/12">
+						<div class="flex flex-wrap -mx-3 mb-5 ml-40">
+							<div class="px-3 md:mb-0">
+								<img
+									src="https://via.placeholder.com/250x250"
+									ref="foodRecipeRef"
+									width="250"
+									height="250"
+								/>
+							</div>
+							<div class="w-full md:w-1/2 px-3 md:mb-0">
+								<input
+									class="
+										appearance-none
+										block
+										w-full
+										bg-gray-200
+										text-gray-700 text-xl
+										border
+										rounded
+										py-3
+										px-4
+										mb-3
+										leading-tight
+										focus:outline-none focus:bg-white
+									"
+									type="text"
+									v-model="foodRecipeForm.name"
+									placeholder="Name"
+								/>
+								<div class="w-full mt-6">
+									<textarea
+										class="
+											appearance-none
+											block
+											w-full
+											bg-gray-200
+											text-gray-700 text-xl
+											border
+											rounded
+											py-3
+											px-4
+											mb-3
+											leading-tight
+											focus:outline-none focus:bg-white
+										"
+										placeholder="Detail"
+										rows="4"
+										v-model="foodRecipeForm.detail"
+									/>
+								</div>
+								<div class="mt-5">
+									<input
+										class="cursor-pointer"
+										type="file"
+										ref="recipePhoto"
+										id="recipePhoto"
+										@change="selectedRecipePhoto()"
+									/>
+								</div>
+							</div>
+						</div>
+						<h2
+							class="
+								flex
+								font-bold
+								text-4xl text-white
+								ml-44
+								pb-5
+							"
+						>
+							Ingredient
+							<p class="font-normal text-base ml-4 mt-3.5">
+								Quantity per 1 serving
+							</p>
+						</h2>
+						<div v-for="(input, k) in allIngredient" :key="k">
+							<label
+								for="number"
+								class="
+									absolute
+									font-normal
+									text-2xl text-white
+									ml-40
+									py-1
+								"
+								>{{ k + 1 }}
+							</label>
+							<div class="flex mt-0 space-x-1 ml-48">
+								<input
+									class="
+										appearance-none
+										block
+										w-2/5
+										bg-gray-200
+										text-gray-700 text-lg
+										border
+										rounded
+										py-2
+										px-3
+										mb-3
+										leading-tight
+										focus:outline-none focus:bg-white
+									"
+									type="text"
+									v-model="input.name"
+									placeholder="Ingredient"
+								/>
+								<input
+									class="
+										appearance-none
+										block
+										w-1/6
+										bg-gray-200
+										text-gray-700 text-lg
+										border
+										rounded
+										py-2
+										px-3
+										mb-3
+										leading-tight
+										focus:outline-none focus:bg-white
+									"
+									type="number"
+									v-model="input.quantity"
+									placeholder="Quantity"
+								/>
+								<input
+									class="
+										appearance-none
+										block
+										w-1/6
+										bg-gray-200
+										text-gray-700 text-lg
+										border
+										rounded
+										py-2
+										px-3
+										mb-3
+										leading-tight
+										focus:outline-none focus:bg-white
+									"
+									type="text"
+									v-model="input.unit"
+									placeholder="Unit"
+								/>
+								<button
+									@click="removeIngredient(k)"
+									v-show="
+										k || (!k && allIngredient.length > 1)
+									"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="h-8 w-8 text-white -mt-3 ml-2"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+										/>
+									</svg>
+								</button>
+							</div>
+						</div>
+						<div class="text-center py-2">
+							<button
+								@click="addIngredient()"
+								class="text-xl font-semibold text-white"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-8 w-8"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+							</button>
+						</div>
+						<h2
+							class="
+								flex
+								font-bold
+								text-4xl text-white
+								ml-44
+								pb-5
+							"
+						>
+							Process
+						</h2>
+
+						<div
+							class="flex flex-wrap -mx-3 mb-5 ml-40"
+							v-for="(input, k) in allCookingProcess"
+							:key="k"
+						>
+							<label
+								for="number"
+								class="
+									absolute
+									font-normal
+									text-2xl text-white
+									py-1
+								"
+								>{{ k + 1 }}
+							</label>
+							<div class="px-3 md:mb-0 ml-5">
+								<img
+									src="https://via.placeholder.com/150x150"
+									ref="processRef"
+									width="150"
+									height="150"
+								/>
+							</div>
+							<div class="w-6/12 px-3 md:mb-0">
+								<div class="w-full">
+									<textarea
+										class="
+											appearance-none
+											block
+											w-full
+											bg-gray-200
+											text-gray-700 text-xl
+											border
+											rounded
+											py-3
+											px-4
+											mb-3
+											leading-tight
+											focus:outline-none focus:bg-white
+										"
+										placeholder="Process"
+										rows="3"
+										v-model="input.process"
+									/>
+								</div>
+								<div class="mt-5">
+									<input
+										class="cursor-pointer"
+										type="file"
+										ref="photo"
+										id="processPhoto"
+										@change="selectedFileProcess(k)"
+									/>
+								</div>
+							</div>
+							<button
+								@click="removeProcess(k)"
+								v-show="
+									k || (!k && allCookingProcess.length > 1)
+								"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-8 w-8 text-white -mt-10 ml-2"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+							</button>
+						</div>
+						<div class="text-center py-2">
+							<button
+								@click="addProcess()"
+								class="text-xl font-semibold text-white"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-8 w-8"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+							</button>
+						</div>
+						<h2
+							class="
+								flex
+								font-bold
+								text-4xl text-white
+								ml-44
+								pb-5
+							"
+						>
+							Food Categories
+						</h2>
+						<div class="flex flex-wrap -mx-3 mb-5 ml-44">
+							<div class="w-full md:w-1/2 px-3 md:mb-0">
+								<div class="relative">
+									<select
+										class="
+											block
+											appearance-none
+											w-full
+											border
+											bg-gray-200
+											border-gray-200
+											text-gray-700 text-xl
+											py-2
+											px-3
+											pr-8
+											rounded
+											leading-tight
+											focus:outline-none
+											focus:bg-white
+											focus:border-gray-500
+										"
+										v-model="selectedCategory"
+									>
+										<option value="">
+											Food Categories
+										</option>
+										<option
+											v-for="(item, k) in allCategory"
+											:key="k"
+											:value="item.name"
+										>
+											{{ item.name }}
+										</option>
+									</select>
+									<div
+										class="
+											pointer-events-none
+											absolute
+											inset-y-0
+											right-0
+											flex
+											items-center
+											px-2
+											text-gray-700
+										"
+									>
+										<svg
+											class="fill-current h-4 w-4"
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 20 20"
+										>
+											<path
+												d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+											/>
+										</svg>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="py-3 text-center text-black">
+					<button
+						@click="addNewFoodRecipe()"
+						class="
+							font-normal
+							text-2xl
+							py-2
+							w-44
+							rounded-full
+							border-2 border-white
+							text-white
+							hover:bg-gray-100 hover:text-black
+							transition
+							duration-250
+						"
 					>
-						{{ item.name }}
-					</option>
-				</select>
-				<button @click="selectCategory">เลือก</button>
+						Add
+					</button>
+				</div>
+				<br />
 			</div>
-			<div>
-				<span>
-					ประเภทของอาหารที่เลือกแล้ว :
-					<p>{{ this.foodRecipeForm.categories }}</p>
-				</span>
-				<button @click="clearSelectedCategories">ลบทั้งหมด</button>
-			</div>
-		</div>
-		<div>
-			<button type="submit" @click="addNewFoodRecipe()">
-				เพิ่มสูตรใหม่
-			</button>
 		</div>
 	</div>
 </template>
@@ -162,9 +417,9 @@ export default {
 			allIngredient: [
 				{
 					name: "",
-					quantity: 0,
+					quantity: "",
 					unit: "",
-					food_recipe_id: 0,
+					food_recipe_id: "",
 				},
 			],
 			foodRecipeForm: {
@@ -211,7 +466,7 @@ export default {
 		addIngredient() {
 			this.allIngredient.push({
 				name: "",
-				quantity: 0,
+				quantity: "",
 				unit: "",
 				food_recipe_id: 0,
 			});
