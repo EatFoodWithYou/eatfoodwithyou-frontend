@@ -275,4 +275,11 @@ export default {
 			},
 		});
 	},
+
+	async searchFoodRecipeByCategories(payload) {
+		const url = `${api_endpoint}/api/recipes/category/${payload}`;
+		const headers = AuthService.getApiHeader();
+		const res = await Axios.get(url, headers);
+		return res.data;
+	},
 };

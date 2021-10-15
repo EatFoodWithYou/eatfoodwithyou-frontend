@@ -12,6 +12,7 @@ import foodRecipeItem from "@/views/FoodRecipe/foodRecipeItem.vue";
 import SearchRecipes from "@/views/FoodRecipe/SearchRecipes";
 import AdminFoodRecipes from "@/views/Admin/AdminFoodRecipes.vue";
 import EditFoodRecipe from "@/views/FoodRecipe/EditRecipe.vue";
+import SearchCategories from "../views/FoodRecipe/SearchCategories.vue";
 
 // import IsFoodRecipe from '@/views/Admin/IsFoodRecipe.vue'
 
@@ -101,6 +102,11 @@ const routes = [
 		path: "/recipe",
 		name: "foodRecipeItem",
 		component: foodRecipeItem,
+	},
+	{
+		path: "/recipes/category/:categories",
+		name: "SearchCategories",
+		component: SearchCategories,
 	},
 ];
 
