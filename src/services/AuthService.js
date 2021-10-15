@@ -2,8 +2,8 @@ import Axios from "axios";
 
 const auth_key = "auth-shop";
 let auth = JSON.parse(localStorage.getItem(auth_key));
-const user = auth ? auth.data.user : "";
-const jwt = auth ? auth.data.access_token : "";
+let user = auth ? auth.data.user : "";
+let jwt = auth ? auth.data.access_token : "";
 const api_endpoint =
 	process.env.VUE_APP_SHOP_ENDPOINT || "http://localhost:8000";
 
@@ -27,9 +27,13 @@ export default {
 	getUser() {
 		return user;
 	},
-
 	getJwt() {
 		return jwt;
+	},
+	setUser(){
+		let auth = JSON.parse(localStorage.getItem(auth_key));
+		this.user = auth ? auth.data.user : "";
+		jwt = auth ? auth.data.access_token : "";
 	},
 	async login({ email, password }) {
 		try {
@@ -46,6 +50,7 @@ export default {
 				// console.log(res.data);
 
 				localStorage.setItem(auth_key, JSON.stringify(res));
+				this.setUser();
 				return {
 					success: true,
 					user: res.data.user,
