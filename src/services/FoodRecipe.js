@@ -12,14 +12,14 @@ export default {
 			let res = await Axios.post(url, data, {
 				headers: {
 					"Content-Type": "multipart/form-data",
-					Authorization: `Bearer ${jwt}`,
-				},
+					Authorization: `Bearer ${jwt}`
+				}
 			});
 			// console.log(res);
 			if (res.status === 201) {
 				return {
 					success: true,
-					foodRecipe: res.data,
+					foodRecipe: res.data
 				};
 			} else {
 				console.log("NOT 200", res);
@@ -30,7 +30,7 @@ export default {
 				// console.log(e.response.data.message[0].messages[0].message);
 				return {
 					success: false,
-					message: res.message,
+					message: res.message
 				};
 			} else {
 				let error = "";
@@ -41,7 +41,7 @@ export default {
 				// console.log(error);
 				return {
 					success: false,
-					message: error,
+					message: error
 				};
 			}
 		}
@@ -57,13 +57,13 @@ export default {
 			let url = `${api_endpoint}/api/recipes/`;
 			let res = await Axios.get(url, null, {
 				headers: {
-					"Content-Type": "multipart/form-data",
-				},
+					"Content-Type": "multipart/form-data"
+				}
 			});
 			if (res.status === 200) {
 				return {
 					success: true,
-					foodRecipe: res.data,
+					foodRecipe: res.data
 				};
 			} else {
 				console.log("NOT 200", res);
@@ -74,7 +74,7 @@ export default {
 				// console.log(e.response.data.message[0].messages[0].message);
 				return {
 					success: false,
-					message: res.message,
+					message: res.message
 				};
 			} else {
 				let error = "";
@@ -85,7 +85,7 @@ export default {
 				// console.log(error);
 				return {
 					success: false,
-					message: error,
+					message: error
 				};
 			}
 		}
@@ -118,13 +118,13 @@ export default {
 			//console.log();
 			let res = await Axios.get(url, null, {
 				headers: {
-					"Content-Type": "multipart/form-data",
-				},
+					"Content-Type": "multipart/form-data"
+				}
 			});
 			if (res.status === 200) {
 				return {
 					success: true,
-					foodRecipe: res.data,
+					foodRecipe: res.data
 				};
 			} else {
 				console.log("NOT 200", res);
@@ -135,7 +135,7 @@ export default {
 				// console.log(e.response.data.message[0].messages[0].message);
 				return {
 					success: false,
-					message: res.message,
+					message: res.message
 				};
 			} else {
 				let error = "";
@@ -146,7 +146,7 @@ export default {
 				// console.log(error);
 				return {
 					success: false,
-					message: error,
+					message: error
 				};
 			}
 		}
@@ -158,8 +158,8 @@ export default {
 		console.log(jwt);
 		await Axios.delete(url, {
 			headers: {
-				Authorization: `Bearer ${jwt}`,
-			},
+				Authorization: `Bearer ${jwt}`
+			}
 		});
 	},
 
@@ -173,7 +173,7 @@ export default {
 			if (e.response.status === 400) {
 				return {
 					success: false,
-					message: res.message,
+					message: res.message
 				};
 			} else {
 				let error = "";
@@ -182,7 +182,7 @@ export default {
 				}
 				return {
 					success: false,
-					message: error,
+					message: error
 				};
 			}
 		}
@@ -197,18 +197,18 @@ export default {
 			const res = await Axios.post(url, payload, {
 				headers: {
 					"Content-Type": "multipart/form-data",
-					Authorization: `Bearer ${jwt}`,
-				},
+					Authorization: `Bearer ${jwt}`
+				}
 			});
 			return {
 				success: true,
-				foodRecipe: res,
+				foodRecipe: res
 			};
 		} catch (e) {
 			if (e.response.status === 400) {
 				return {
 					success: false,
-					message: res.message,
+					message: res.message
 				};
 			} else {
 				let error = "";
@@ -217,7 +217,7 @@ export default {
 				}
 				return {
 					success: false,
-					message: error,
+					message: error
 				};
 			}
 		}
@@ -229,14 +229,14 @@ export default {
 			let jwt = AuthService.getJwt();
 			let res = await Axios.post(url, data, {
 				headers: {
-					Authorization: `Bearer ${jwt}`,
-				},
+					Authorization: `Bearer ${jwt}`
+				}
 			});
 			// console.log(res);
 			if (res.status === 201) {
 				return {
 					success: true,
-					like: res.data,
+					like: res.data
 				};
 			} else {
 				console.log("NOT 200", res);
@@ -247,7 +247,7 @@ export default {
 				// console.log(e.response.data.message[0].messages[0].message);
 				return {
 					success: false,
-					message: res.message,
+					message: res.message
 				};
 			} else {
 				let error = "";
@@ -258,7 +258,7 @@ export default {
 				// console.log(error);
 				return {
 					success: false,
-					message: error,
+					message: error
 				};
 			}
 		}
@@ -271,8 +271,30 @@ export default {
 		console.log(jwt);
 		await Axios.delete(url, {
 			headers: {
-				Authorization: `Bearer ${jwt}`,
-			},
+				Authorization: `Bearer ${jwt}`
+			}
 		});
 	},
+
+	async changeComment({ comment, id }) {
+		//console.log("55555" , id);
+		// console.log("66666" , comment);
+		let url = `${api_endpoint}/api/comments/${id}`;
+		// console.log("66666" , url);
+		let jwt = AuthService.getJwt();
+		let headers = AuthService.getApiHeader();
+		// console.log("66666" , headers);
+		let res = await Axios.put(url, { isComment: comment }, headers);
+		console.log("is res", res);
+		return res.data;
+	},
+
+	async getComment(id) {
+		let url = `${api_endpoint}/api/recipe/comments/${id}`;
+		let headers = AuthService.getApiHeader();
+
+		let res = await Axios.get(url, null, headers);
+
+		return res.data;
+	}
 };

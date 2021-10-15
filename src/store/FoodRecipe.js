@@ -16,14 +16,16 @@ export default new Vuex.Store({
 		allFoodRecipes: [],
 		currentFoodRecipe: "",
 		currentFood: "",
+		comment: ""
 	},
 	getters: {
-		getNewFoodRecipe: (state) => state.newFoodRecipe,
-		getNewCookingProcess: (state) => state.newCookingProcess,
-		getNewIngredient: (state) => state.newIngredient,
-		getAllFoodRecipes: (state) => state.allFoodRecipes,
-		getCurrentFoodRecipe: (state) => state.currentFoodRecipe,
-		getCurrentFood: (state) => state.currentFood,
+		getNewFoodRecipe: state => state.newFoodRecipe,
+		getNewCookingProcess: state => state.newCookingProcess,
+		getNewIngredient: state => state.newIngredient,
+		getAllFoodRecipes: state => state.allFoodRecipes,
+		getCurrentFoodRecipe: state => state.currentFoodRecipe,
+		getCurrentFood: state => state.currentFood,
+		getComment: state => state.comment
 	},
 	mutations: {
 		fetch(state, res) {
@@ -36,6 +38,12 @@ export default new Vuex.Store({
 			state.currentFood = res.data.data;
 			// console.log("cur",state.currentFood);
 		},
+		editSuccess(state, { res, index }) {
+			state.comment[index] = res;
+		},
+		fetchAllComment(state, body) {
+			state.comment = body;
+		}
 	},
 	actions: {
 		async fetchFoodRecipes({ commit }) {
@@ -75,7 +83,24 @@ export default new Vuex.Store({
 				console.log(e.message);
 			}
 		},
+
+		async editComment({ commit }, { comment, id, index }) {
+			// console.log("123");
+			// console.log("55555" , id);
+			// console.log("66666" , comment);
+			let res = await FoodRecipe.changeComment({ comment, id });
+			commit("editSuccess", { res, index });
+			console.log("5555", res);
+			return res.isComment;
+		},
+
+		async fetchComment({ commit }, id) {
+			let res = await FoodRecipe.getComment(id);
+			console.log("is res", res);
+			commit("fetchAllComment", res);
+			return res;
+		}
 	},
 
-	modules: {},
+	modules: {}
 });
