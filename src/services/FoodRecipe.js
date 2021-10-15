@@ -282,4 +282,25 @@ export default {
 		const res = await Axios.get(url, headers);
 		return res.data;
 	},
+	async changeComment({ comment, id }) {
+		//console.log("55555" , id);
+		// console.log("66666" , comment);
+		let url = `${api_endpoint}/api/comments/${id}`;
+		// console.log("66666" , url);
+		let jwt = AuthService.getJwt();
+		let headers = AuthService.getApiHeader();
+		// console.log("66666" , headers);
+		let res = await Axios.put(url, { isComment: comment }, headers);
+		console.log("is res", res);
+		return res.data;
+	},
+
+	async getComment(id) {
+		let url = `${api_endpoint}/api/recipe/comments/${id}`;
+		let headers = AuthService.getApiHeader();
+
+		let res = await Axios.get(url, null, headers);
+
+		return res.data;
+	},
 };

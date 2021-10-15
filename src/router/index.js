@@ -13,6 +13,7 @@ import SearchRecipes from "@/views/FoodRecipe/SearchRecipes";
 import AdminFoodRecipes from "@/views/Admin/AdminFoodRecipes.vue";
 import EditFoodRecipe from "@/views/FoodRecipe/EditRecipe.vue";
 import SearchCategories from "../views/FoodRecipe/SearchCategories.vue";
+import UserManage from "@/views/Admin/UserManagement.vue";
 
 // import IsFoodRecipe from '@/views/Admin/IsFoodRecipe.vue'
 
@@ -73,6 +74,12 @@ const routes = [
 	//   name: 'IsFoodRecipe',
 	//   component: IsFoodRecipe,
 	// },
+
+	{
+		path: "/admin/user-manage",
+		name: "UserManage",
+		component: UserManage,
+	},
 
 	{
 		path: "/user-information",

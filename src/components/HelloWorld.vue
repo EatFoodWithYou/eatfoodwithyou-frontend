@@ -34,7 +34,7 @@
 				</nav>
 			</div>
 			<div class="flex justify-center mt-10 mr-44">
-				<div class="text-5xl font-bold px-6">Menu</div>
+				<div class="text-5xl font-bold px-6 text-white mt-2">Menu</div>
 				<SearchBar />
 				<button
 					@click="add()"
@@ -45,18 +45,20 @@
 						transition
 						duration-200
 						bg-transparent
-						border-2 border-white
+						border-4 border-white
 						text-white
 						hover:bg-navbarColor
 						cursor-pointer
 						rounded-full
 						ml-28
+						text-2xl
 					"
 				>
 					Add Recipes
 				</button>
 			</div>
 			<Random />
+			<RandomFoodTable />
 		</div>
 	</div>
 </template>
@@ -64,6 +66,7 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Random from "@/components/FoodRecipe/randomFoodRecipe.vue";
+import RandomFoodTable from "@/components/FoodRecipe/randomFoodTable.vue";
 import SearchBar from "@/components/FoodRecipe/SearchForm.vue";
 import CategoriesService from "../services/Categories";
 export default {
@@ -71,6 +74,7 @@ export default {
 		Navbar,
 		Random,
 		SearchBar,
+		RandomFoodTable,
 	},
 	data() {
 		return {

@@ -118,7 +118,7 @@
 							{{ currentUser.user.name }}
 						</span>
 						<button
-							@click="info()"
+							@click="info(), (isOpen = !isOpen)"
 							class="
 								py-4
 								w-full
@@ -133,7 +133,7 @@
 						</button>
 
 						<button
-							@click="logout()"
+							@click="logout(), (isOpen = !isOpen)"
 							class="
 								py-4
 								w-full

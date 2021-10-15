@@ -41,28 +41,50 @@ export default {
 			};
 
 			let res = await Axios.post(url, body);
+			console.log(res.data.user.status);
 
 			if (res.status === 200) {
 				// console.log(res.data);
-
-				localStorage.setItem(auth_key, JSON.stringify(res));
-				return {
-					success: true,
-					user: res.data.user,
-					jwt: res.data.access_token,
-				};
+				if (res.data.user.status === "ACTIVE") {
+					localStorage.setItem(auth_key, JSON.stringify(res));
+					return {
+						success: true,
+						user: res.data.user,
+						jwt: res.data.access_token,
+					};
+				} else if (res.data.user.status === "BANNED") {
+					return {
+						success: false,
+						user: "",
+						jwt: "",
+						message: "YOU ACCOUNT BANNED!!!",
+					};
+				}
 			} else {
 				console.log("NOT 200", res);
 			}
 		} catch (e) {
+			// console.log("sad");
 			console.error(e);
-			if (e.response.status === 400) {
-				// console.log(e.response.data.message[0].messages[0].message);
+			// console.log(e.response.status);
+			if (e.response.status === 401) {
+				console.log("sohard");
+				console.log(e.response.data);
+				console.log("sohard");
 				return {
 					success: false,
-					message: e.response.data.message[0].messages[0].message,
+					message: e.response.data.error,
+				};
+			} else if (e.response.status === 422) {
+				console.log("sohard");
+				console.log(e.response.data);
+				console.log("sohard");
+				return {
+					success: false,
+					message: e.response.data.password[0],
 				};
 			}
+			// throw e
 		}
 	},
 
@@ -124,20 +146,15 @@ export default {
 
 	async fetchRecipes() {
 		let url = api_endpoint + "/api/auth/me";
-		// console.log(url)
-		// console.log(jwt)
-		// console.log(user)
 		let header = this.getApiHeader();
-		// console.log(header)
-		// console.log("__________")
 		let res = await Axios.post(url, "", header);
-		// console.log(res)
-		// console.log("______________")
+
 		return res;
 	},
 
-	async editInformation({ name, age, gender }) {
-		let url = `${api_endpoint}/api/auth/update`;
+	async editInformation({ name, age, gender }, id) {
+		let url = `${api_endpoint}/api/auth/update/${id}`;
+		console.log(url);
 		let body = {
 			name: name,
 			age: age,
@@ -146,6 +163,21 @@ export default {
 		let header = this.getApiHeader();
 		let res = await Axios.put(url, body, header);
 		return res;
+	},
+	async allUser() {
+		let url = `${api_endpoint}/api/auth/allUser`;
+		let header = this.getApiHeader();
+		let res = await Axios.get(url, header);
+		return res.data;
+	},
+
+	async updateStatus({ id, status }) {
+		// console.log("is id" ,id);
+		// console.log("is status" ,status);
+		let url = `${api_endpoint}/api/auth/updateStatus/${id}`;
+		let header = this.getApiHeader();
+		let res = await Axios.put(url, { status: status }, header);
+		console.log("is res", res);
 	},
 };
 

@@ -55,6 +55,49 @@
 				</td>
 			</div>
 		</div>
+		<div>
+			Comment
+			<div v-for="(comment, index) in allComment" :key="index">
+				<div>
+					<span>
+						{{ comment.user.name }}
+						<button
+							class="bg-white"
+							v-if="
+								comment.user_id === currentUser.user.id &&
+								!test(index)
+							"
+							@click="editComment(index, comment.isComment)"
+						>
+							EDIT
+						</button>
+					</span>
+				</div>
+				<div>
+					<span>
+						<div v-if="!test(index)">
+							{{ comment.isComment }}
+						</div>
+						<div v-if="test(index)">
+							<input
+								type="text"
+								placeholder=""
+								v-model="textCancel"
+							/>
+							<button
+								class="mx-2"
+								@click="
+									confirmEdit(textCancel, comment.id, index)
+								"
+							>
+								confirm
+							</button>
+							<button @click="cancel()">cancel</button>
+						</div>
+					</span>
+				</div>
+			</div>
+		</div>
 
 		<div class="comment">
 			Comment
@@ -216,6 +259,10 @@
 				</svg>
 			</label>
 		</div>
+
+		<!-- <div>
+			HELLO WORLD
+		</div> -->
 	</div>
 </template>
 
@@ -237,6 +284,9 @@ export default {
 				user_id: 0,
 				food_recipe_id: 0,
 			},
+			textCancel: "",
+			commentList: "",
+			allComment: "",
 		};
 	},
 	async created() {
@@ -245,15 +295,18 @@ export default {
 		await this.fetchFood(this.id);
 		// console.log(this.currentFood);
 		this.fetchCurrentUser();
-		// console.log(this.currentUser);
+		console.log("it is current user", this.currentUser);
 		this.checkCurrentUserHasLike();
+		this.fetchComments(this.id);
 		//   let url = `http://localhost:8000/api/recipes/10`;
 		//   let res= await axios.get(url,null,{
 		//       headers: {
 		//           'Content-Type': "multipart/form-data"
 		//       }
 		//   })
-		//   console.log(res.data.data)
+		console.log("it is currentFood", this.currentFood);
+
+		this.commentList = this.currentFood.comments;
 		//   this.food = res
 	},
 	methods: {
@@ -275,6 +328,10 @@ export default {
 					this.currentUserLike.detail = item;
 				}
 			}
+		},
+		async fetchComments(id) {
+			let res = await FoodRecipeStore.dispatch("fetchComment", id);
+			this.allComment = res;
 		},
 		async fetchCurrentUser() {
 			this.currentUser = AuthUserStore.getters.getCurrentUser;
@@ -315,6 +372,46 @@ export default {
 		},
 		isAuthen() {
 			return AuthUserStore.getters.isAuthen;
+		},
+
+		editComment(index, comment) {
+			// if(id === )
+			this.commentList = index;
+			this.textCancel = comment;
+			// if (this.editbar=== "active") {
+			// 	this.editbar = "unactive";
+			// } else {
+			// 	this.editbar = "active";
+			// }
+			// console.log("it is editbar", this.editbar);
+		},
+		test(index) {
+			if (this.commentList === index) {
+				return true;
+			}
+			return false;
+		},
+		async confirmEdit(comment, id, index) {
+			console.log("it is comment 55555", comment);
+			console.log("it is id", id);
+			console.log("it is index", index);
+			let res = await FoodRecipeStore.dispatch("editComment", {
+				comment,
+				id,
+				index,
+			});
+			console.log("6666", res);
+			this.textCancel = "";
+			this.commentList = -1;
+		},
+		cancel() {
+			// this.textCancel = ""
+			this.commentList = -1;
+			// if(this.commentList === index)
+			// {
+			// 	return false
+			// }
+			// return true
 		},
 	},
 };

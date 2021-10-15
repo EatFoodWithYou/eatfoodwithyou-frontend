@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="mt-2">
 		<input
 			class="p-1 bg-gray-100 text-2xl mt-2 px-3"
 			type="nameForSearch"
