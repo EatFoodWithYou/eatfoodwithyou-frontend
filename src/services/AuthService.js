@@ -104,33 +104,6 @@ export default {
             // throw e
         }
     },
-
-<<<<<<< HEAD
-				localStorage.setItem(auth_key, JSON.stringify(res));
-				this.setUser();
-				return {
-					success: true,
-					user: res.data.user,
-					jwt: res.data.access_token,
-				};
-			} else {
-				console.log("NOT 200", res);
-			}
-		} catch (e) {
-			console.error(e);
-			if (e.response.status === 400) {
-				// console.log(e.response.data.message[0].messages[0].message);
-				return {
-					success: false,
-					message: e.response.data.message[0].messages[0].message,
-				};
-			}
-		}
-	},
-=======
-		
->>>>>>> 04cbb288544bde9adf5ca9669eda8a4022134955
-
 	async register({
 		email,
 		password,
