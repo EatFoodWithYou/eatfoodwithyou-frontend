@@ -446,7 +446,7 @@ export default {
 		//           'Content-Type': "multipart/form-data"
 		//       }
 		//   })
-		console.log("it is currentFood", this.currentFood);
+		console.log("it is currentFood", this.currentFood.deleted_at);
 
 		this.commentList = this.currentFood.comments;
 		//   this.food = res
