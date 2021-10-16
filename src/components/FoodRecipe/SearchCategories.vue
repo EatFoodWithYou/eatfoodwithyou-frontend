@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<h1>Categories : {{ this.categorySearchList }}</h1>
+		<h1 class="flex justify-between text-xl font-normal text-white p-4">
+			Categories : {{ this.categorySearchList }}
+		</h1>
 		<div
 			class="container"
 			v-for="(recipe, index) in food_recipes"

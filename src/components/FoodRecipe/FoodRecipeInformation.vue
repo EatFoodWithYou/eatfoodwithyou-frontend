@@ -1,282 +1,410 @@
 <template>
-	<div class="ml-12 mt-6">
-		
+	<div>
+		<h2 class="flex justify-between text-xl font-medium text-white p-4">
+			Food Recipe ID : {{ this.id }}
+			<div v-show="isAuthen()">
+				<input
+					type="checkbox"
+					id="checkbox"
+					v-model="currentUserLike.status"
+					@change="clickLike()"
+				/>
+				<label for="checkbox">
+					<svg
+						id="heart-svg"
+						viewBox="467 392 58 57"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<g
+							id="Group"
+							fill="none"
+							fill-rule="evenodd"
+							transform="translate(467 392)"
+						>
+							<path
+								d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z"
+								id="heart"
+								fill="#FFFFFF"
+							/>
+							<circle
+								id="main-circ"
+								fill="#E2264D"
+								opacity="0"
+								cx="29.5"
+								cy="29.5"
+								r="1.5"
+							/>
 
-		<div class=" grid justify-items-center ">
-			
-			<img
-				class="h-60  object-cover w-3/5 rounded-lg"
-				v-bind:src="this.currentFood.photo_url"
-				alt="Man looking at item at a store"
-			/>
-			
-		</div>
-		<div class=" grid justify-items-center ">
-		
-			<div class="bg-white w-3/5 mt-4 rounded-t-lg">
-				
-				
-				<h1 class="pt-4 ml-12 text-5xl font-extrabold">{{ this.currentFood.name }}</h1>
-				<!-- <h2 class="ml-12">Food Recipe ID : {{ this.id }}</h2> -->
-				<h2 class="pt-2 ml-12 text-3xl">By: {{ this.currentFood.user_name }}.</h2>
-				<!-- <div v-for="(tag,index) in currentFood" :key="index"> -->
-				<h2 class=" pt-2 pb-4 ml-12 text-3xl">tag: {{ this.currentFood.category_names }} ..</h2>
-				<!-- </div> -->
-			</div>
+							<g id="grp7" opacity="0" transform="translate(7 6)">
+								<circle
+									id="oval1"
+									fill="#9CD8C3"
+									cx="2"
+									cy="6"
+									r="2"
+								/>
+								<circle
+									id="oval2"
+									fill="#8CE8C3"
+									cx="5"
+									cy="2"
+									r="2"
+								/>
+							</g>
 
-			<div class="bg-gray-100 w-3/5 ">
-				<h1 class="pt-4 ml-12 text-3xl font-semibold pb-4">วัตถุดิบที่ใช้</h1>
-				
-
-				<div class="w-full pb-4">
-					<table class=" w-full">
-						<tbody >
-							<tr
-								v-for="(ingredient, index) in currentFood.ingredients"
-								:key="index"  
+							<g
+								id="grp6"
+								opacity="0"
+								transform="translate(0 28)"
 							>
-								
-								<td class="w-1/2 pl-12 text-2xl pb-2 font-medium">{{ ingredient.name }}</td>
-								<td class="w-1/4 text-center text-2xl font-medium">{{ ingredient.quantity }}</td>
-								<td class="w-1/4 text-left pl-10 text-2xl font-medium">{{ ingredient.unit }}</td>
-							</tr>
-						</tbody>
-					</table>
+								<circle
+									id="oval1"
+									fill="#CC8EF5"
+									cx="2"
+									cy="7"
+									r="2"
+								/>
+								<circle
+									id="oval2"
+									fill="#91D2FA"
+									cx="3"
+									cy="2"
+									r="2"
+								/>
+							</g>
+
+							<g
+								id="grp3"
+								opacity="0"
+								transform="translate(52 28)"
+							>
+								<circle
+									id="oval2"
+									fill="#9CD8C3"
+									cx="2"
+									cy="7"
+									r="2"
+								/>
+								<circle
+									id="oval1"
+									fill="#8CE8C3"
+									cx="4"
+									cy="2"
+									r="2"
+								/>
+							</g>
+
+							<g
+								id="grp2"
+								opacity="0"
+								transform="translate(44 6)"
+							>
+								<circle
+									id="oval2"
+									fill="#CC8EF5"
+									cx="5"
+									cy="6"
+									r="2"
+								/>
+								<circle
+									id="oval1"
+									fill="#CC8EF5"
+									cx="2"
+									cy="2"
+									r="2"
+								/>
+							</g>
+
+							<g
+								id="grp5"
+								opacity="0"
+								transform="translate(14 50)"
+							>
+								<circle
+									id="oval1"
+									fill="#91D2FA"
+									cx="6"
+									cy="5"
+									r="2"
+								/>
+								<circle
+									id="oval2"
+									fill="#91D2FA"
+									cx="2"
+									cy="2"
+									r="2"
+								/>
+							</g>
+
+							<g
+								id="grp4"
+								opacity="0"
+								transform="translate(35 50)"
+							>
+								<circle
+									id="oval1"
+									fill="#F48EA7"
+									cx="6"
+									cy="5"
+									r="2"
+								/>
+								<circle
+									id="oval2"
+									fill="#F48EA7"
+									cx="2"
+									cy="2"
+									r="2"
+								/>
+							</g>
+
+							<g id="grp1" opacity="0" transform="translate(24)">
+								<circle
+									id="oval1"
+									fill="#9FC7FA"
+									cx="2.5"
+									cy="3"
+									r="2"
+								/>
+								<circle
+									id="oval2"
+									fill="#9FC7FA"
+									cx="7.5"
+									cy="2"
+									r="2"
+								/>
+							</g>
+						</g>
+					</svg>
+				</label>
+			</div>
+		</h2>
+
+		<div class="head" :class="isAuthen() ? '-mt-10' : '-mt-2'">
+			<div class="text-center">
+				<h2 class="text-6xl font-bold text-white">
+					{{ this.currentFood.name }}
+				</h2>
+			</div>
+			<div class="flex justify-center">
+				<img
+					class="h-60 w-full object-cover md:w-60 mt-6"
+					v-bind:src="this.currentFood.photo_url"
+					alt="Man looking at item at a store"
+				/>
+			</div>
+			<div class="flex justify-center mt-2">
+				<h2 class="text-xl text-white">
+					By: {{ this.currentFood.user_name }}
+				</h2>
+			</div>
+			<div class="flex justify-center mt-2">
+				<h2 class="text-xl text-white">
+					Category: {{ this.currentFood.tag }}
+				</h2>
+			</div>
+		</div>
+
+		<div>
+			<div class="flex justify-center mt-10">
+				<div class="w-1/3 bg-white rounded-lg shadow">
+					<h1 class="text-lg text-black p-3">Ingredients</h1>
+					<ul
+						class="divide-y-2 divide-gray-100 border-t-2"
+						v-for="(ingredient, index) in currentFood.ingredients"
+						:key="index"
+					>
+						<li class="p-3">
+							{{ ingredient.name }} - {{ ingredient.quantity }}
+							{{ ingredient.unit }}
+						</li>
+					</ul>
 				</div>
 			</div>
+		</div>
 
-			<div class="cookingProcess bg-white w-3/5 rounded-b-lg ">
-				<h1 class="pt-4 ml-12 text-3xl font-semibold pb-4">ขั้นตอนการทำ</h1>
-				<div
+		<div class="cookingProcess flex justify-center">
+			<h1 class="text-3xl font-bold text-white mt-4 py-2">Process</h1>
+		</div>
+		<div class="flex justify-center w-full overflow-x-auto">
+			<table
+				class="
+					mt-3
+					bg-transparent
+					w-5/12
+					border-collapse
+					cursor
+					bg-white
+				"
+			>
+				<tbody
 					v-for="(process, index) in currentFood.cooking_processes"
 					:key="index"
+					class="border-b"
 				>
-					<h2 class=" ml-20 pt-4 text-2xl font-medium">{{ index + 1 }} {{ process.process }}</h2>
-					<td v-if="process.photo !== null">
-						<img
-							class="h-60 w-full object-cover md:w-96 ml-20 pt-4 mb-4"
-							v-bind:src="`http://localhost:8000/storage/cookingProcess/${process.photo}`"
-						/>
-					</td>
+					<tr>
+						<td
+							class="
+								text-center
+								px-6
+								align-middle
+								border-l-0 border-r-2
+								text-base
+								whitespace-nowrap
+								p-4
+							"
+						>
+							{{ index + 1 }}
+						</td>
+
+						<td
+							class="
+								flex
+								justify-center
+								border-l-0 border-r-2
+								text-base
+								whitespace-nowrap
+								py-3
+							"
+							v-if="process.photo !== null"
+						>
+							<img
+								class="h-48 w-full object-cover md:w-48"
+								v-bind:src="`http://localhost:8000/storage/cookingProcess/${process.photo}`"
+							/>
+						</td>
+						<td
+							class="
+								px-6
+								border-l-0 border-r-2
+								text-base
+								whitespace-nowrap
+							"
+						>
+							{{ process.process }}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="mt-10 text-2xl font-medium text-white p-4">
+			<div class="pb-2 flex">Comment</div>
+			<div
+				v-for="(comment, index) in allComment"
+				:key="index"
+				class="bg-white text-black font-medium px-4 pt-2 text-lg"
+			>
+				<div>
+					<span>
+						{{ comment.user.name }}
+						<button
+							class="
+								text-base
+								px-2
+								text-gray-400
+								hover:text-gray-700
+								duration-200
+							"
+							v-if="
+								comment.user_id === currentUser.user.id &&
+								!test(index)
+							"
+							@click="editComment(index, comment.isComment)"
+						>
+							Edit
+						</button>
+					</span>
+				</div>
+				<div>
+					<span>
+						<div v-if="!test(index)" class="flex font-normal py-2">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6 mt-0.5"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M13 5l7 7-7 7M5 5l7 7-7 7"
+								/>
+							</svg>
+							{{ comment.isComment }}
+						</div>
+						<div v-if="test(index)">
+							<input
+								class="bg-gray-200 w-4/12 px-4 py-2"
+								type="text"
+								placeholder=""
+								v-model="textCancel"
+							/>
+							<div>
+								<button
+									class="
+										mr-3
+										text-base text-blue-400
+										hover:text-blue-700
+										duration-200
+									"
+									@click="
+										confirmEdit(
+											textCancel,
+											comment.id,
+											index
+										)
+									"
+								>
+									Confirm
+								</button>
+								<button
+									@click="cancel()"
+									class="
+										mr-3
+										text-base text-red-400
+										hover:text-red-700
+										duration-200
+									"
+								>
+									Cancel
+								</button>
+							</div>
+						</div>
+					</span>
 				</div>
 			</div>
-		
-		
-			<div class="bg-white w-3/5 mt-10 rounded-lg">
-				<h1 class="ml-6 pt-4 text-3xl font-semibold">Comment</h1> 
-				<div v-for="(comment, index) in allComment" :key="index" class="">
-					<div class="bg-blue-200 mt-4 mb-4 ml-4 w-3/5 rounded-lg" >
-						<div>
-							<span class="ml-6 mr-6 text-2xl font-medium">
-								{{ comment.user.name }}
-								<button
-									class="bg-blue-200 rounded-lg text-xl ml-12"
-									v-if="
-										comment.user_id === currentUser.user.id &&
-										!test(index)
-									"
-									@click="editComment(index, comment.isComment)"
-								>
-									EDIT
-								</button>
-							</span>
-						</div>
-						<div>
-							<span >
-								<div v-if="!test(index)" class="ml-6 mr-6 pb-1 text-xl font-normal">
-									<p class="break-all">{{ comment.isComment }}</p>
-									
-								</div>
-								<div v-if="test(index)">
-									<input
-										type="text"
-										placeholder=""
-										v-model="textCancel"
-										class="ml-6 w-3/5 mb-1 text-xl"
-									/>
-									
-									<button
-										class="mx-2 text-xl"
-										@click="
-											confirmEdit(textCancel, comment.id, index)
-										"
-									>
-										confirm
-									</button>
-									<button @click="cancel()" class="text-xl">cancel</button>
-								</div>
-								
-							</span>
-						</div>
+		</div>
+
+		<div class="flex h-auto px-4 pb-16">
+			<div class="w-1/2 bg-white p-2 rounded">
+				<div class="p-3 w-full">
+					<textarea
+						rows="3"
+						class="border p-2 rounded w-full"
+						placeholder="Write a comment..."
+					></textarea>
+				</div>
+
+				<div class="flex justify-between mx-3">
+					<div>
+						<button
+							class="
+								px-4
+								py-1
+								bg-gray-800
+								text-white
+								rounded
+								font-light
+								hover:bg-gray-700
+							"
+						>
+							Post
+						</button>
 					</div>
 				</div>
 			</div>
-
-			<div class="comment">
-				Comment
-				<input type="text" placeholder="แสดงความเห็น" />
-			</div>
 		</div>
-		<div>
-			<input
-				type="checkbox"
-				id="checkbox"
-				v-model="currentUserLike.status"
-				@change="clickLike()"
-				:disabled="!isAuthen()"
-			/>
-			<label for="checkbox">
-				<svg
-					id="heart-svg"
-					viewBox="467 392 58 57"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<g
-						id="Group"
-						fill="none"
-						fill-rule="evenodd"
-						transform="translate(467 392)"
-					>
-						<path
-							d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z"
-							id="heart"
-							fill="#AAB8C2"
-						/>
-						<circle
-							id="main-circ"
-							fill="#E2264D"
-							opacity="0"
-							cx="29.5"
-							cy="29.5"
-							r="1.5"
-						/>
-
-						<g id="grp7" opacity="0" transform="translate(7 6)">
-							<circle
-								id="oval1"
-								fill="#9CD8C3"
-								cx="2"
-								cy="6"
-								r="2"
-							/>
-							<circle
-								id="oval2"
-								fill="#8CE8C3"
-								cx="5"
-								cy="2"
-								r="2"
-							/>
-						</g>
-
-						<g id="grp6" opacity="0" transform="translate(0 28)">
-							<circle
-								id="oval1"
-								fill="#CC8EF5"
-								cx="2"
-								cy="7"
-								r="2"
-							/>
-							<circle
-								id="oval2"
-								fill="#91D2FA"
-								cx="3"
-								cy="2"
-								r="2"
-							/>
-						</g>
-
-						<g id="grp3" opacity="0" transform="translate(52 28)">
-							<circle
-								id="oval2"
-								fill="#9CD8C3"
-								cx="2"
-								cy="7"
-								r="2"
-							/>
-							<circle
-								id="oval1"
-								fill="#8CE8C3"
-								cx="4"
-								cy="2"
-								r="2"
-							/>
-						</g>
-
-						<g id="grp2" opacity="0" transform="translate(44 6)">
-							<circle
-								id="oval2"
-								fill="#CC8EF5"
-								cx="5"
-								cy="6"
-								r="2"
-							/>
-							<circle
-								id="oval1"
-								fill="#CC8EF5"
-								cx="2"
-								cy="2"
-								r="2"
-							/>
-						</g>
-
-						<g id="grp5" opacity="0" transform="translate(14 50)">
-							<circle
-								id="oval1"
-								fill="#91D2FA"
-								cx="6"
-								cy="5"
-								r="2"
-							/>
-							<circle
-								id="oval2"
-								fill="#91D2FA"
-								cx="2"
-								cy="2"
-								r="2"
-							/>
-						</g>
-
-						<g id="grp4" opacity="0" transform="translate(35 50)">
-							<circle
-								id="oval1"
-								fill="#F48EA7"
-								cx="6"
-								cy="5"
-								r="2"
-							/>
-							<circle
-								id="oval2"
-								fill="#F48EA7"
-								cx="2"
-								cy="2"
-								r="2"
-							/>
-						</g>
-
-						<g id="grp1" opacity="0" transform="translate(24)">
-							<circle
-								id="oval1"
-								fill="#9FC7FA"
-								cx="2.5"
-								cy="3"
-								r="2"
-							/>
-							<circle
-								id="oval2"
-								fill="#9FC7FA"
-								cx="7.5"
-								cy="2"
-								r="2"
-							/>
-						</g>
-					</g>
-				</svg>
-			</label>
-		</div>
-
-		<!-- <div>
-			HELLO WORLD
-		</div> -->
 	</div>
 </template>
 

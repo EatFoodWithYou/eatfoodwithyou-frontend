@@ -61,23 +61,7 @@
 						href="http://localhost:8080/"
 						>Home</a
 					>
-					<div class="flex justify-center">
-						<button
-							class="
-								p-3
-								block
-								text-yellow-50
-								hover:text-hoverColor
-								sm:hover:bg-navbarColor
-								hover:bg-navbarColor
-								transition
-								duration-250
-							"
-							@click="recipes()"
-						>
-							Recipes
-						</button>
-					</div>
+
 					<div
 						class="flex justify-center"
 						v-if="isAuthen() && isAdmin()"
