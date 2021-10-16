@@ -16,16 +16,16 @@ export default new Vuex.Store({
 		allFoodRecipes: [],
 		currentFoodRecipe: "",
 		currentFood: "",
-		comment: ""
+		comment: "",
 	},
 	getters: {
-		getNewFoodRecipe: state => state.newFoodRecipe,
-		getNewCookingProcess: state => state.newCookingProcess,
-		getNewIngredient: state => state.newIngredient,
-		getAllFoodRecipes: state => state.allFoodRecipes,
-		getCurrentFoodRecipe: state => state.currentFoodRecipe,
-		getCurrentFood: state => state.currentFood,
-		getComment: state => state.comment
+		getNewFoodRecipe: (state) => state.newFoodRecipe,
+		getNewCookingProcess: (state) => state.newCookingProcess,
+		getNewIngredient: (state) => state.newIngredient,
+		getAllFoodRecipes: (state) => state.allFoodRecipes,
+		getCurrentFoodRecipe: (state) => state.currentFoodRecipe,
+		getCurrentFood: (state) => state.currentFood,
+		getComment: (state) => state.comment,
 	},
 	mutations: {
 		fetch(state, res) {
@@ -43,7 +43,7 @@ export default new Vuex.Store({
 		},
 		fetchAllComment(state, body) {
 			state.comment = body;
-		}
+		},
 	},
 	actions: {
 		async fetchFoodRecipes({ commit }) {
@@ -99,8 +99,8 @@ export default new Vuex.Store({
 			console.log("is res", res);
 			commit("fetchAllComment", res);
 			return res;
-		}
+		},
 	},
 
-	modules: {}
+	modules: {},
 });

@@ -1,11 +1,7 @@
 <template>
 	<div>
-		<h1>
-			ALLUSER
-		</h1>
-		<div>
-			อิอิ
-		</div>
+		<h1>ALLUSER</h1>
+		<div>อิอิ</div>
 
 		<div class="conteiner">
 			<table class="bg-indigo-400 text-white">
@@ -52,7 +48,7 @@ export default {
 	data() {
 		return {
 			allUser: [],
-			id: ""
+			id: "",
 		};
 	},
 	async created() {
@@ -78,22 +74,22 @@ export default {
 
 		async banUser(isid, name) {
 			// this.$router.push(`/admin/foodrecipes/${id}`);
-			
-			console.log("sad",isid);
+
+			console.log("sad", isid);
 			swal({
 				title: "warning",
 				text: `Would you like to Ban ${name} ?`,
 				icon: "warning",
 				buttons: true,
-				dangerMode: true
-			}).then(async willRedeem => {
+				dangerMode: true,
+			}).then(async (willRedeem) => {
 				if (willRedeem) {
 					await swal("Successful", {
-						icon: "success"
+						icon: "success",
 					});
 					await AuthUser.dispatch("banUser", {
 						id: isid,
-						status: "BANNED"
+						status: "BANNED",
 					});
 					await this.fetchAllUser();
 				} else {
@@ -112,15 +108,15 @@ export default {
 				text: `Would you like to Active ${name} ?`,
 				icon: "warning",
 				buttons: true,
-				dangerMode: true
-			}).then(async willRedeem => {
+				dangerMode: true,
+			}).then(async (willRedeem) => {
 				if (willRedeem) {
 					await swal("Successful", {
-						icon: "success"
+						icon: "success",
 					});
 					await AuthUser.dispatch("activeUser", {
 						id: isid,
-						status: "ACTIVE"
+						status: "ACTIVE",
 					});
 					await this.fetchAllUser();
 				} else {
@@ -134,7 +130,7 @@ export default {
 		},
 		isAdmin() {
 			return AuthUser.getters.isAdmin;
-		}
-	}
+		},
+	},
 };
 </script>

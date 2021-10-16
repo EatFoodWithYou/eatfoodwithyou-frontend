@@ -244,8 +244,8 @@ export default {
 			this.$router.push("/admin/foodrecipes");
 		},
 		edit() {
-      	this.$router.push("/edit-information");
-    },
+			this.$router.push("/edit-information");
+		},
 	},
 	created() {
 		this.fetchCurrentUser();

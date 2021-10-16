@@ -136,15 +136,14 @@ export default {
 			currentUser: "",
 			loginFrom: {
 				email: "",
-				password: ""
-			}
+				password: "",
+			},
 		};
 	},
 	methods: {
 		async login() {
 			//  console.log("it is loginform" ,this.loginFrom);
-			if (this.loginFrom.email !== "" && this.loginFrom.password !== "")
-			{
+			if (this.loginFrom.email !== "" && this.loginFrom.password !== "") {
 				let res = await AuthUser.dispatch("login", this.loginFrom);
 				console.log(1);
 				console.log(res);
@@ -164,12 +163,13 @@ export default {
 				} else {
 					this.$swal("Login Failed", res.message, "error");
 				}
+			} else {
+				this.$swal(
+					"Login Failed",
+					"please enter you email or password",
+					"error"
+				);
 			}
-			else
-			{
-				this.$swal("Login Failed", "please enter you email or password", "error");
-			}
-			
 		},
 		clearFrom() {
 			this.loginFrom.email = "";
@@ -177,8 +177,8 @@ export default {
 		},
 		signup() {
 			this.$router.push("/register");
-		}
-	}
+		},
+	},
 };
 </script>
 

@@ -4,7 +4,7 @@
 			<div>
 				<div class="text-center py-10 pt-16">
 					<h2 class="text-6xl font-bold text-white">
-						{{ currentUserWithFoodRecipe.name }}
+						{{ this.currentUserWithFoodRecipe.name }}
 						<button
 							@click="goToEdit()"
 							class="
@@ -26,7 +26,7 @@
 					</h2>
 				</div>
 				<div class="flex justify-center">
-					<div class="w-1/4 max-w-4xl text-center">
+					<div class="w-full max-w-4xl text-center">
 						<div class="flex flex-wrap -mx-3 mb-5 mt-4">
 							<div class="w-full px-3 md:mb-0">
 								<label
@@ -39,7 +39,7 @@
 									"
 								>
 									Age :
-									{{ currentUserWithFoodRecipe.age }} yrs
+									{{ this.currentUserWithFoodRecipe.age }} yrs
 								</label>
 							</div>
 						</div>
@@ -71,7 +71,7 @@
 									"
 								>
 									Email :
-									{{ currentUserWithFoodRecipe.email }}
+									{{ this.currentUserWithFoodRecipe.email }}
 								</label>
 							</div>
 						</div>
@@ -87,65 +87,229 @@
 							>
 								Your Recipes
 							</label>
-							<thead>
-								<tr>
-									<th>No.</th>
-									<th>name</th>
-									<th>detail</th>
-									<th>photo</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr
-									v-for="(
-										food, index
-									) in currentUserWithFoodRecipe.food_recipes"
-									:key="index"
+							<div class="block w-full overflow-x-auto">
+								<table
+									class="
+										mt-6
+										items-center
+										bg-transparent
+										w-full
+										border-collapse
+										cursor
+										bg-white
+									"
 								>
-									<td>{{ index + 1 }}</td>
-									<td>
-										<router-link
-											:to="{
-												name: 'FoodRecipeInfor',
-												params: { id: food.id },
-											}"
-											class="
-												block
-												mt-1
-												text-lg
-												leading-tight
-												font-medium
-												text-black
-												hover:underline
-											"
-											>{{ food.name }}</router-link
+									<thead>
+										<tr>
+											<th
+												class="
+													px-6
+													bg-blueGray-50
+													text-black
+													align-middle
+													border-b
+													border-solid
+													border-blueGray-100
+													py-3
+													text-base
+													uppercase
+													whitespace-nowrap
+													font-medium
+													text-center
+												"
+											>
+												No.
+											</th>
+											<th
+												class="
+													px-6
+													bg-blueGray-50
+													text-black
+													align-middle
+													border-b
+													border-solid
+													border-blueGray-100
+													py-3
+													text-base
+													uppercase
+													whitespace-nowrap
+													font-medium
+													text-center
+												"
+											>
+												Name
+											</th>
+											<th
+												class="
+													px-6
+													bg-blueGray-50
+													text-black
+													align-middle
+													border-b
+													border-r
+													border-solid
+													border-blueGray-100
+													py-3
+													text-base
+													uppercase
+													whitespace-nowrap
+													font-medium
+													text-center
+												"
+											>
+												Photo
+											</th>
+											<th
+												class="
+													px-6
+													bg-blueGray-50
+													text-transparent
+													align-middle
+													border-b
+													border-solid
+													border-blueGray-100
+													py-3
+													text-base
+													uppercase
+													whitespace-nowrap
+													font-medium
+													text-center
+												"
+											>
+												Edit
+											</th>
+											<th
+												class="
+													px-6
+													bg-blueGray-50
+													text-transparent
+													align-middle
+													border-b
+													border-solid
+													border-blueGray-100
+													py-3
+													text-base
+													uppercase
+													whitespace-nowrap
+													font-medium
+													text-center
+												"
+											>
+												Delete
+											</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr
+											class="text-center"
+											v-for="(
+												food, index
+											) in currentUserWithFoodRecipe.food_recipes"
+											:key="index"
 										>
-									</td>
-									<td>{{ food.detail }}</td>
-									<td>
-										<img
-											v-if="food.photo"
-											v-bind:src="food.photo_url"
-											width="100"
-											height="100"
-										/>
-										<img
-											v-else
-											src=""
-											width="100"
-											height="100"
-										/>
-									</td>
-									<td v-if="index !== editIndex">
-										<button @click="goToEditRecipe(food)">
-											Edit
-										</button>
-										<button @click="deleteRecipe(food)">
-											Delete
-										</button>
-									</td>
-								</tr>
-							</tbody>
+											<td
+												class="
+													border-t-0
+													px-6
+													align-middle
+													border-l-0 border-r-0
+													text-base
+													whitespace-nowrap
+													p-4
+												"
+											>
+												{{ food.id }}
+											</td>
+											<td
+												class="
+													border-t-0
+													px-6
+													align-middle
+													border-l-0 border-r-0
+													text-base
+													whitespace-nowrap
+													p-4
+												"
+											>
+												{{ food.name }}
+											</td>
+											<td
+												class="
+													flex
+													border-t-0
+													justify-center
+													border-l-0 border-r-0
+													text-base
+													whitespace-nowrap
+													py-3
+												"
+											>
+												<img
+													v-if="food.photo"
+													v-bind:src="food.photo_url"
+													width="100"
+													height="100"
+												/>
+												<img
+													v-else
+													src="https://via.placeholder.com/100x100"
+													width="100"
+													height="100"
+												/>
+											</td>
+											<td
+												class="
+													border-t-0
+													px-6
+													align-middle
+													border-l-0 border-r-0
+													text-lg
+													whitespace-nowrap
+													p-4
+												"
+												v-if="index !== editIndex"
+											>
+												<button
+													@click="
+														goToEditRecipe(food)
+													"
+													class="
+														text-blue-300
+														hover:text-blue-500
+														duration-200
+													"
+												>
+													Edit
+												</button>
+											</td>
+											<td
+												class="
+													border-t-0
+													px-6
+													align-middle
+													border-l-0 border-r-0
+													text-lg
+													whitespace-nowrap
+													p-4
+												"
+												v-if="index !== editIndex"
+											>
+												<button
+													@click="deleteRecipe(food)"
+													class="
+														text-red-300
+														hover:text-red-500
+														duration-200
+													"
+												>
+													Delete
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -178,7 +342,7 @@ export default {
 			this.currentUser = this.currentUser;
 			console.log("CurrentUser2", this.currentUser);
 			let res = await AuthService.fetchRecipes();
-			console.log("RESDATA", this.res)
+			console.log("RESDATA", this.res);
 			this.currentUserWithFoodRecipe = res.data;
 		},
 
@@ -202,10 +366,11 @@ export default {
 						deleteFoodId
 					);
 					if (res.success) {
-						swal("Delete success", {
+						swal("Deleted", {
 							icon: "success",
+						}).then((result) => {
+							if (result) this.$router.go();
 						});
-						this.$router.go();
 					} else {
 						this.$swal("Cannot Delete This Recipe.", "error");
 					}

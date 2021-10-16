@@ -1,29 +1,5 @@
 <script src="AuthUser.js"></script>
 <template>
-	<!-- <div>
-		<h2>EDIT</h2>
-		<form @submit.prevent="edit">
-			<div>
-				<label for="name">ชื่อ : </label>
-				<input type="name" v-model="form.name" placeholder="ชื่อ" />
-			</div>
-			<div>
-				<label for="age">อายุ : </label>
-				<input type="age" v-model="form.age" placeholder="อายุ" />
-			</div>
-			<div>
-				<label for="gender">เพศ : </label>
-				<select v-model="form.gender">
-					<option disabled value="">เพศ</option>
-					<option>MALE</option>
-					<option>FEMALE</option>
-				</select>
-			</div>
-			<div>
-				<button>SubmitBUTTON</button>
-			</div>
-		</form>
-	</div> -->
 	<div class="bg-bgColor font-prompt">
 		<div>
 			<div>
@@ -62,7 +38,6 @@
 									"
 									type="text"
 									v-model="form.name"
-
 								/>
 							</div>
 							<div class="w-full md:w-2/4 px-3 md:mb-0">
@@ -215,7 +190,7 @@ export default {
 		async fetchCurrentUser() {
 			let res = await AuthService.fetchRecipes();
 			this.currentUser = res.data;
-			console.log("USERID",this.currentUser.id);
+			console.log("USERID", this.currentUser.id);
 			this.form.name = this.currentUser.name;
 			this.form.age = this.currentUser.age;
 			this.form.gender = this.currentUser.gender;
@@ -227,7 +202,10 @@ export default {
 				this.form.age !== "" &&
 				this.form.gender !== ""
 			) {
-				let res = await AuthService.editInformation(this.form, this.currentUser.id);
+				let res = await AuthService.editInformation(
+					this.form,
+					this.currentUser.id
+				);
 				console.log(this.currentUser);
 				console.log(2);
 				console.log(res.data);

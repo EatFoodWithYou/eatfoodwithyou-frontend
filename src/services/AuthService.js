@@ -28,82 +28,66 @@ export default {
 		return user;
 	},
 
-    getJwt() {
-       
-        return jwt;
-    },
-	setUser(){
-		let auth = JSON.parse(localStorage.getItem(auth_key));
-		this.user = auth ? auth.data.user : "";
-		jwt = auth ? auth.data.access_token : "";
+	getJwt() {
+		return jwt;
 	},
-    async login({ email, password }) {
-        try {
-           
-            let url = api_endpoint +'/api/auth/login';
-           
-            let body = {
-                email : email,
-                password: password,
-            };
-           
-            let res = await Axios.post(url, body);
-            console.log(res.data.user.status);
-            
-            if (res.status === 200) {
-                // console.log(res.data);
-                if (res.data.user.status === "ACTIVE")
-                {
-                    localStorage.setItem(auth_key, JSON.stringify(res));
-					this.setUser();
-                    return {
-                        success: true,
-                        user: res.data.user,
-                        jwt: res.data.access_token,
-                    };
-                }
-                else if (res.data.user.status === "BANNED")
-                {
-                    return {
-                        success: false,
-                        user: "",
-                        jwt: "",
-                        message: "YOU ACCOUNT BANNED!!!"
-                    };
-                }
-                
-            } else {
-                console.log('NOT 200', res);
-            }
-        } catch (e) {
-            // console.log("sad");
-            console.error(e);
-            // console.log(e.response.status);
-            if (e.response.status === 401) {
-                 
+	async login({ email, password }) {
+		try {
+			let url = api_endpoint + "/api/auth/login";
 
-                console.log("sohard");
-                console.log(e.response.data);
-                console.log("sohard");
-                return {
-                    success: false,
-                    message: e.response.data.error
-                };
-            }
-            else if (e.response.status === 422) {
-                 
+			let body = {
+				email: email,
+				password: password,
+			};
 
-                console.log("sohard");
-                console.log(e.response.data);
-                console.log("sohard");
-                return {
-                    success: false,
-                    message: e.response.data.password[0]
-                };
-            }
-            // throw e
-        }
-    },
+			let res = await Axios.post(url, body);
+			console.log(res.data.user.status);
+
+			if (res.status === 200) {
+				// console.log(res.data);
+				if (res.data.user.status === "ACTIVE") {
+					localStorage.setItem(auth_key, JSON.stringify(res));
+					return {
+						success: true,
+						user: res.data.user,
+						jwt: res.data.access_token,
+					};
+				} else if (res.data.user.status === "BANNED") {
+					return {
+						success: false,
+						user: "",
+						jwt: "",
+						message: "YOU ACCOUNT BANNED!!!",
+					};
+				}
+			} else {
+				console.log("NOT 200", res);
+			}
+		} catch (e) {
+			// console.log("sad");
+			console.error(e);
+			// console.log(e.response.status);
+			if (e.response.status === 401) {
+				console.log("sohard");
+				console.log(e.response.data);
+				console.log("sohard");
+				return {
+					success: false,
+					message: e.response.data.error,
+				};
+			} else if (e.response.status === 422) {
+				console.log("sohard");
+				console.log(e.response.data);
+				console.log("sohard");
+				return {
+					success: false,
+					message: e.response.data.password[0],
+				};
+			}
+			// throw e
+		}
+	},
+
 	async register({
 		email,
 		password,
@@ -170,7 +154,7 @@ export default {
 
 	async editInformation({ name, age, gender }, id) {
 		let url = `${api_endpoint}/api/auth/update/${id}`;
-		console.log(url)
+		console.log(url);
 		let body = {
 			name: name,
 			age: age,
@@ -180,23 +164,21 @@ export default {
 		let res = await Axios.put(url, body, header);
 		return res;
 	},
-    async allUser()
-    {
-        let url = `${api_endpoint}/api/auth/allUser`
-        let header = this.getApiHeader();
-        let res = await Axios.get(url, header);
-        return res.data;
-    },
+	async allUser() {
+		let url = `${api_endpoint}/api/auth/allUser`;
+		let header = this.getApiHeader();
+		let res = await Axios.get(url, header);
+		return res.data;
+	},
 
-    async updateStatus({id , status})
-    {
-        // console.log("is id" ,id);
-        // console.log("is status" ,status);
-        let url = `${api_endpoint}/api/auth/updateStatus/${id}`
-        let header = this.getApiHeader();
-        let res = await Axios.put(url, {status : status} ,header);
-        console.log("is res" ,res);
-    }
+	async updateStatus({ id, status }) {
+		// console.log("is id" ,id);
+		// console.log("is status" ,status);
+		let url = `${api_endpoint}/api/auth/updateStatus/${id}`;
+		let header = this.getApiHeader();
+		let res = await Axios.put(url, { status: status }, header);
+		console.log("is res", res);
+	},
 };
 
 // export const

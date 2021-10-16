@@ -50,22 +50,24 @@
 				<td v-if="process.photo !== null">
 					<img
 						class="h-48 w-full object-cover md:w-48"
-						v-bind:src="
-							`http://localhost:8000/storage/cookingProcess/${process.photo}`
-						"
+						v-bind:src="`http://localhost:8000/storage/cookingProcess/${process.photo}`"
 					/>
 				</td>
 			</div>
 		</div>
-		<div> Comment
-			<div v-for="(comment , index) in allComment" :key="index">
+		<div>
+			Comment
+			<div v-for="(comment, index) in allComment" :key="index">
 				<div>
 					<span>
-						{{comment.user.name}}
+						{{ comment.user.name }}
 						<button
 							class="bg-white"
-							v-if="comment.user_id === currentUser.user.id && !test(index)"
-							@click="editComment(index , comment.isComment)"
+							v-if="
+								comment.user_id === currentUser.user.id &&
+								!test(index)
+							"
+							@click="editComment(index, comment.isComment)"
 						>
 							EDIT
 						</button>
@@ -77,15 +79,21 @@
 							{{ comment.isComment }}
 						</div>
 						<div v-if="test(index)">
-							<input type="text" placeholder="" v-model="textCancel">
-							<button class="mx-2" @click="confirmEdit(textCancel , comment.id , index)">
+							<input
+								type="text"
+								placeholder=""
+								v-model="textCancel"
+							/>
+							<button
+								class="mx-2"
+								@click="
+									confirmEdit(textCancel, comment.id, index)
+								"
+							>
 								confirm
 							</button>
-							<button @click="cancel() ">
-								cancel
-							</button>
+							<button @click="cancel()">cancel</button>
 						</div>
-						
 					</span>
 				</div>
 			</div>
@@ -270,15 +278,15 @@ export default {
 			currentUser: "",
 			currentUserLike: {
 				status: false,
-				detail: null
+				detail: null,
 			},
 			likeFrom: {
 				user_id: 0,
-				food_recipe_id: 0
+				food_recipe_id: 0,
 			},
 			textCancel: "",
-			commentList: "" ,
-			allComment: ""
+			commentList: "",
+			allComment: "",
 		};
 	},
 	async created() {
@@ -321,10 +329,9 @@ export default {
 				}
 			}
 		},
-		async fetchComments(id)
-		{
+		async fetchComments(id) {
 			let res = await FoodRecipeStore.dispatch("fetchComment", id);
-			this.allComment = res
+			this.allComment = res;
 		},
 		async fetchCurrentUser() {
 			this.currentUser = AuthUserStore.getters.getCurrentUser;
@@ -360,17 +367,17 @@ export default {
 		setCurrentUserLikeNull() {
 			this.currentUserLike = {
 				status: false,
-				detail: null
+				detail: null,
 			};
 		},
 		isAuthen() {
 			return AuthUserStore.getters.isAuthen;
 		},
 
-		editComment(index , comment ) {
+		editComment(index, comment) {
 			// if(id === )
-			this.commentList = index
-			this.textCancel = comment
+			this.commentList = index;
+			this.textCancel = comment;
 			// if (this.editbar=== "active") {
 			// 	this.editbar = "unactive";
 			// } else {
@@ -378,37 +385,35 @@ export default {
 			// }
 			// console.log("it is editbar", this.editbar);
 		},
-		test(index)
-		{
-			if(this.commentList === index)
-			{
-				return true
+		test(index) {
+			if (this.commentList === index) {
+				return true;
 			}
-			return false
+			return false;
 		},
-		async confirmEdit(comment ,id, index )
-		{
-			console.log("it is comment 55555" , comment);
-			console.log("it is id" , id);
-			console.log("it is index" , index);
-			let res = await FoodRecipeStore.dispatch("editComment" , {comment , id , index})
-			console.log("6666" , res);
-			this.textCancel = ""
-			this.commentList = -1
-
+		async confirmEdit(comment, id, index) {
+			console.log("it is comment 55555", comment);
+			console.log("it is id", id);
+			console.log("it is index", index);
+			let res = await FoodRecipeStore.dispatch("editComment", {
+				comment,
+				id,
+				index,
+			});
+			console.log("6666", res);
+			this.textCancel = "";
+			this.commentList = -1;
 		},
-		cancel()
-		{
+		cancel() {
 			// this.textCancel = ""
-			this.commentList = -1
+			this.commentList = -1;
 			// if(this.commentList === index)
 			// {
 			// 	return false
 			// }
 			// return true
 		},
-		
-	}
+	},
 };
 </script>
 

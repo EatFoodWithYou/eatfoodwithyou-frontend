@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="flex justify-center ml-12 mt-10">
+		<div class="flex justify-center ml-12 mt-6">
 			<div class="w-5/6 h-full lg:flex justify-end">
 				<div
 					class="
@@ -19,7 +19,7 @@
 						backgroundImage:
 							'url(' + this.foodRecipe.photo_url + ')',
 					}"
-					title="Mountain"
+					title="foodPic"
 				></div>
 				<div
 					class="
@@ -59,90 +59,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- <div
-			class="
-					flex flex-warp
-					bg-white
-					rounded-xl
-					shadow-md
-					overflow-hidden
-				"
-		>
-			<food-recipe-item
-				v-for="(foodRecipe, index) in randomFoodRecipe"
-				v-bind:key="index"
-				:FoodRecipes="foodRecipe"
-				:endPoint="endPoint"
-			>
-			</food-recipe-item>
-		</div> -->
-	<!-- </div> -->
-	<!-- <div class="container">
-		<div
-			class="
-				max-w-md
-				mx-auto
-				bg-white
-				rounded-xl
-				shadow-md
-				overflow-hidden
-				md:max-w-2xl
-			"
-		>
-			<div class="md:flex">
-				<div class="md:flex-shrink-0">
-					<img
-						class="h-48 w-full object-cover md:w-48"
-						v-bind:src="this.foodRecipe.photo_url"
-						alt="Man looking at item at a store"
-					/>
-				</div>
-				<div class="p-8">
-					<router-link
-						:to="{
-							name: 'FoodRecipeInfor',
-							params: { id: this.foodRecipe.id }
-						}"
-						class="
-							block
-							mt-1
-							text-lg
-							leading-tight
-							font-medium
-							text-black
-							hover:underline
-						"
-						>{{ this.foodRecipe.name }}</router-link
-					>
-					<p class="mt-2 text-gray-500">
-						{{ this.foodRecipe.detail }}
-					</p>
-				</div>
-			</div>
-		</div>
-		<div>
-			<button @click="fetchRandomFoodRecipes" class="object object-right">
-				Refresh
-			</button>
-			<div
-				class="
-					flex flex-warp
-					bg-white
-					rounded-xl
-					shadow-md
-					overflow-hidden
-				"
-			>
-				<food-recipe-item
-					v-for="(foodRecipe, index) in randomFoodRecipe"
-					v-bind:key="index"
-					:FoodRecipes="foodRecipe"
-					:endPoint="endPoint"
-				>
-				</food-recipe-item>
-			</div>
-		</div>
-	</div> -->
 </template>
 
 <script>
