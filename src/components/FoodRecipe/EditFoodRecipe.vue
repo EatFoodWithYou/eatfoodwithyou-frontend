@@ -365,9 +365,6 @@
 										id="category"
 										v-model="selectedCategory"
 									>
-										<option value="">
-											Food Categories
-										</option>
 										<option
 											v-for="(item, k) in allCategory"
 											:key="k"
@@ -400,7 +397,33 @@
 									</div>
 								</div>
 							</div>
+							<button
+								@click="selectCategory()"
+								class="
+									text-blue-600
+									hover:text-blue-400
+									duration-200
+								"
+							>
+								Select
+							</button>
 						</div>
+						<span class="ml-48 flex flex-wrap -mt-3">
+							Selected :&nbsp;
+							<p>{{ this.foodRecipeForm.category_names }}</p>
+						</span>
+						<button
+							@click="clearSelectedCategories"
+							class="
+								ml-48
+								text-red-500
+								hover:text-red-400
+								text-lg
+								duration-200
+							"
+						>
+							Clear Selected
+						</button>
 					</div>
 				</div>
 				<div class="py-3 text-center text-black">
