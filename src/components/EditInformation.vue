@@ -1,6 +1,6 @@
 <script src="AuthUser.js"></script>
 <template>
-	<div class="bg-bgColor font-prompt">
+	<div class="bg-editInfo bg-no-repeat font-prompt">
 		<div>
 			<div>
 				<div class="text-center pt-16">
