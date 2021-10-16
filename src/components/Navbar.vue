@@ -1,15 +1,7 @@
 <template>
-	<div class="sm:flex z-30">
-		<div
-			class="
-				sm:flex sm:justify-between
-				font-sans
-				bg-navbarColor
-				w-full
-				py-1
-			"
-		>
-			<div class="flex justify-between px-4 text-yellow-50 text-2xl">
+	<div class="sm:flex z-30 border-b-2 border-bgColor">
+		<div class="sm:flex sm:justify-between font-sans bg-white w-full py-1">
+			<div class="flex justify-between px-4 text-black text-2xl">
 				<a class="flex mb-3" href="http://localhost:8080/">
 					<img
 						class="block h-12 w-auto mt-1.5"
@@ -26,12 +18,12 @@
 				<button @click="isOpen = !isOpen" class="flex sm:hidden mt-4">
 					<font-awesome-icon
 						:icon="['fas', 'bars']"
-						class="text-white text-3xl"
+						class="text-gray-800 text-3xl"
 						v-if="!isOpen"
 					/>
 					<font-awesome-icon
 						:icon="['fas', 'times']"
-						class="text-white text-3xl"
+						class="text-gray-800 text-3xl"
 						v-if="isOpen"
 					/>
 				</button>
@@ -51,10 +43,8 @@
 						class="
 							p-3
 							block
-							text-yellow-50
-							hover:text-hoverColor
-							sm:hover:bg-navbarColor
-							hover:bg-navbarColor
+							text-black
+							hover:text-gray-600
 							transition
 							duration-250
 						"
@@ -70,16 +60,32 @@
 							class="
 								p-3
 								block
-								text-yellow-50
-								hover:text-hoverColor
-								sm:hover:bg-navbarColor
-								hover:bg-navbarColor
+								text-gray-800
+								hover:text-gray-500
 								transition
 								duration-250
 							"
 							@click="allRecipes()"
 						>
-							ALL Recipes
+							All Recipes
+						</button>
+					</div>
+					<div
+						class="flex justify-center"
+						v-if="isAuthen() && isAdmin()"
+					>
+						<button
+							class="
+								p-3
+								block
+								text-gray-800
+								hover:text-gray-500
+								transition
+								duration-250
+							"
+							@click="allUsers()"
+						>
+							User Manage
 						</button>
 					</div>
 					<Account class="hidden sm:block" v-if="isAuthen()" />
@@ -89,9 +95,8 @@
 							p-3
 							block
 							pr-8
-							text-yellow-50
-							sm:hover:text-hoverColor sm:hover:bg-navbarColor
-							hover:bg-navbarColor
+							text-gray-800
+							sm:hover:text-navbarColor
 							transition
 							duration-250
 						"
@@ -109,7 +114,7 @@
 										class="
 											pl-2
 											mt-1
-											text-bgColor
+											text-black
 											font-prompt
 											text-xl
 											truncate
@@ -128,7 +133,7 @@
 								w-full
 								text-left
 								font-prompt
-								text-white
+								text-gray-800
 								rounded-b-lg
 								bg-navbarColor
 								shadow-xl
@@ -142,8 +147,8 @@
 									px-3
 									py-2.5
 									mt-2
-									text-white
-									hover:bg-bgColor hover:text-white
+									text-gray-200
+									hover:text-gray-300
 									transition
 									duration-250
 								"
@@ -226,6 +231,9 @@ export default {
 		},
 		allRecipes() {
 			this.$router.push("/admin/foodrecipes");
+		},
+		allUsers() {
+			this.$router.push("/admin/user-manage");
 		},
 		edit() {
 			this.$router.push("/edit-information");

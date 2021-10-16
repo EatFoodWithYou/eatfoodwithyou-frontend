@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-2">
 		<input
-			class="p-1 bg-gray-100 text-2xl mt-2 px-3"
+			class="p-1 bg-gray-100 text-xl mt-2 px-4"
 			type="nameForSearch"
 			v-model="form.nameForSearch"
 			placeholder="ชื่อสูตรอาหารที่ต้องการค้นหา"

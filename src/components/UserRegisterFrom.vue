@@ -1,8 +1,8 @@
 <template>
-	<div class="bg-bgColor main-container min-h-screen">
+	<div class="bg-gray-200 main-container min-h-screen">
 		<div class="font-prompt">
 			<div class="mt-20">
-				<div class="text-center py-4 text-white">
+				<div class="text-center py-4 text-gray-800">
 					<h2 class="text-7xl">Register</h2>
 				</div>
 				<div class="flex justify-center">
@@ -14,7 +14,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -26,7 +26,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -49,7 +49,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -61,7 +61,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -83,7 +83,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -95,7 +95,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -117,7 +117,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -129,7 +129,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -152,7 +152,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -164,7 +164,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -187,7 +187,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -199,7 +199,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -222,7 +222,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -234,7 +234,7 @@
 											block
 											appearance-none
 											w-full
-											bg-gray-200
+											bg-white
 											border border-gray-200
 											text-gray-700 text-xl
 											py-3
@@ -282,7 +282,7 @@
 								lg:flex
 								text-base
 								lg:text-lg
-								text-white
+								text-gray-800
 								float-right
 								-mt-7
 								cursor-default

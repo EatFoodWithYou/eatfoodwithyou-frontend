@@ -1,9 +1,11 @@
 <template>
-	<div class="bg-bgColor font-prompt">
+	<div class="bg-gray-200 font-prompt">
 		<div>
 			<div>
 				<div class="text-center py-10 pt-16">
-					<h2 class="text-6xl font-bold text-white">All Recipes</h2>
+					<h2 class="text-6xl font-bold text-gray-800">
+						All Recipes
+					</h2>
 				</div>
 				<div class="flex justify-center">
 					<div class="w-full max-w-6xl text-center pb-16">
@@ -125,6 +127,7 @@
 									<tr
 										v-for="(food, index) in foodRecipes"
 										:key="index"
+										class="cursor-pointer hover:bg-gray-100"
 									>
 										<td
 											class="
@@ -136,6 +139,7 @@
 												whitespace-nowrap
 												p-4
 											"
+											@click="goToRecipe(food.id)"
 										>
 											{{ index + 1 }}
 										</td>
@@ -146,6 +150,7 @@
 												text-base
 												whitespace-nowrap
 											"
+											@click="goToRecipe(food.id)"
 										>
 											{{ food.name }}
 										</td>
@@ -158,6 +163,7 @@
 												whitespace-nowrap
 												py-3
 											"
+											@click="goToRecipe(food.id)"
 											v-if="food.photo_url !== null"
 										>
 											<img
@@ -174,6 +180,7 @@
 												text-base
 												whitespace-nowrap
 											"
+											@click="goToRecipe(food.id)"
 										>
 											{{ food.detail }}
 										</td>
@@ -272,6 +279,12 @@ export default {
 		},
 		isAdmin() {
 			return AuthUser.getters.isAdmin;
+		},
+		goToRecipe(id) {
+			this.$router.push({
+				name: "FoodRecipeInfor",
+				params: { id: id },
+			});
 		},
 	},
 };

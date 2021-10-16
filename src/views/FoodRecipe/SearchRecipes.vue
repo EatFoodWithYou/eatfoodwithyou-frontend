@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h2 class="flex justify-between text-xl font-medium text-white p-4">
+		<h2 class="flex justify-between text-xl font-medium text-gray-800 p-4">
 			Food Recipe name : {{ this.name }}
 		</h2>
 		<div class="flex flex-wrap w-full">

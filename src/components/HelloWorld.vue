@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="bg-heroBg bg-auto bg-no-repeat">
 		<div>
-			<div class="absolute px-14 text-black bg-white -mt-6">
+			<div class="absolute px-14 text-black bg-white">
 				<nav class="flex flex-col w-full min-h-full pb-8 bg-[#0C0B10]">
 					<div class="text-xl font-semibold mt-6 pb-4">
 						Food Category
@@ -36,9 +36,13 @@
 					</button>
 				</nav>
 			</div>
-			<div class="flex justify-center mt-6 mr-32">
-				<div class="text-5xl font-bold px-6 text-white mt-2">Menu</div>
-				<SearchBar />
+			<div class="flex justify-center">
+				<div class="flex mt-6">
+					<div class="text-5xl font-bold px-6 text-white mt-2">
+						Menu
+					</div>
+					<SearchBar />
+				</div>
 				<button
 					@click="add()"
 					class="
@@ -47,13 +51,13 @@
 						w-auto
 						transition
 						duration-200
-						bg-transparent
-						border-4 border-white
-						text-white
-						hover:bg-navbarColor
+						bg-transparent bg-white
+						text-navbarColor
+						hover:bg-gray-100 hover:text-gray-500
 						cursor-pointer
 						rounded-full
 						ml-28
+						mt-6
 						text-2xl
 					"
 				>

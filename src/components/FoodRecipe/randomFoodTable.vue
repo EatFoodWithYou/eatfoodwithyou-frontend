@@ -1,8 +1,8 @@
 <template>
-	<section class="py-1 bg-blueGray-50">
+	<section class="py-1">
 		<div class="w-full xl:w-4/6 xl:mb-0 px-3 mx-auto mr-36 mt-6">
 			<div>
-				<h1 class="flex text-2xl font-bold text-white pb-6">
+				<h1 class="flex text-2xl font-medium text-white pb-6">
 					Random Recipes
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@
 							w-8
 							ml-2
 							cursor-pointer
-							hover:text-gray-700
+							hover:text-gray-400
 							transition
 							duration-200
 						"
@@ -47,7 +47,14 @@
 						@click="goToRecipe(foodRecipe.id)"
 					>
 						<img
+							v-if="foodRecipe.photo"
 							v-bind:src="foodRecipe.photo_url"
+							alt=""
+							class="rounded-t-lg"
+						/>
+						<img
+							v-else
+							src="https://via.placeholder.com/300x225"
 							alt=""
 							class="rounded-t-lg"
 						/>

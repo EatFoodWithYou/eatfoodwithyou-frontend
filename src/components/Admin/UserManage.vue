@@ -1,9 +1,9 @@
 <template>
-	<div class="bg-bgColor font-prompt">
+	<div class="bg-gray-200 font-prompt">
 		<div>
 			<div>
 				<div class="text-center py-10 pt-16">
-					<h2 class="text-6xl font-bold text-white">All Users</h2>
+					<h2 class="text-6xl font-bold text-gray-800">All Users</h2>
 				</div>
 				<div class="flex justify-center">
 					<div class="w-full max-w-6xl pb-16">
