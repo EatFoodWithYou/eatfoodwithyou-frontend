@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div>
-			<div class="absolute px-20 text-black bg-white -mt-10">
+			<div class="absolute px-14 text-black bg-white -mt-6">
 				<nav class="flex flex-col w-full min-h-full pb-8 bg-[#0C0B10]">
-					<div class="text-xl font-semibold mt-7 pb-5">
+					<div class="text-xl font-semibold mt-6 pb-4">
 						Food Category
 					</div>
 					<div v-for="(category, index) in categoryList" :key="index">
@@ -15,10 +15,7 @@
 						<label class="px-4">{{ category.name }}</label
 						><br />
 					</div>
-					<button @click="searchCategory()" class="border">
-						Filter
-					</button>
-					<!-- <div class="text-xl font-semibold mt-7 pb-6">Budget</div>
+					<!-- <div class="text-xl font-semibold mt-4 pb-4">Budget</div>
 					<form class="text-lg font-normal">
 						<input type="checkbox" />
 						<label class="px-4"> &lt; 100 </label><br />
@@ -31,9 +28,15 @@
 						<input type="checkbox" />
 						<label class="px-4"> 1000 > </label><br />
 					</form> -->
+					<button
+						@click="searchCategory()"
+						class="border mt-4 py-1 hover:bg-gray-50 bg-gray-100"
+					>
+						Filter
+					</button>
 				</nav>
 			</div>
-			<div class="flex justify-center mt-10 mr-44">
+			<div class="flex justify-center mt-6 mr-32">
 				<div class="text-5xl font-bold px-6 text-white mt-2">Menu</div>
 				<SearchBar />
 				<button
