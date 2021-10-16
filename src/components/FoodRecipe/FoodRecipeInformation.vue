@@ -212,12 +212,12 @@
 				</div>
 				<div class="flex justify-center mt-2">
 					<h2 class="text-xl text-navbarColor">
-						By: {{ this.currentFood.user_name }}
+						By : {{ this.currentFood.user_name }}
 					</h2>
 				</div>
 				<div class="flex justify-center mt-2">
 					<h2 class="text-xl text-navbarColor">
-						Category: {{ this.currentFood.tag }}
+						Category : {{ this.currentFood.category_names }}
 					</h2>
 				</div>
 			</div>
