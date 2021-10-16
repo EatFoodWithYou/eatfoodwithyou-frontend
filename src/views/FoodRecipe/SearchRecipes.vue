@@ -21,7 +21,14 @@
 					@click="goToRecipe(recipe.id)"
 				>
 					<img
+						v-if="recipe.photo"
 						v-bind:src="recipe.photo_url"
+						alt=""
+						class="rounded-t-lg"
+					/>
+					<img
+						v-else
+						src="https://via.placeholder.com/300x225"
 						alt=""
 						class="rounded-t-lg"
 					/>

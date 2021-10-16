@@ -217,6 +217,11 @@
 				</div>
 				<div class="flex justify-center mt-2">
 					<h2 class="text-xl text-navbarColor">
+						{{ this.currentFood.detail }}
+					</h2>
+				</div>
+				<div class="flex justify-center mt-2">
+					<h2 class="text-xl text-navbarColor">
 						Category : {{ this.currentFood.category_names }}
 					</h2>
 				</div>
