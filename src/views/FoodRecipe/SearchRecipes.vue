@@ -27,19 +27,22 @@
 						/>
 					</div>
 					<div class="p-8">
-						<h1
-							class="
-								block
-								mt-1
-								text-3xl
-								leading-tight
-								font-extrabold
-								text-black
-								hover:underline
-							"
-						>
-							{{ recipe.name }}
-						</h1>
+						<router-link
+											:to="{
+												name: 'FoodRecipeInfor',
+												params: { id: recipe.id },
+											}"
+											class="
+												block
+												mt-1
+												text-lg
+												leading-tight
+												font-medium
+												text-black
+												hover:underline
+											"
+											>{{ recipe.name }}</router-link
+										>
 						<p class="mt-2 text-gray-500">{{ recipe.detail }}</p>
 					</div>
 				</div>

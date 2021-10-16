@@ -71,6 +71,16 @@
 						>
 							EDIT
 						</button>
+						<button
+							class="bg-red-600"
+							v-if="
+								comment.user_id === currentUser.user.id &&
+								!test(index)
+							"
+							@click="removeComment(comment.id)"
+						>
+							DELETE
+						</button>
 					</span>
 				</div>
 				<div>
@@ -101,7 +111,12 @@
 
 		<div class="comment">
 			Comment
-			<input type="text" placeholder="แสดงความเห็น" />
+			<input type="text" v-model="commentForm.comment" placeholder="แสดงความเห็น" />
+			<button 
+			class="bg-green-200"
+			@click="
+				postComment( currentUser.user.id, currentFood.id, commentForm.comment)
+			">post</button>
 		</div>
 		<div>
 			<input
@@ -284,6 +299,11 @@ export default {
 				user_id: 0,
 				food_recipe_id: 0,
 			},
+			commentForm:{
+				id:"",
+				comment: "",
+				
+			},
 			textCancel: "",
 			commentList: "",
 			allComment: "",
@@ -392,9 +412,9 @@ export default {
 			return false;
 		},
 		async confirmEdit(comment, id, index) {
-			console.log("it is comment 55555", comment);
-			console.log("it is id", id);
-			console.log("it is index", index);
+			// console.log("it is comment 55555", comment);
+			// console.log("it is id", id);
+			// console.log("it is index", index);
 			let res = await FoodRecipeStore.dispatch("editComment", {
 				comment,
 				id,
@@ -412,6 +432,46 @@ export default {
 			// 	return false
 			// }
 			// return true
+		},
+		
+		async postComment (user_id, food_recipe_id, comment){
+			if(this.currentUser.name !== undefined)
+			{
+				let res = await FoodRecipeService.addComment(user_id, food_recipe_id, comment,)
+				swal("Your comment has been post!", {
+					icon: "success",
+				});
+			}
+			else {
+				swal("Please Login", {
+					icon: "error",
+				});
+			}
+			
+
+		},
+
+		async removeComment(index) {
+			swal({
+					title: "Are you sure?",
+					text: "Once deleted, you will not be able to recover this comment",
+					icon: "warning",
+					dangerMode: true,
+					buttons: true,
+				}).then(async (willDelete) => {
+					if (willDelete) {
+						let res = await FoodRecipeService.deleteComment(index);
+						if (res.success) {
+							swal("Your comment has been deleted!", {
+								icon: "success",
+							});
+
+						} else {
+							this.$swal("Cannot Remove Comment.", "error");
+						}
+					}
+				});
+			
 		},
 	},
 };
