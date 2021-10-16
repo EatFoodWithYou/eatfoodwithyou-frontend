@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1 class="flex justify-between text-xl font-normal text-white p-4">
+		<h1 class="flex justify-between text-xl font-normal text-gray-800 p-4">
 			Categories : {{ this.categorySearchList }}
 		</h1>
 		<div

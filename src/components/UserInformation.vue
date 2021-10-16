@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-bgColor font-prompt">
+	<div class="bg-userBg bg-no-repeat font-prompt">
 		<div>
 			<div>
 				<div class="text-center py-10 pt-16">
@@ -14,7 +14,7 @@
 								right-24
 								cursor-pointer
 								bg-white
-								text-navbarColor
+								text-gray-800
 								hover:bg-gray-200
 								transition
 								duration-250

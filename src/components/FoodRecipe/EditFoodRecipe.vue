@@ -1,5 +1,5 @@
 <template>
-	<div class="min-h-screen font-prompt">
+	<div class="min-h-screen font-prompt bg-editBg bg-no-repeat">
 		<div>
 			<div>
 				<div class="text-center py-16">
@@ -29,7 +29,7 @@
 										appearance-none
 										block
 										w-full
-										bg-gray-200
+										bg-white
 										text-gray-700 text-xl
 										border
 										rounded
@@ -49,7 +49,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -66,7 +66,7 @@
 								</div>
 								<div class="mt-5">
 									<input
-										class="cursor-pointer"
+										class="cursor-pointer text-gray-100"
 										type="file"
 										ref="recipePhoto"
 										id="recipePhoto"
@@ -79,13 +79,21 @@
 							class="
 								flex
 								font-bold
-								text-4xl text-white
+								text-4xl text-gray-800
 								ml-44
 								pb-5
 							"
 						>
 							Ingredient
-							<p class="font-normal text-base ml-4 mt-3.5">
+							<p
+								class="
+									font-normal
+									text-base
+									ml-4
+									mt-3.5
+									text-gray-800
+								"
+							>
 								Quantity per 1 serving
 							</p>
 						</h2>
@@ -95,7 +103,7 @@
 								class="
 									absolute
 									font-normal
-									text-2xl text-white
+									text-2xl text-gray-800
 									ml-40
 									py-1
 								"
@@ -107,7 +115,7 @@
 										appearance-none
 										block
 										w-2/5
-										bg-gray-200
+										bg-white
 										text-gray-700 text-lg
 										border
 										rounded
@@ -126,7 +134,7 @@
 										appearance-none
 										block
 										w-1/6
-										bg-gray-200
+										bg-white
 										text-gray-700 text-lg
 										border
 										rounded
@@ -145,7 +153,7 @@
 										appearance-none
 										block
 										w-1/6
-										bg-gray-200
+										bg-white
 										text-gray-700 text-lg
 										border
 										rounded
@@ -167,7 +175,7 @@
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										class="h-8 w-8 text-white -mt-3 ml-2"
+										class="h-8 w-8 text-gray-800 -mt-3 ml-2"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -185,7 +193,7 @@
 						<div class="text-center py-2">
 							<button
 								@click="addIngredient()"
-								class="text-xl font-semibold text-white"
+								class="text-xl font-semibold text-gray-800"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -207,7 +215,7 @@
 							class="
 								flex
 								font-bold
-								text-4xl text-white
+								text-4xl text-gray-800
 								ml-44
 								pb-5
 							"
@@ -225,7 +233,7 @@
 								class="
 									absolute
 									font-normal
-									text-2xl text-white
+									text-2xl text-gray-800
 									py-1
 								"
 								>{{ k + 1 }}
@@ -253,7 +261,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -286,7 +294,7 @@
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									class="h-8 w-8 text-white -mt-10 ml-2"
+									class="h-8 w-8 text-gray-800 -mt-10 ml-2"
 									fill="none"
 									viewBox="0 0 24 24"
 									stroke="currentColor"
@@ -303,7 +311,7 @@
 						<div class="text-center py-2">
 							<button
 								@click="addProcess()"
-								class="text-xl font-semibold text-white"
+								class="text-xl font-semibold text-gray-800"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -325,7 +333,7 @@
 							class="
 								flex
 								font-bold
-								text-4xl text-white
+								text-4xl text-gray-800
 								ml-44
 								pb-5
 							"
@@ -341,7 +349,7 @@
 											appearance-none
 											w-full
 											border
-											bg-gray-200
+											bg-white
 											border-gray-200
 											text-gray-700 text-xl
 											py-2
@@ -404,8 +412,8 @@
 							py-2
 							w-44
 							rounded-full
-							border-2 border-white
-							text-white
+							border-2 border-gray-800
+							text-gray-800
 							hover:bg-gray-100 hover:text-black
 							transition
 							duration-250

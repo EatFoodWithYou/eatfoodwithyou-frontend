@@ -22,7 +22,7 @@
 			<div>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="h-10 w-10 mb-1 mt-0.5 md:mr-7 sm:mr-3 text-yellow-50"
+					class="h-10 w-10 mb-1 mt-0.5 md:mr-7 sm:mr-3 text-black"
 					fill="none"
 					viewBox="0 -1 24 24"
 					stroke="currentColor"
@@ -67,7 +67,7 @@
 					class="
 						cursor-default
 						pointer-events-none
-						bg-navbarColor
+						bg-navbarColor bg-opacity-100
 						text-blue-100
 						w-64
 						space-y-6
@@ -91,7 +91,7 @@
 					>
 						<img
 							class="block h-24 w-auto mb-2"
-							src="../assets/logo.svg"
+							src="../assets/logo2.svg"
 							alt="EFWY"
 						/>
 					</span>
@@ -111,7 +111,7 @@
 								py-4
 								w-full
 								transition
-								text-bgColor
+								text-white
 								duration-200
 							"
 						>
@@ -184,6 +184,12 @@ export default {
 		},
 		info() {
 			this.$router.push("/user-information");
+		},
+		isAdmin() {
+			return AuthUser.getters.isAdmin;
+		},
+		allRecipes() {
+			this.$router.push("/admin/foodrecipes");
 		},
 	},
 	created() {
