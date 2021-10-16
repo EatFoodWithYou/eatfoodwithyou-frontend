@@ -347,30 +347,43 @@ export default {
 		async register() {
 			console.log(this.registerForm);
 			if (this.checkNull()) {
-				if (this.registerForm.password === this.confirm_password) {
-					let res = await AuthUser.dispatch(
-						"register",
-						this.registerForm
-					);
-					console.log(56);
-					console.log(res);
-					if (res.success) {
-						this.$swal(
-							"Register Success",
-							`Welcome ${res.user.username}`,
-							"success"
+				
+				if(this.registerForm.password.length >= 6)
+				{
+					if (this.registerForm.password === this.confirm_password) {
+						let res = await AuthUser.dispatch(
+							"register",
+							this.registerForm
 						);
-						this.$router.push("/");
+						console.log(56);
+						console.log(res);
+						if (res.success) {
+							this.$swal(
+								"Register Success",
+								`Welcome ${res.user.name}`,
+								"success"
+							);
+							this.$router.push("/");
+						} else {
+							this.$swal("Register Failed", res.message.email[0], "error");
+						}
 					} else {
-						this.$swal("Register Failed", res.message, "error");
+						this.$swal(
+							"Register Failed",
+							"Your password and confirm password is not match!",
+							"error"
+						);
 					}
-				} else {
+				}
+				else
+				{
 					this.$swal(
 						"Register Failed",
-						"Your password and confirm password is not match!",
+						"The password must be at least 6 characters.",
 						"error"
 					);
 				}
+				
 			} else {
 				this.$swal(
 					"Register Failed",

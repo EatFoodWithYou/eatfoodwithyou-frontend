@@ -1,107 +1,121 @@
 <template>
-	<div>
-		<h2>Food Recipe ID : {{ this.id }}</h2>
+	<div class="ml-12 mt-6">
+		
 
-		<div class="head">
-			<h1>MENU : {{ this.currentFood.name }}</h1>
+		<div class=" grid justify-items-center ">
+			
 			<img
-				class="h-48 w-full object-cover md:w-48"
+				class="h-60  object-cover w-3/5 rounded-lg"
 				v-bind:src="this.currentFood.photo_url"
 				alt="Man looking at item at a store"
 			/>
-			<h2>By: {{ this.currentFood.user_name }}.</h2>
-			<!-- <div v-for="(tag,index) in currentFood" :key="index"> -->
-			<h2>tag: {{ this.currentFood.category_names }} ..</h2>
-			<!-- </div> -->
+			
 		</div>
+		<div class=" grid justify-items-center ">
+		
+			<div class="bg-white w-3/5 mt-4 rounded-t-lg">
+				
+				
+				<h1 class="pt-4 ml-12 text-5xl font-extrabold">{{ this.currentFood.name }}</h1>
+				<!-- <h2 class="ml-12">Food Recipe ID : {{ this.id }}</h2> -->
+				<h2 class="pt-2 ml-12 text-3xl">By: {{ this.currentFood.user_name }}.</h2>
+				<!-- <div v-for="(tag,index) in currentFood" :key="index"> -->
+				<h2 class=" pt-2 pb-4 ml-12 text-3xl">tag: {{ this.currentFood.category_names }} ..</h2>
+				<!-- </div> -->
+			</div>
 
-		<div class="Ingredient">
-			<h1>วัตถุดิบที่ใช้</h1>
-			<thead>
-				<tr>
-					<th>No.</th>
-					<th>วัตถุดิบ</th>
-					<th>ปริมาณ</th>
-					<th>หน่วย</th>
-				</tr>
-			</thead>
+			<div class="bg-gray-100 w-3/5 ">
+				<h1 class="pt-4 ml-12 text-3xl font-semibold pb-4">วัตถุดิบที่ใช้</h1>
+				
 
-			<tbody>
-				<tr
-					v-for="(ingredient, index) in currentFood.ingredients"
+				<div class="w-full pb-4">
+					<table class=" w-full">
+						<tbody >
+							<tr
+								v-for="(ingredient, index) in currentFood.ingredients"
+								:key="index"  
+							>
+								
+								<td class="w-1/2 pl-12 text-2xl pb-2 font-medium">{{ ingredient.name }}</td>
+								<td class="w-1/4 text-center text-2xl font-medium">{{ ingredient.quantity }}</td>
+								<td class="w-1/4 text-left pl-10 text-2xl font-medium">{{ ingredient.unit }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="cookingProcess bg-white w-3/5 rounded-b-lg ">
+				<h1 class="pt-4 ml-12 text-3xl font-semibold pb-4">ขั้นตอนการทำ</h1>
+				<div
+					v-for="(process, index) in currentFood.cooking_processes"
 					:key="index"
 				>
-					<td>{{ index + 1 }}</td>
-					<td>{{ ingredient.name }}</td>
-					<td>{{ ingredient.quantity }}</td>
-					<td>{{ ingredient.unit }}</td>
-				</tr>
-			</tbody>
-		</div>
-
-		<div class="cookingProcess">
-			<h1>ขั้นตอนการทำ</h1>
-			<div
-				v-for="(process, index) in currentFood.cooking_processes"
-				:key="index"
-			>
-				<h2>{{ index + 1 }}</h2>
-				<h2>{{ process.process }}</h2>
-				<td v-if="process.photo !== null">
-					<img
-						class="h-48 w-full object-cover md:w-48"
-						v-bind:src="`http://localhost:8000/storage/cookingProcess/${process.photo}`"
-					/>
-				</td>
-			</div>
-		</div>
-		<div>
-			Comment
-			<div v-for="(comment, index) in allComment" :key="index">
-				<div>
-					<span>
-						{{ comment.user.name }}
-						<button
-							class="bg-white"
-							v-if="
-								comment.user_id === currentUser.user.id &&
-								!test(index)
-							"
-							@click="editComment(index, comment.isComment)"
-						>
-							EDIT
-						</button>
-					</span>
-				</div>
-				<div>
-					<span>
-						<div v-if="!test(index)">
-							{{ comment.isComment }}
-						</div>
-						<div v-if="test(index)">
-							<input
-								type="text"
-								placeholder=""
-								v-model="textCancel"
-							/>
-							<button
-								class="mx-2"
-								@click="
-									confirmEdit(textCancel, comment.id, index)
-								"
-							>
-								confirm
-							</button>
-							<button @click="cancel()">cancel</button>
-						</div>
-					</span>
+					<h2 class=" ml-20 pt-4 text-2xl font-medium">{{ index + 1 }} {{ process.process }}</h2>
+					<td v-if="process.photo !== null">
+						<img
+							class="h-60 w-full object-cover md:w-96 ml-20 pt-4 mb-4"
+							v-bind:src="`http://localhost:8000/storage/cookingProcess/${process.photo}`"
+						/>
+					</td>
 				</div>
 			</div>
-		</div>
+		
+		
+			<div class="bg-white w-3/5 mt-10 rounded-lg">
+				<h1 class="ml-6 pt-4 text-3xl font-semibold">Comment</h1> 
+				<div v-for="(comment, index) in allComment" :key="index" class="">
+					<div class="bg-blue-200 mt-4 mb-4 ml-4 w-3/5 rounded-lg" >
+						<div>
+							<span class="ml-6 mr-6 text-2xl font-medium">
+								{{ comment.user.name }}
+								<button
+									class="bg-blue-200 rounded-lg text-xl ml-12"
+									v-if="
+										comment.user_id === currentUser.user.id &&
+										!test(index)
+									"
+									@click="editComment(index, comment.isComment)"
+								>
+									EDIT
+								</button>
+							</span>
+						</div>
+						<div>
+							<span >
+								<div v-if="!test(index)" class="ml-6 mr-6 pb-1 text-xl font-normal">
+									<p class="break-all">{{ comment.isComment }}</p>
+									
+								</div>
+								<div v-if="test(index)">
+									<input
+										type="text"
+										placeholder=""
+										v-model="textCancel"
+										class="ml-6 w-3/5 mb-1 text-xl"
+									/>
+									
+									<button
+										class="mx-2 text-xl"
+										@click="
+											confirmEdit(textCancel, comment.id, index)
+										"
+									>
+										confirm
+									</button>
+									<button @click="cancel()" class="text-xl">cancel</button>
+								</div>
+								
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
 
-		<div class="comment">
-			Comment
-			<input type="text" placeholder="แสดงความเห็น" />
+			<div class="comment">
+				Comment
+				<input type="text" placeholder="แสดงความเห็น" />
+			</div>
 		</div>
 		<div>
 			<input

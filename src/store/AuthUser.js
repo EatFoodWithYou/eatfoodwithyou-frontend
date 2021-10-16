@@ -32,8 +32,8 @@ export default new Vuex.Store({
 	mutations: {
 		setCurrentUser(state, body) {
 			(state.currentUser.user = body.user),
-				(state.currentUser.jwt = body.jwt),
-				(state.currentUser.isAuthen = true);
+			(state.currentUser.jwt = body.jwt),
+			(state.currentUser.isAuthen = true);
 			// if (body.user.role === "ADMIN")
 			// {
 			//     state.currentUser.isAdmin = true
@@ -95,9 +95,10 @@ export default new Vuex.Store({
 				role,
 				age,
 			});
+			console.log("res" ,res);
 
 			if (res.success) {
-				commit("loginSuccess", res);
+				commit("setCurrentUser", res);
 			}
 			return res;
 		},
