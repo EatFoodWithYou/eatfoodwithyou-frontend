@@ -267,6 +267,7 @@ export default {
 		// try
 		// {
 		let url = `${api_endpoint}/api/likes/${id}`;
+		console.log("like url",url);
 		let jwt = AuthService.getJwt();
 		console.log(jwt);
 		await Axios.delete(url, {
@@ -302,5 +303,49 @@ export default {
 		let res = await Axios.get(url, null, headers);
 
 		return res.data;
+	},
+
+	async addComment( user_id, food_id, comment) {
+		try{
+			let url = `${api_endpoint}/api/comments`
+		let headers = AuthService.getApiHeader();
+		let body = {
+			user_id : user_id,
+			food_recipe_id : food_id,
+			isComment : comment
+		}
+		console.log("this is body",body);
+		let res = await Axios.post(url, body, headers);
+		console.log("res2",res)
+		return res.data
+		} catch (e) {
+			console.log("this is error from try catch",e)
+		}
+	},
+
+	async deleteComment(id) {
+		try {
+			const url = `${api_endpoint}/api/comments/${id}`;
+			const headers = AuthService.getApiHeader();
+			console.log("This is url", url);
+			let res = await Axios.delete(url, headers);
+			return { success: true };
+		} catch (e) {
+			if (e.response.status === 400) {
+				return {
+					success: false,
+					message: res.message,
+				};
+			} else {
+				let error = "";
+				for (let items in e.response.data.errors) {
+					error = error + `${e.response.data.errors[items]}` + "\n";
+				}
+				return {
+					success: false,
+					message: error,
+				};
+			}
+		}
 	},
 };

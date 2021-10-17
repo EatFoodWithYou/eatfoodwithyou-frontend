@@ -212,12 +212,17 @@
 				</div>
 				<div class="flex justify-center mt-2">
 					<h2 class="text-xl text-navbarColor">
-						By: {{ this.currentFood.user_name }}
+						By : {{ this.currentFood.user_name }}
 					</h2>
 				</div>
 				<div class="flex justify-center mt-2">
 					<h2 class="text-xl text-navbarColor">
-						Category: {{ this.currentFood.tag }}
+						{{ this.currentFood.detail }}
+					</h2>
+				</div>
+				<div class="flex justify-center mt-2">
+					<h2 class="text-xl text-navbarColor">
+						Category : {{ this.currentFood.category_names }}
 					</h2>
 				</div>
 			</div>
@@ -337,6 +342,22 @@
 							>
 								Edit
 							</button>
+							<button
+								class="
+									text-base
+									px-2
+									text-red-400
+									hover:text-red-700
+									duration-200
+								"
+								v-if="
+									(comment.user_id === currentUser.user.id &&
+									!test(index) || currentUser.user.role === 'ADMIN' ) 
+							"
+							@click="removeComment(comment.id)"
+						>
+							DELETE
+						</button>
 						</span>
 					</div>
 					<div>
@@ -403,6 +424,84 @@
 					</div>
 				</div>
 			</div>
+			<div class="flex h-auto px-4 pb-16">
+				<div class="w-1/2 bg-white p-2 rounded">
+					<div class="p-3 w-full">
+						<textarea
+							rows="3"
+							class="border p-2 rounded w-full"
+							placeholder="Write a comment..."
+							v-model="commentForm.comment"
+						></textarea>
+					</div>
+
+					<div class="flex justify-between mx-3">
+						<div>
+							<button
+								class="
+									px-4
+									py-1
+									bg-gray-800
+									text-white
+									rounded
+									font-light
+									hover:bg-gray-700
+								"
+								@click="
+								postComment( currentUser.user.id, currentFood.id, commentForm.comment)
+								"
+							>
+								Post
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+		<!-- <div class="comment">
+			Comment
+			<input type="text" v-model="commentForm.comment" placeholder="แสดงความเห็น" />
+			<button 
+			class="bg-green-200"
+			@click="
+				postComment( currentUser.user.id, currentFood.id, commentForm.comment)
+			">post</button>
+		</div> -->
+		<!-- <div>
+			<input
+				type="checkbox"
+				id="checkbox"
+				v-model="currentUserLike.status"
+				@change="clickLike()"
+				:disabled="!isAuthen()"
+			/>
+			<label for="checkbox">
+				<svg
+					id="heart-svg"
+					viewBox="467 392 58 57"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<g
+						id="Group"
+						fill="none"
+						fill-rule="evenodd"
+						transform="translate(467 392)"
+					>
+						<path
+							d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z"
+							id="heart"
+							fill="#AAB8C2"
+						/>
+						<circle
+							id="main-circ"
+							fill="#E2264D"
+							opacity="0"
+							cx="29.5"
+							cy="29.5"
+							r="1.5"
+						/>
 
 			<div class="flex h-auto px-4 pb-16">
 				<div class="w-1/2 bg-white p-2 rounded">
@@ -433,7 +532,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div v-else class="animate-fade-in-down">
 			<div class="text-center w-auto bg-white p-10 de">
 				<h2 class="text-6xl font-bold text-red-500 py-16 delay-1000">
@@ -461,6 +560,11 @@ export default {
 			likeFrom: {
 				user_id: 0,
 				food_recipe_id: 0,
+			},
+			commentForm:{
+				id:"",
+				comment: "",
+				
 			},
 			textCancel: "",
 			commentList: "",
@@ -551,6 +655,9 @@ export default {
 		isAuthen() {
 			return AuthUserStore.getters.isAuthen;
 		},
+		isAdmin() {
+			return AuthUserStore.getters.isAdmin;
+		},
 
 		editComment(index, comment) {
 			// if(id === )
@@ -570,9 +677,9 @@ export default {
 			return false;
 		},
 		async confirmEdit(comment, id, index) {
-			console.log("it is comment 55555", comment);
-			console.log("it is id", id);
-			console.log("it is index", index);
+			// console.log("it is comment 55555", comment);
+			// console.log("it is id", id);
+			// console.log("it is index", index);
 			let res = await FoodRecipeStore.dispatch("editComment", {
 				comment,
 				id,
@@ -590,6 +697,49 @@ export default {
 			// 	return false
 			// }
 			// return true
+		},
+		
+		async postComment (user_id, food_recipe_id, comment){
+			if(this.currentUser.user.name !== undefined)
+			{
+				let res = await FoodRecipeService.addComment(user_id, food_recipe_id, comment,)
+				swal("Your comment has been post!", {
+					icon: "success",
+				});
+				this.fetchComments(this.id)
+				this.commentForm.comment = "";
+			}
+			else {
+				swal("Please Login", {
+					icon: "error",
+				});
+			}
+			
+
+		},
+
+		async removeComment(index) {
+			swal({
+					title: "Are you sure?",
+					text: "Once deleted, you will not be able to recover this comment",
+					icon: "warning",
+					dangerMode: true,
+					buttons: true,
+				}).then(async (willDelete) => {
+					if (willDelete) {
+						let res = await FoodRecipeService.deleteComment(index);
+						if (res.success) {
+							swal("Your comment has been deleted!", {
+								icon: "success",
+							});
+							this.fetchComments(this.id)
+
+						} else {
+							this.$swal("Cannot Remove Comment.", "error");
+						}
+					}
+				});
+			
 		},
 	},
 };

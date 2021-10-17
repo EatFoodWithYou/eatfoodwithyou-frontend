@@ -51,12 +51,14 @@ export default {
 						success: true,
 						user: res.data.user,
 						jwt: res.data.access_token,
+						status: 200
 					};
 				} else if (res.data.user.status === "BANNED") {
 					return {
 						success: false,
 						user: "",
 						jwt: "",
+						status: 200 ,
 						message: "YOU ACCOUNT BANNED!!!",
 					};
 				}
@@ -74,6 +76,7 @@ export default {
 				return {
 					success: false,
 					message: e.response.data.error,
+					status: 401
 				};
 			} else if (e.response.status === 422) {
 				console.log("sohard");
@@ -81,7 +84,9 @@ export default {
 				console.log("sohard");
 				return {
 					success: false,
-					message: e.response.data.password[0],
+					message1: "The email must be a valid email address" ,
+					message2: "The password must be at least 6 characters.",
+					status: 422
 				};
 			}
 			// throw e
@@ -98,7 +103,9 @@ export default {
 		age,
 	}) {
 		try {
+			
 			let url = `${api_endpoint}/api/auth/register`;
+			
 			let body = {
 				email: email,
 				password: password,
@@ -109,22 +116,27 @@ export default {
 			};
 
 			let res = await Axios.post(url, body);
-			if (res.status === 201) {
-				localStorage.setItem(auth_key, JSON.stringify(res.data));
-				return {
-					success: true,
-					user: res.data.user,
-					jwt: res.data.access_token,
-				};
-			} else {
-				console.log("NOT 200", res);
-			}
+			console.log("hard");
+			console.log("it it it res" , res);
+		
+			localStorage.setItem(auth_key, JSON.stringify(res));
+			return {
+				success: true,
+				user: res.data.user,
+				jwt: res.data.access_token,
+				
+			};
+				
+			
 		} catch (e) {
+			console.log("error");
+			console.error(e);
+			console.log(e.response);
 			if (e.response.status === 400) {
 				// console.log(e.response.data.message[0].messages[0].message);
 				return {
 					success: false,
-					message: e.response.data.message[0].messages[0].message,
+					message: e.response.data
 				};
 			} else {
 				return;
