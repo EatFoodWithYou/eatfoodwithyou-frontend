@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-bgColor font-prompt">
+	<div class="bg-userBg bg-no-repeat font-prompt">
 		<div>
 			<div>
 				<div class="text-center py-10 pt-16">
@@ -14,7 +14,7 @@
 								right-24
 								cursor-pointer
 								bg-white
-								text-navbarColor
+								text-gray-800
 								hover:bg-gray-200
 								transition
 								duration-250
@@ -202,7 +202,11 @@
 
 									<tbody>
 										<tr
-											class="text-center"
+											class="
+												text-center
+												cursor-pointer
+												hover:bg-gray-100
+											"
 											v-for="(
 												food, index
 											) in currentUserWithFoodRecipe.food_recipes"
@@ -218,6 +222,7 @@
 													whitespace-nowrap
 													p-4
 												"
+												@click="goToRecipe(food.id)"
 											>
 												{{ food.id }}
 											</td>
@@ -231,6 +236,7 @@
 													whitespace-nowrap
 													p-4
 												"
+												@click="goToRecipe(food.id)"
 											>
 												{{ food.name }}
 											</td>
@@ -244,6 +250,7 @@
 													whitespace-nowrap
 													py-3
 												"
+												@click="goToRecipe(food.id)"
 											>
 												<img
 													v-if="food.photo"
@@ -352,6 +359,12 @@ export default {
 
 		goToEditRecipe(food) {
 			this.$router.push(`/recipe/edit/${food.id}`);
+		},
+		goToRecipe(id) {
+			this.$router.push({
+				name: "FoodRecipeInfor",
+				params: { id: id },
+			});
 		},
 
 		deleteRecipe(food) {

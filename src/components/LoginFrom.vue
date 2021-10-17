@@ -1,8 +1,8 @@
 <template>
-	<div class="bg-bgColor main-container min-h-screen">
+	<div class="bg-gray-200 main-container min-h-screen">
 		<div class="font-prompt">
 			<div class="mt-48">
-				<div class="text-center py-4 text-white">
+				<div class="text-center py-4 text-gray-800">
 					<h2 class="text-7xl">Log in</h2>
 				</div>
 				<div class="flex justify-center">
@@ -19,7 +19,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -31,7 +31,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -53,7 +53,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -65,7 +65,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -86,7 +86,7 @@
 								lg:flex
 								text-base
 								lg:text-lg
-								text-white
+								text-gray-800
 								float-right
 								-mt-3
 								cursor-default
@@ -145,10 +145,8 @@ export default {
 			//  console.log("it is loginform" ,this.loginFrom);
 			if (this.loginFrom.email !== "" && this.loginFrom.password !== "") {
 				let res = await AuthUser.dispatch("login", this.loginFrom);
-				console.log(1);
-				console.log(res);
-				console.log(2);
-				if (res.success) {
+				console.log("it res" , res);
+				if (res.success && res.status === 200) {
 					this.$swal(
 						"Login Success",
 						`Welcome, ${res.user.name}`,
@@ -160,8 +158,11 @@ export default {
 					// console.log(this.currentUser);
 					// ShopStore.dispatch('setCurrentUser',this.currentUser)
 					this.$router.push("/");
-				} else {
+				} else if (!res.success && res.status === 401){
 					this.$swal("Login Failed", res.message, "error");
+				}
+				else if (!res.success && res.status === 422){
+					this.$swal("Login Failed", res.message1 + "\n and " + res.message2 , "error");
 				}
 			} else {
 				this.$swal(

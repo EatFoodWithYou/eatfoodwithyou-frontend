@@ -1,43 +1,221 @@
 <template>
-	<div>
-		<h1>....FoodRecipes....</h1>
-		<div>อิอิ</div>
+	<div class="bg-gray-200 font-prompt">
+		<div>
+			<div>
+				<div class="text-center py-10 pt-16">
+					<h2 class="text-6xl font-bold text-gray-800">
+						All Recipes
+					</h2>
+				</div>
+				<div class="flex justify-center">
+					<div class="w-full max-w-6xl text-center pb-16">
+						<div class="block w-full overflow-x-hidden">
+							<table
+								class="
+									mt-6
+									items-center
+									bg-transparent
+									w-full
+									border-collapse
+									cursor
+									bg-white
+								"
+							>
+								<thead>
+									<tr>
+										<th
+											class="
+												px-6
+												bg-blueGray-50
+												text-black
+												align-middle
+												border-b
+												border-solid
+												border-blueGray-100
+												py-3
+												text-base
+												uppercase
+												whitespace-nowrap
+												font-medium
+												text-center
+											"
+										>
+											No.
+										</th>
+										<th
+											class="
+												px-6
+												bg-blueGray-50
+												text-black
+												align-middle
+												border-b
+												border-solid
+												border-blueGray-100
+												py-3
+												text-base
+												uppercase
+												whitespace-nowrap
+												font-medium
+												text-center
+											"
+										>
+											Name
+										</th>
+										<th
+											class="
+												px-6
+												bg-blueGray-50
+												text-black
+												align-middle
+												border-b
+												border-solid
+												border-blueGray-100
+												py-3
+												text-base
+												uppercase
+												whitespace-nowrap
+												font-medium
+												text-center
+											"
+										>
+											Photo
+										</th>
+										<th
+											class="
+												px-6
+												bg-blueGray-50
+												text-black
+												align-middle
+												border-b
+												border-r-2
+												border-solid
+												border-blueGray-100
+												py-3
+												text-base
+												uppercase
+												whitespace-nowrap
+												font-medium
+												text-center
+											"
+										>
+											Detail
+										</th>
 
-		<div class="conteiner">
-			<table class="bg-indigo-400 text-white">
-				<thead class="bg-dark text-white">
-					<tr>
-						<th colspan="6">ALL RECIPES</th>
-					</tr>
-					<tr>
-						<th>picture</th>
-						<th>No.</th>
-						<th>NameRecipes</th>
-						<th>Details</th>
-					</tr>
-				</thead>
-				<tbody class="box">
-					<tr v-for="food in foodRecipes" :key="food.id">
-						<td>
-							<img
-								v-bind:src="food.photo_url"
-								alt=""
-								height="50px"
-								width="100px"
-							/>
-						</td>
-						<td>{{ food.id }}</td>
-						<td>{{ food.name }}</td>
-						<td>{{ food.detail }}</td>
-						<button
-							class="bg-red-800"
-							@click="deleteRecipe(food.id, food.name)"
-						>
-							DELETE
-						</button>
-					</tr>
-				</tbody>
-			</table>
+										<th
+											class="
+												px-6
+												bg-blueGray-50
+												text-transparent
+												align-middle
+												border-b
+												border-solid
+												border-blueGray-100
+												py-3
+												text-base
+												uppercase
+												whitespace-nowrap
+												font-medium
+												text-center
+											"
+										>
+											Delete
+										</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr
+										v-for="(food, index) in foodRecipes"
+										:key="index"
+										class="cursor-pointer hover:bg-gray-100"
+									>
+										<td
+											class="
+												text-center
+												px-6
+												align-middle
+												border-l-0 border-r-2
+												text-base
+												whitespace-nowrap
+												p-4
+											"
+											@click="goToRecipe(food.id)"
+										>
+											{{ index + 1 }}
+										</td>
+										<td
+											class="
+												px-6
+												border-l-0 border-r-2
+												text-base
+												whitespace-nowrap
+											"
+											@click="goToRecipe(food.id)"
+										>
+											{{ food.name }}
+										</td>
+										<td
+											class="
+												flex
+												justify-center
+												border-l-0 border-r-2
+												text-base
+												whitespace-nowrap
+												py-3
+											"
+											@click="goToRecipe(food.id)"
+											v-if="food.photo_url !== null"
+										>
+											<img
+												v-bind:src="food.photo_url"
+												alt=""
+												height="50px"
+												width="100px"
+											/>
+										</td>
+										<td
+											class="
+												px-6
+												border-l-0 border-r-2
+												text-base
+												whitespace-nowrap
+											"
+											@click="goToRecipe(food.id)"
+										>
+											{{ food.detail }}
+										</td>
+										<td
+											class="
+												px-14
+												border-l-0 border-r-2
+												text-base
+												whitespace-nowrap
+											"
+										>
+											<div
+												class="
+													cursor-pointer
+													text-red-300
+													hover:text-red-600
+													duration-200
+												"
+												@click="
+													deleteRecipe(
+														food.id,
+														food.name
+													)
+												"
+											>
+												Delete
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -102,15 +280,13 @@ export default {
 		isAdmin() {
 			return AuthUser.getters.isAdmin;
 		},
+		goToRecipe(id) {
+			this.$router.push({
+				name: "FoodRecipeInfor",
+				params: { id: id },
+			});
+		},
 	},
 };
 </script>
-<style>
-.tt {
-	background: indigo;
-	color: aliceblue;
-}
-.box {
-	margin: 10px;
-}
-</style>
+<style></style>

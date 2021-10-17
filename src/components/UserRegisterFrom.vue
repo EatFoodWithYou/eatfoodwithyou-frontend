@@ -1,8 +1,8 @@
 <template>
-	<div class="bg-bgColor main-container min-h-screen">
+	<div class="bg-gray-200 main-container min-h-screen">
 		<div class="font-prompt">
 			<div class="mt-20">
-				<div class="text-center py-4 text-white">
+				<div class="text-center py-4 text-gray-800">
 					<h2 class="text-7xl">Register</h2>
 				</div>
 				<div class="flex justify-center">
@@ -14,7 +14,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -26,7 +26,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -49,7 +49,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -61,7 +61,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -83,7 +83,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -95,7 +95,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -117,7 +117,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -129,7 +129,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -152,7 +152,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -164,7 +164,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -187,7 +187,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -199,7 +199,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -222,7 +222,7 @@
 										block
 										uppercase
 										tracking-wide
-										text-white text-xl
+										text-gray-800 text-xl
 										mb-2
 									"
 								>
@@ -234,7 +234,7 @@
 											block
 											appearance-none
 											w-full
-											bg-gray-200
+											bg-white
 											border border-gray-200
 											text-gray-700 text-xl
 											py-3
@@ -250,7 +250,6 @@
 									>
 										<option value="MALE">Male</option>
 										<option value="FEMALE">Female</option>
-										<option>Unspecified</option>
 									</select>
 									<div
 										class="
@@ -282,7 +281,7 @@
 								lg:flex
 								text-base
 								lg:text-lg
-								text-white
+								text-gray-800
 								float-right
 								-mt-7
 								cursor-default
@@ -347,30 +346,43 @@ export default {
 		async register() {
 			console.log(this.registerForm);
 			if (this.checkNull()) {
-				if (this.registerForm.password === this.confirm_password) {
-					let res = await AuthUser.dispatch(
-						"register",
-						this.registerForm
-					);
-					console.log(56);
-					console.log(res);
-					if (res.success) {
-						this.$swal(
-							"Register Success",
-							`Welcome ${res.user.username}`,
-							"success"
+				
+				if(this.registerForm.password.length >= 6)
+				{
+					if (this.registerForm.password === this.confirm_password) {
+						let res = await AuthUser.dispatch(
+							"register",
+							this.registerForm
 						);
-						this.$router.push("/");
+						console.log(56);
+						console.log(res);
+						if (res.success) {
+							this.$swal(
+								"Register Success",
+								`Welcome ${res.user.name}`,
+								"success"
+							);
+							this.$router.push("/");
+						} else {
+							this.$swal("Register Failed", res.message.email[0], "error");
+						}
 					} else {
-						this.$swal("Register Failed", res.message, "error");
+						this.$swal(
+							"Register Failed",
+							"Your password and confirm password is not match!",
+							"error"
+						);
 					}
-				} else {
+				}
+				else
+				{
 					this.$swal(
 						"Register Failed",
-						"Your password and confirm password is not match!",
+						"The password must be at least 6 characters.",
 						"error"
 					);
 				}
+				
 			} else {
 				this.$swal(
 					"Register Failed",

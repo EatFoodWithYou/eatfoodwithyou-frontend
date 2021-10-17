@@ -1,5 +1,5 @@
 <template>
-	<div class="min-h-screen font-prompt">
+	<div class="min-h-screen font-prompt bg-addBg bg-no-repeat">
 		<div>
 			<div>
 				<div class="text-center py-16">
@@ -24,7 +24,7 @@
 										appearance-none
 										block
 										w-full
-										bg-gray-200
+										bg-white
 										text-gray-700 text-xl
 										border
 										rounded
@@ -44,7 +44,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -74,7 +74,7 @@
 							class="
 								flex
 								font-bold
-								text-4xl text-white
+								text-4xl text-navbarColor
 								ml-44
 								pb-5
 							"
@@ -90,7 +90,7 @@
 								class="
 									absolute
 									font-normal
-									text-2xl text-white
+									text-2xl text-navbarColor
 									ml-40
 									py-1
 								"
@@ -102,7 +102,7 @@
 										appearance-none
 										block
 										w-2/5
-										bg-gray-200
+										bg-white
 										text-gray-700 text-lg
 										border
 										rounded
@@ -121,7 +121,7 @@
 										appearance-none
 										block
 										w-1/6
-										bg-gray-200
+										bg-white
 										text-gray-700 text-lg
 										border
 										rounded
@@ -140,7 +140,7 @@
 										appearance-none
 										block
 										w-1/6
-										bg-gray-200
+										bg-white
 										text-gray-700 text-lg
 										border
 										rounded
@@ -162,7 +162,13 @@
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										class="h-8 w-8 text-white -mt-3 ml-2"
+										class="
+											h-8
+											w-8
+											text-navbarColor
+											-mt-3
+											ml-2
+										"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -180,7 +186,7 @@
 						<div class="text-center py-2">
 							<button
 								@click="addIngredient()"
-								class="text-xl font-semibold text-white"
+								class="text-xl font-semibold text-navbarColor"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +208,7 @@
 							class="
 								flex
 								font-bold
-								text-4xl text-white
+								text-4xl text-navbarColor
 								ml-44
 								pb-5
 							"
@@ -220,7 +226,7 @@
 								class="
 									absolute
 									font-normal
-									text-2xl text-white
+									text-2xl text-navbarColor
 									py-1
 								"
 								>{{ k + 1 }}
@@ -240,7 +246,7 @@
 											appearance-none
 											block
 											w-full
-											bg-gray-200
+											bg-white
 											text-gray-700 text-xl
 											border
 											rounded
@@ -273,7 +279,7 @@
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									class="h-8 w-8 text-white -mt-10 ml-2"
+									class="h-8 w-8 text-navbarColor -mt-10 ml-2"
 									fill="none"
 									viewBox="0 0 24 24"
 									stroke="currentColor"
@@ -290,7 +296,7 @@
 						<div class="text-center py-2">
 							<button
 								@click="addProcess()"
-								class="text-xl font-semibold text-white"
+								class="text-xl font-semibold text-navbarColor"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -312,7 +318,7 @@
 							class="
 								flex
 								font-bold
-								text-4xl text-white
+								text-4xl text-navbarColor
 								ml-44
 								pb-5
 							"
@@ -328,7 +334,7 @@
 											appearance-none
 											w-full
 											border
-											bg-gray-200
+											bg-white
 											border-gray-200
 											text-gray-700 text-xl
 											py-2
@@ -342,9 +348,6 @@
 										"
 										v-model="selectedCategory"
 									>
-										<option value="">
-											Food Categories
-										</option>
 										<option
 											v-for="(item, k) in allCategory"
 											:key="k"
@@ -377,7 +380,33 @@
 									</div>
 								</div>
 							</div>
+							<button
+								@click="selectCategory()"
+								class="
+									text-blue-600
+									hover:text-blue-400
+									duration-200
+								"
+							>
+								Select
+							</button>
 						</div>
+						<span class="ml-48 flex flex-wrap -mt-3">
+							Selected :&nbsp;
+							<p>{{ this.foodRecipeForm.categories }}</p>
+						</span>
+						<button
+							@click="clearSelectedCategories"
+							class="
+								ml-48
+								text-red-500
+								hover:text-red-400
+								text-lg
+								duration-200
+							"
+						>
+							Clear Selected
+						</button>
 					</div>
 				</div>
 				<div class="py-3 text-center text-black">
@@ -389,9 +418,9 @@
 							py-2
 							w-44
 							rounded-full
-							border-2 border-white
-							text-white
-							hover:bg-gray-100 hover:text-black
+							border-2 border-navbarColor
+							text-navbarColor
+							hover:bg-navbarColor hover:text-white
 							transition
 							duration-250
 						"

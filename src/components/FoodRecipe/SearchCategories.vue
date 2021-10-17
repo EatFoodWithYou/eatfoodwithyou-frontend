@@ -1,7 +1,49 @@
 <template>
 	<div>
-		<h1>Categories : {{ this.categorySearchList }}</h1>
-		<div
+		<h1 class="flex justify-between text-xl font-normal text-gray-800 p-4">
+			Categories : {{ this.categorySearchList }}
+		</h1>
+		<div class="flex flex-wrap w-full">
+			<div
+				class="pl-6"
+				v-for="(recipe, index) in food_recipes"
+				:key="index"
+			>
+				<div
+					class="
+						bg-white
+						rounded-lg
+						shadow-lg
+						h-80
+						w-72
+						cursor-pointer
+					"
+					@click="goToRecipe(recipe.id)"
+				>
+					<img
+						v-if="recipe.photo"
+						v-bind:src="recipe.photo_url"
+						alt=""
+						class="rounded-t-lg"
+					/>
+					<img
+						v-else
+						src="https://via.placeholder.com/300x225"
+						alt=""
+						class="rounded-t-lg"
+					/>
+					<div class="p-6">
+						<h2 class="font-semibold mb-2 text-lg text-black">
+							{{ recipe.name }}
+						</h2>
+						<p class="text-black mt-4">
+							{{ recipe.user.name }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div
 			class="container"
 			v-for="(recipe, index) in food_recipes"
 			:key="index"
@@ -47,11 +89,10 @@
 							{{ recipe.name }}
 						</h1>
 						<p class="mt-2 text-gray-500">{{ recipe.detail }}</p>
-						<p>Category: {{ recipe.category_names }}</p>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -71,6 +112,15 @@ export default {
 			await FoodRecipeService.searchFoodRecipeByCategories(
 				this.categorySearchList
 			);
+		console.log(this.food_recipes);
+	},
+	methods: {
+		goToRecipe(id) {
+			this.$router.push({
+				name: "FoodRecipeInfor",
+				params: { id: id },
+			});
+		},
 	},
 };
 </script>
