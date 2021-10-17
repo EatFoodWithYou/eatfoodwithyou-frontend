@@ -31,6 +31,11 @@ export default {
 	getJwt() {
 		return jwt;
 	},
+	setUser(){
+		auth = JSON.parse(localStorage.getItem(auth_key));
+		user = auth ? auth.data.user : "";
+		jwt = auth ? auth.data.access_token : "";
+	},
 	async login({ email, password }) {
 		try {
 			let url = api_endpoint + "/api/auth/login";
@@ -47,6 +52,7 @@ export default {
 				// console.log(res.data);
 				if (res.data.user.status === "ACTIVE") {
 					localStorage.setItem(auth_key, JSON.stringify(res));
+					this.setUser();
 					return {
 						success: true,
 						user: res.data.user,
