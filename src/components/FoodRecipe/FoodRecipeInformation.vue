@@ -238,21 +238,6 @@
 							) in currentFood.ingredients"
 							:key="index"
 						>
-<<<<<<< HEAD
-							EDIT
-						</button>
-						<button
-							class="bg-red-600"
-							v-if="
-								comment.user_id === currentUser.user.id &&
-								!test(index)
-							"
-							@click="removeComment(comment.id)"
-						>
-							DELETE
-						</button>
-					</span>
-=======
 							<li class="p-3">
 								{{ ingredient.name }} -
 								{{ ingredient.quantity }}
@@ -260,7 +245,6 @@
 							</li>
 						</ul>
 					</div>
->>>>>>> 7331a4f0af30a4a02d00cde76e59c55f9daa1282
 				</div>
 			</div>
 
@@ -358,6 +342,22 @@
 							>
 								Edit
 							</button>
+							<button
+								class="
+									text-base
+									px-2
+									text-red-400
+									hover:text-red-700
+									duration-200
+								"
+								v-if="
+									comment.user_id === currentUser.user.id &&
+									!test(index)
+							"
+							@click="removeComment(comment.id)"
+						>
+							DELETE
+						</button>
 						</span>
 					</div>
 					<div>
@@ -424,10 +424,43 @@
 					</div>
 				</div>
 			</div>
-<<<<<<< HEAD
-		</div>
+			<div class="flex h-auto px-4 pb-16">
+				<div class="w-1/2 bg-white p-2 rounded">
+					<div class="p-3 w-full">
+						<textarea
+							rows="3"
+							class="border p-2 rounded w-full"
+							placeholder="Write a comment..."
+							v-model="commentForm.comment"
+						></textarea>
+					</div>
 
-		<div class="comment">
+					<div class="flex justify-between mx-3">
+						<div>
+							<button
+								class="
+									px-4
+									py-1
+									bg-gray-800
+									text-white
+									rounded
+									font-light
+									hover:bg-gray-700
+								"
+								@click="
+								postComment( currentUser.user.id, currentFood.id, commentForm.comment)
+								"
+							>
+								Post
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+		<!-- <div class="comment">
 			Comment
 			<input type="text" v-model="commentForm.comment" placeholder="แสดงความเห็น" />
 			<button 
@@ -435,8 +468,8 @@
 			@click="
 				postComment( currentUser.user.id, currentFood.id, commentForm.comment)
 			">post</button>
-		</div>
-		<div>
+		</div> -->
+		<!-- <div>
 			<input
 				type="checkbox"
 				id="checkbox"
@@ -469,8 +502,6 @@
 							cy="29.5"
 							r="1.5"
 						/>
-=======
->>>>>>> 7331a4f0af30a4a02d00cde76e59c55f9daa1282
 
 			<div class="flex h-auto px-4 pb-16">
 				<div class="w-1/2 bg-white p-2 rounded">
@@ -501,7 +532,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div v-else class="animate-fade-in-down">
 			<div class="text-center w-auto bg-white p-10 de">
 				<h2 class="text-6xl font-bold text-red-500 py-16 delay-1000">
@@ -555,7 +586,7 @@ export default {
 		//           'Content-Type': "multipart/form-data"
 		//       }
 		//   })
-		console.log("it is currentFood", this.currentFood.deleted_at);
+		console.log("it is currentFood", this.currentFood);
 
 		this.commentList = this.currentFood.comments;
 		//   this.food = res
@@ -666,12 +697,14 @@ export default {
 		},
 		
 		async postComment (user_id, food_recipe_id, comment){
-			if(this.currentUser.name !== undefined)
+			if(this.currentUser.user.name !== undefined)
 			{
 				let res = await FoodRecipeService.addComment(user_id, food_recipe_id, comment,)
 				swal("Your comment has been post!", {
 					icon: "success",
 				});
+				this.fetchComments(this.id)
+				this.commentForm.comment = "";
 			}
 			else {
 				swal("Please Login", {
@@ -696,6 +729,7 @@ export default {
 							swal("Your comment has been deleted!", {
 								icon: "success",
 							});
+							this.fetchComments(this.id)
 
 						} else {
 							this.$swal("Cannot Remove Comment.", "error");

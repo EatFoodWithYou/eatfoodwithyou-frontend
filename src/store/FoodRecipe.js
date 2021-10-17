@@ -100,6 +100,10 @@ export default new Vuex.Store({
 			commit("fetchAllComment", res);
 			return res;
 		},
+
+		// async postComment({ commit }, {user_id, food_recipe_id, comment}){
+			
+		// },
 	},
 
 	modules: {},
