@@ -340,24 +340,25 @@
 								"
 								@click="editComment(index, comment.isComment)"
 							>
-								Edit
+								EDIT
 							</button>
 							<button
 								class="
 									text-base
 									px-2
-									text-red-400
-									hover:text-red-700
+									text-red-300
+									hover:text-red-500
 									duration-200
 								"
 								v-if="
 									(comment.user_id === currentUser.user.id &&
-									!test(index) || currentUser.user.role === 'ADMIN' ) 
-							"
-							@click="removeComment(comment.id)"
-						>
-							DELETE
-						</button>
+										!test(index)) ||
+									currentUser.user.role === 'ADMIN'
+								"
+								@click="removeComment(comment.id)"
+							>
+								DELETE
+							</button>
 						</span>
 					</div>
 					<div>
@@ -448,7 +449,11 @@
 									hover:bg-gray-700
 								"
 								@click="
-								postComment( currentUser.user.id, currentFood.id, commentForm.comment)
+									postComment(
+										currentUser.user.id,
+										currentFood.id,
+										commentForm.comment
+									)
 								"
 							>
 								Post
@@ -458,7 +463,6 @@
 				</div>
 			</div>
 		</div>
-		
 
 		<!-- <div class="comment">
 			Comment
@@ -561,10 +565,9 @@ export default {
 				user_id: 0,
 				food_recipe_id: 0,
 			},
-			commentForm:{
-				id:"",
+			commentForm: {
+				id: "",
 				comment: "",
-				
 			},
 			textCancel: "",
 			commentList: "",
@@ -698,48 +701,46 @@ export default {
 			// }
 			// return true
 		},
-		
-		async postComment (user_id, food_recipe_id, comment){
-			if(this.currentUser.user.name !== undefined)
-			{
-				let res = await FoodRecipeService.addComment(user_id, food_recipe_id, comment,)
+
+		async postComment(user_id, food_recipe_id, comment) {
+			if (this.currentUser.user.name !== undefined) {
+				let res = await FoodRecipeService.addComment(
+					user_id,
+					food_recipe_id,
+					comment
+				);
 				swal("Your comment has been post!", {
 					icon: "success",
 				});
-				this.fetchComments(this.id)
+				this.fetchComments(this.id);
 				this.commentForm.comment = "";
-			}
-			else {
+			} else {
 				swal("Please Login", {
 					icon: "error",
 				});
 			}
-			
-
 		},
 
 		async removeComment(index) {
 			swal({
-					title: "Are you sure?",
-					text: "Once deleted, you will not be able to recover this comment",
-					icon: "warning",
-					dangerMode: true,
-					buttons: true,
-				}).then(async (willDelete) => {
-					if (willDelete) {
-						let res = await FoodRecipeService.deleteComment(index);
-						if (res.success) {
-							swal("Your comment has been deleted!", {
-								icon: "success",
-							});
-							this.fetchComments(this.id)
-
-						} else {
-							this.$swal("Cannot Remove Comment.", "error");
-						}
+				title: "Are you sure?",
+				text: "Once deleted, you will not be able to recover this comment",
+				icon: "warning",
+				dangerMode: true,
+				buttons: true,
+			}).then(async (willDelete) => {
+				if (willDelete) {
+					let res = await FoodRecipeService.deleteComment(index);
+					if (res.success) {
+						swal("Your comment has been deleted!", {
+							icon: "success",
+						});
+						this.fetchComments(this.id);
+					} else {
+						this.$swal("Cannot Remove Comment.", "error");
 					}
-				});
-			
+				}
+			});
 		},
 	},
 };
