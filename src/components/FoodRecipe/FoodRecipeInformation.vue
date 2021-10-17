@@ -351,8 +351,8 @@
 									duration-200
 								"
 								v-if="
-									comment.user_id === currentUser.user.id &&
-									!test(index)
+									(comment.user_id === currentUser.user.id &&
+									!test(index) || currentUser.user.role === 'ADMIN' ) 
 							"
 							@click="removeComment(comment.id)"
 						>
@@ -654,6 +654,9 @@ export default {
 		},
 		isAuthen() {
 			return AuthUserStore.getters.isAuthen;
+		},
+		isAdmin() {
+			return AuthUserStore.getters.isAdmin;
 		},
 
 		editComment(index, comment) {

@@ -158,7 +158,10 @@ export default {
 					// console.log(this.currentUser);
 					// ShopStore.dispatch('setCurrentUser',this.currentUser)
 					this.$router.push("/");
-				} else if (!res.success && res.status === 401){
+				}else if (!res.success && res.status === 200){
+					this.$swal("Login Failed", res.message, "error");
+				} 
+				else if (!res.success && res.status === 401){
 					this.$swal("Login Failed", res.message, "error");
 				}
 				else if (!res.success && res.status === 422){

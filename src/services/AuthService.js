@@ -58,6 +58,7 @@ export default {
 						success: false,
 						user: "",
 						jwt: "",
+						status: 200 ,
 						message: "YOU ACCOUNT BANNED!!!",
 					};
 				}
