@@ -53,7 +53,18 @@
 										mb-2
 									"
 								>
-									Password
+									Password 
+								</label>
+								<label
+									class="
+										block
+										uppercase
+										tracking-wide
+										text-gray-800 text-sm
+										mb-2
+									"
+								>
+									password must be at least 6 characters.
 								</label>
 								<div class="relative">
 									<input

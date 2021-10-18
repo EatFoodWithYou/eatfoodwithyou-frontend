@@ -71,6 +71,7 @@
 										ref="recipePhoto"
 										id="recipePhoto"
 										@change="selectedRecipePhoto()"
+										accept="image/*"
 									/>
 								</div>
 							</div>
@@ -283,6 +284,7 @@
 										ref="photo"
 										id="processPhoto"
 										@change="selectedFileProcess(k)"
+										accept="image/*"
 									/>
 								</div>
 							</div>
