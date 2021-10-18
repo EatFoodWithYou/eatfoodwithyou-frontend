@@ -115,7 +115,7 @@
 								duration-200
 							"
 						>
-							{{ currentUser.user.name }}
+							{{ currentUserWithFoodRecipe.name }}
 						</span>
 						<button
 							@click="info(), (isOpen = !isOpen)"
@@ -167,11 +167,9 @@ export default {
 	},
 	methods: {
 		async fetchCurrentUser() {
-			this.currentUser = JSON.parse(
-				JSON.stringify(AuthUser.getters.getCurrentUser)
-			);
-			console.log("CurrentUser", this.currentUser);
-			console.log("_______________");
+			// this.currentUser = AuthUser.getters.getCurrentUser;
+			// console.log("CurrentUser", this.currentUser);
+			// console.log("_______________");
 			let res = await AuthService.fetchRecipes();
 			this.currentUserWithFoodRecipe = res.data;
 			console.log(this.currentUserWithFoodRecipe);

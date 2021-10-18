@@ -5,7 +5,7 @@
 		</h2>
 		<div class="flex flex-wrap w-full">
 			<div
-				class="pl-6"
+				class="pl-6 pb-6"
 				v-for="(recipe, index) in recipes.data"
 				:key="index"
 			>

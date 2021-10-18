@@ -186,6 +186,9 @@
 						</svg>
 					</label>
 				</div>
+				<div>
+					{{ this.currentFood.total_like }}
+				</div>
 			</div>
 
 			<div class="head" :class="isAuthen() ? '-mt-10' : '-mt-2'">

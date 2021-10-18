@@ -47,7 +47,7 @@ export default new Vuex.Store({
 
 		setUser(state, body) {
 			console.log(state.currentUser);
-			(state.currentUser.user = body.user), console.log(3);
+			(state.currentUser.user = body), console.log(3);
 			console.log(state.currentUser);
 		},
 

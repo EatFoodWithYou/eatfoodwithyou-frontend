@@ -37,6 +37,7 @@
 									type="text"
 									v-model="foodRecipeForm.name"
 									placeholder="Name"
+									minlength="3"
 								/>
 								<div class="w-full mt-6">
 									<textarea
@@ -57,6 +58,7 @@
 										placeholder="Detail"
 										rows="4"
 										v-model="foodRecipeForm.detail"
+										minlength="5"
 									/>
 								</div>
 								<div class="mt-5">
@@ -66,6 +68,7 @@
 										ref="recipePhoto"
 										id="recipePhoto"
 										@change="selectedRecipePhoto()"
+										accept="image/*"
 									/>
 								</div>
 							</div>
@@ -115,6 +118,7 @@
 									type="text"
 									v-model="input.name"
 									placeholder="Ingredient"
+									minlength="3"
 								/>
 								<input
 									class="
@@ -268,6 +272,7 @@
 										ref="photo"
 										id="processPhoto"
 										@change="selectedFileProcess(k)"
+										accept="image/*"
 									/>
 								</div>
 							</div>

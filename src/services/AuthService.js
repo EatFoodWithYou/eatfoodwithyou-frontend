@@ -126,6 +126,7 @@ export default {
 			console.log("it it it res" , res);
 		
 			localStorage.setItem(auth_key, JSON.stringify(res));
+			this.setUser();
 			return {
 				success: true,
 				user: res.data.user,
