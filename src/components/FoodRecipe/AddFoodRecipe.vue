@@ -61,7 +61,7 @@
 								</div>
 								<div class="mt-5">
 									<input
-										class="cursor-pointer"
+										class="cursor-pointer text-white"
 										type="file"
 										ref="recipePhoto"
 										id="recipePhoto"
