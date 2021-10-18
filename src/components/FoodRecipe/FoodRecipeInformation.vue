@@ -592,7 +592,7 @@ import AuthUserStore from "@/store/AuthUser";
 import FoodRecipeService from "../../services/FoodRecipe";
 import Label from '../../../../laravel101/vendor/laravel/breeze/stubs/inertia-vue/resources/js/Components/Label.vue';
 export default {
-  components: { Label },
+    components: { Label },
 	data() {
 		return {
 			id: "",
