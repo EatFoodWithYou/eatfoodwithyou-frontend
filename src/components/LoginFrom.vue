@@ -145,7 +145,7 @@ export default {
 			//  console.log("it is loginform" ,this.loginFrom);
 			if (this.loginFrom.email !== "" && this.loginFrom.password !== "") {
 				let res = await AuthUser.dispatch("login", this.loginFrom);
-				console.log("it res" , res);
+				console.log("it res", res);
 				if (res.success && res.status === 200) {
 					this.$swal(
 						"Login Success",
@@ -158,14 +158,16 @@ export default {
 					// console.log(this.currentUser);
 					// ShopStore.dispatch('setCurrentUser',this.currentUser)
 					this.$router.push("/");
-				}else if (!res.success && res.status === 200){
+				} else if (!res.success && res.status === 200) {
 					this.$swal("Login Failed", res.message, "error");
-				} 
-				else if (!res.success && res.status === 401){
+				} else if (!res.success && res.status === 401) {
 					this.$swal("Login Failed", res.message, "error");
-				}
-				else if (!res.success && res.status === 422){
-					this.$swal("Login Failed", res.message1 + "\n and " + res.message2 , "error");
+				} else if (!res.success && res.status === 422) {
+					this.$swal(
+						"Login Failed",
+						res.message1 + "\n and " + res.message2,
+						"error"
+					);
 				}
 			} else {
 				this.$swal(
