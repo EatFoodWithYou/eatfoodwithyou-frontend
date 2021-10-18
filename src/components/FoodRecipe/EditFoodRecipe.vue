@@ -507,6 +507,8 @@ export default {
 			return this.$router.push("/login");
 		}
 		this.getCurrentUser();
+		console.log('-----');
+		console.log(this.currentUser);
 		const res = await FoodRecipeService.fetchRecipeById(
 			this.$route.params.id
 		);
@@ -516,6 +518,15 @@ export default {
 		// console.log("recipeForm", this.foodRecipeForm);
 		this.ingredientForm = res.data.ingredients;
 		this.cookingProcessForm = res.data.cooking_processes;
+		console.log(this.checkCurrentUserFoodRecipe());
+		if(!this.checkCurrentUserFoodRecipe()){
+			this.$swal(
+				"You dont have permission to edit this food recipe",
+				"",
+				"error"
+			);
+			this.$router.push('/');
+		}
 	},
 	methods: {
 		isAuthen() {
@@ -801,6 +812,15 @@ export default {
 		clearSelectedCategories() {
 			this.foodRecipeForm.category_names = "";
 		},
+		checkCurrentUserFoodRecipe(){
+			// console.log(this.currentUser.user.id);
+			// console.log(this.foodRecipeForm.user_id);
+			if(this.currentUser.user.id === this.foodRecipeForm.user_id)
+			{
+				return true
+			}
+			return false	
+		}
 	},
 };
 </script>

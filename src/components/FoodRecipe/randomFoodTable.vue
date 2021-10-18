@@ -56,7 +56,7 @@
 							v-else
 							src="https://via.placeholder.com/300x225"
 							alt=""
-							class="rounded-t-lg"
+							class="rounded-t-lg "
 						/>
 						<div class="p-6">
 							<h2 class="font-semibold mb-2 text-lg text-black">
