@@ -4,7 +4,7 @@
 			<div class="absolute px-14 text-black bg-white">
 				<nav class="flex flex-col w-full min-h-full pb-8 bg-[#0C0B10]">
 					<div class="text-xl font-semibold mt-6 pb-4">
-						Food Category
+						Food Categories
 					</div>
 					<div v-for="(category, index) in categoryList" :key="index">
 						<input

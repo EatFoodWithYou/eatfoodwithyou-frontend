@@ -36,8 +36,11 @@
 										leading-tight
 										focus:outline-none focus:bg-white
 									"
+									pattern=".{3,}"   
+									required title="3 characters minimum"
 									type="text"
 									v-model="form.name"
+									
 								/>
 							</div>
 							<div class="w-full md:w-2/4 px-3 md:mb-0">
@@ -210,8 +213,10 @@ export default {
 				console.log(2);
 				console.log(res.data);
 				AuthUser.dispatch("setUser", res.data);
+				console.log(AuthUser.getters.getCurrentUser);
 				this.$swal("Edit Success", " ", "success");
 				this.$router.push("/user-information");
+				this.$router.go()
 			} else {
 				this.$swal("Edit Failed", "Fill up this form!", "error");
 			}

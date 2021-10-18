@@ -141,7 +141,7 @@
 											"
 											@click="goToRecipe(food.id)"
 										>
-											{{ index + 1 }}
+											{{ food.id }}
 										</td>
 										<td
 											class="
