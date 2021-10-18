@@ -300,10 +300,25 @@
 								"
 								v-if="process.photo !== null"
 							>
-								<img
+								<!-- <img
 									class="h-48 w-full object-cover md:w-48"
 									v-bind:src="`http://localhost:8000/storage/cookingProcess/${process.photo}`"
-								/>
+								/> -->
+								<div class="px-3 md:mb-0 object-contain">
+									<img
+										v-if="process.photo !== null"
+										v-bind:src="process.photo_url"
+										ref="foodRecipeRef"
+										width="250"
+										height="250"
+									/><img
+										v-else
+										src="https://via.placeholder.com/250x250"
+										ref="foodRecipeRef"
+										width="250"
+										height="250"
+									/>
+								</div>
 							</td>
 							<td
 								class="
