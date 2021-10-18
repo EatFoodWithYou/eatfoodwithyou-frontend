@@ -218,10 +218,10 @@
 						By : {{ this.currentFood.user_name }}
 					</h2>
 				</div>
-				<div class="flex justify-center mt-2">
-					<h2 class="text-xl text-navbarColor">
+				<div class="flex justify-center mt-2 text-center">
+					<label class="text-xl text-navbarColor w-5/12">
 						{{ this.currentFood.detail }}
-					</h2>
+					</label>
 				</div>
 				<div class="flex justify-center mt-2">
 					<h2 class="text-xl text-navbarColor">
@@ -590,7 +590,9 @@
 import FoodRecipeStore from "@/store/FoodRecipe";
 import AuthUserStore from "@/store/AuthUser";
 import FoodRecipeService from "../../services/FoodRecipe";
+import Label from '../../../../laravel101/vendor/laravel/breeze/stubs/inertia-vue/resources/js/Components/Label.vue';
 export default {
+  components: { Label },
 	data() {
 		return {
 			id: "",
