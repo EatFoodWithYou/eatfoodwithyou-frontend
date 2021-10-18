@@ -8,7 +8,7 @@
 					</h2>
 				</div>
 				<div class="flex justify-center">
-					<div class="w-full max-w-6xl text-center pb-16">
+					<div class="w-full max-w-6xl pb-16">
 						<div class="block w-full overflow-x-hidden">
 							<table
 								class="
@@ -19,6 +19,7 @@
 									border-collapse
 									cursor
 									bg-white
+									table-fixed
 								"
 							>
 								<thead>
@@ -38,6 +39,7 @@
 												whitespace-nowrap
 												font-medium
 												text-center
+												w-1/12
 											"
 										>
 											No.
@@ -57,6 +59,7 @@
 												whitespace-nowrap
 												font-medium
 												text-center
+												w-2/12
 											"
 										>
 											Name
@@ -76,6 +79,7 @@
 												whitespace-nowrap
 												font-medium
 												text-center
+												w-2/12
 											"
 										>
 											Photo
@@ -96,6 +100,7 @@
 												whitespace-nowrap
 												font-medium
 												text-center
+												w-6/12
 											"
 										>
 											Detail
@@ -145,6 +150,7 @@
 										</td>
 										<td
 											class="
+												text-center
 												px-6
 												border-l-0 border-r-2
 												text-base
@@ -158,7 +164,6 @@
 											class="
 												flex
 												justify-center
-												border-l-0 border-r-2
 												text-base
 												whitespace-nowrap
 												py-3
@@ -169,16 +174,16 @@
 											<img
 												v-bind:src="food.photo_url"
 												alt=""
-												height="50px"
-												width="100px"
+												height="150px"
+												width="150px"
 											/>
 										</td>
 										<td
 											class="
 												px-6
-												border-l-0 border-r-2
+												border-l-2
 												text-base
-												whitespace-nowrap
+												py-2
 											"
 											@click="goToRecipe(food.id)"
 										>
@@ -186,18 +191,19 @@
 										</td>
 										<td
 											class="
-												px-14
-												border-l-0 border-r-2
+												border-l-2
 												text-base
 												whitespace-nowrap
 											"
 										>
 											<div
 												class="
+													flex
+													justify-center
 													cursor-pointer
-													text-red-300
-													hover:text-red-600
-													duration-200
+													text-red-500
+													hover:text-red-400
+													duration-100
 												"
 												@click="
 													deleteRecipe(
@@ -206,7 +212,20 @@
 													)
 												"
 											>
-												Delete
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="h-6 w-6"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke="currentColor"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														stroke-width="2"
+														d="M6 18L18 6M6 6l12 12"
+													/>
+												</svg>
 											</div>
 										</td>
 									</tr>
