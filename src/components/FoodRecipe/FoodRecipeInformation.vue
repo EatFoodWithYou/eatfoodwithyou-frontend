@@ -186,7 +186,7 @@
 						</svg>
 					</label>
 				</div>
-				<div>
+				<div class="mt-4">
 					{{ this.currentFood.total_like }}
 				</div>
 			</div>
@@ -252,88 +252,109 @@
 			</div>
 
 			<div class="cookingProcess flex justify-center">
-				<h1 class="text-3xl font-bold text-navbarColor mt-4 py-2">
+				<h1 class="text-3xl font-bold text-navbarColor mt-4 pt-2 pb-6">
 					Process
 				</h1>
 			</div>
-			<div class="flex justify-center w-full overflow-x-auto">
-				<table
-					class="
-						mt-3
-						bg-transparent
-						w-5/12
-						border-collapse
-						cursor
-						bg-white
-					"
-				>
-					<tbody
-						v-for="(
-							process, index
-						) in currentFood.cooking_processes"
-						:key="index"
-						class="border-b"
-					>
-						<tr>
-							<td
-								class="
-									text-center
-									px-6
-									align-middle
-									border-l-0 border-r-2
-									text-base
-									whitespace-nowrap
-									p-4
-								"
-							>
-								{{ index + 1 }}
-							</td>
-
-							<td
-								class="
-									flex
-									justify-center
-									border-l-0 border-r-2
-									text-base
-									whitespace-nowrap
-									py-3
-								"
-								v-if="process.photo !== null"
-							>
-								<!-- <img
-									class="h-48 w-full object-cover md:w-48"
-									v-bind:src="`http://localhost:8000/storage/cookingProcess/${process.photo}`"
-								/> -->
-								<div class="px-3 md:mb-0 object-contain">
-									<img
-										v-if="process.photo !== null"
-										v-bind:src="process.photo_url"
-										ref="foodRecipeRef"
-										width="250"
-										height="250"
-									/><img
-										v-else
-										src="https://via.placeholder.com/250x250"
-										ref="foodRecipeRef"
-										width="250"
-										height="250"
-									/>
-								</div>
-							</td>
-							<td
-								class="
-									px-6
-									border-l-0 border-r-2
-									text-base
-									whitespace-nowrap
-								"
-							>
-								{{ process.process }}
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			<div
+				class="flex flex-wrap -mx-3 mb-5 justify-center"
+				v-for="(process, index) in currentFood.cooking_processes"
+				:key="index"
+			>
+				<label
+					for="number"
+					class="font-normal text-xl text-gray-800 py-1"
+					>{{ index + 1 }}
+				</label>
+				<div class="px-3 md:mb-0 ml-5 bg-cover">
+					<img
+						v-if="process.photo"
+						v-bind:src="process.photo_url"
+						ref="processRef"
+						width="150"
+						height="150"
+					/>
+					<img
+						v-else
+						src="https://via.placeholder.com/150x150"
+						ref="processRef"
+						width="150"
+						height="150"
+					/>
+				</div>
+				<div class="w-3/12 px-3 md:mb-0 bg-white">
+					<div class="w-full">
+						<label
+							class="
+								appearance-none
+								block
+								w-full
+								text-gray-700 text-xl
+								rounded
+								pt-3
+								px-4
+								mb-3
+								leading-tight
+							"
+							placeholder="Process"
+							rows="3"
+							>{{ process.process }}</label
+						>
+					</div>
+				</div>
 			</div>
+			<!-- <div class="flex justify-center w-full overflow-x-auto">
+				<div
+					class="flex flex-wrap -mx-3 mb-5 ml-40"
+					v-for="(process, index) in currentFood.cooking_processes"
+					:key="index"
+				>
+					<label
+						for="number"
+						class="absolute font-normal text-2xl text-gray-800 py-1"
+						>{{ index + 1 }}
+					</label>
+					<div class="px-3 md:mb-0 ml-5 bg-cover">
+						<img
+							v-if="process.photo"
+							v-bind:src="process.photo_url"
+							ref="processRef"
+							width="150"
+							height="150"
+						/>
+						<img
+							v-else
+							src="https://via.placeholder.com/150x150"
+							ref="processRef"
+							width="150"
+							height="150"
+						/>
+					</div>
+					<div class="w-6/12 px-3 md:mb-0">
+						<div class="w-full">
+							<textarea
+								class="
+									appearance-none
+									block
+									w-full
+									bg-white
+									text-gray-700 text-xl
+									border
+									rounded
+									py-3
+									px-4
+									mb-3
+									leading-tight
+									focus:outline-none focus:bg-white
+								"
+								placeholder="Process"
+								rows="3"
+								v-model="process.process"
+							/>
+						</div>
+					</div>
+				</div>
+			</div> -->
 			<div class="mt-10 text-2xl font-medium text-navbarColor p-4">
 				<div class="pb-2 flex">Comment</div>
 				<div
