@@ -297,12 +297,16 @@
 									text-base
 									whitespace-nowrap
 									py-3
+									bg-cover
 								"
 								v-if="process.photo !== null"
 							>
 								<img
-									class="h-48 w-full object-cover md:w-48"
+									class="h-48 w-full md:w-48"
 									v-bind:src="`http://localhost:8000/storage/cookingProcess/${process.photo}`"
+									width="250"
+									height="250"
+
 								/>
 							</td>
 							<td
