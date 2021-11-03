@@ -3,7 +3,7 @@
 		<div class="font-prompt">
 			<div class="mt-48">
 				<div class="text-center py-4 text-gray-800">
-					<h2 class="text-7xl">Log in</h2>
+					<h2 class="text-7xl" data-testid="title">Log in</h2>
 				</div>
 				<div class="flex justify-center">
 					<form
@@ -11,6 +11,7 @@
 						@submit.prevent="
 							login(loginFrom.email, loginFrom.password)
 						"
+						id="login"
 					>
 						<div class="flex flex-wrap -mx-3 mb-5 mt-4">
 							<div class="w-full md:w-full px-3 md:mb-0">
@@ -44,6 +45,7 @@
 										type="text"
 										v-model="loginFrom.email"
 										placeholder="Email"
+										id="email"
 									/>
 								</div>
 							</div>
@@ -77,6 +79,7 @@
 										type="password"
 										v-model="loginFrom.password"
 										placeholder="Password"
+										id="password"
 									/>
 								</div>
 							</div>
@@ -116,6 +119,7 @@
 									transition
 									duration-250
 								"
+								id="submit"
 							>
 								Log in
 							</button>

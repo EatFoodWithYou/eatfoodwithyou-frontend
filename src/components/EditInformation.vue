@@ -36,11 +36,12 @@
 										leading-tight
 										focus:outline-none focus:bg-white
 									"
-									pattern=".{3,}"   
-									required title="3 characters minimum"
+									pattern=".{3,}"
+									required
+									title="3 characters minimum"
 									type="text"
 									v-model="form.name"
-									
+									id="name"
 								/>
 							</div>
 							<div class="w-full md:w-2/4 px-3 md:mb-0">
@@ -73,6 +74,7 @@
 									"
 									type="number"
 									v-model="form.age"
+									id="age"
 								/>
 							</div>
 
@@ -166,6 +168,7 @@
 							transition
 							duration-250
 						"
+						id="submit"
 					>
 						Submit
 					</button>
@@ -216,7 +219,7 @@ export default {
 				console.log(AuthUser.getters.getCurrentUser);
 				this.$swal("Edit Success", " ", "success");
 				this.$router.push("/user-information");
-				this.$router.go()
+				this.$router.go();
 			} else {
 				this.$swal("Edit Failed", "Fill up this form!", "error");
 			}

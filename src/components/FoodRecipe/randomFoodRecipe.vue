@@ -20,6 +20,7 @@
 							'url(' + this.foodRecipe.photo_url + ')',
 					}"
 					title="foodPic"
+					id="recomendFood"
 				></div>
 				<div
 					class="

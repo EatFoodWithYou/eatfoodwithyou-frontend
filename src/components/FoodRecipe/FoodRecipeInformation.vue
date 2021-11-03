@@ -3,7 +3,7 @@
 		<div v-if="this.currentFood.deleted_at === null">
 			<div class="flex justify-end text-xl font-medium text-gray-800 p-4">
 				<!-- Food Recipe ID : {{ this.id }} -->
-				<div v-show="isAuthen()">
+				<div v-show="isAuthen()" id="likeDiv">
 					<input
 						type="checkbox"
 						id="checkbox"
@@ -355,7 +355,10 @@
 					</div>
 				</div>
 			</div> -->
-			<div class="mt-10 text-2xl font-medium text-navbarColor p-4">
+			<div
+				class="mt-10 text-2xl font-medium text-navbarColor p-4"
+				id="commend"
+			>
 				<div class="pb-2 flex">Comment</div>
 				<div
 					v-for="(comment, index) in allComment"
@@ -378,6 +381,7 @@
 									!test(index)
 								"
 								@click="editComment(index, comment.isComment)"
+								id="editCommend"
 							>
 								EDIT
 							</button>
@@ -395,6 +399,7 @@
 									currentUser.user.role === 'ADMIN'
 								"
 								@click="removeComment(comment.id)"
+								id="deleteCommend"
 							>
 								DELETE
 							</button>
@@ -405,6 +410,7 @@
 							<div
 								v-if="!test(index)"
 								class="flex font-normal py-2"
+								id="commendText"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -428,6 +434,7 @@
 									type="text"
 									placeholder=""
 									v-model="textCancel"
+									id="editCommendInput"
 								/>
 								<div>
 									<button
@@ -444,6 +451,7 @@
 												index
 											)
 										"
+										id="ConfrimEditCommend"
 									>
 										Confirm
 									</button>
@@ -472,6 +480,7 @@
 							class="border p-2 rounded w-full"
 							placeholder="Write a comment..."
 							v-model="commentForm.comment"
+							id="commendTextarea"
 						></textarea>
 					</div>
 
@@ -494,6 +503,7 @@
 										commentForm.comment
 									)
 								"
+								id="post"
 							>
 								Post
 							</button>
@@ -591,7 +601,7 @@ import FoodRecipeStore from "@/store/FoodRecipe";
 import AuthUserStore from "@/store/AuthUser";
 import FoodRecipeService from "../../services/FoodRecipe";
 export default {
-  components: {},
+	components: {},
 	data() {
 		return {
 			id: "",

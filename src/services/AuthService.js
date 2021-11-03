@@ -31,7 +31,7 @@ export default {
 	getJwt() {
 		return jwt;
 	},
-	setUser(){
+	setUser() {
 		auth = JSON.parse(localStorage.getItem(auth_key));
 		user = auth ? auth.data.user : "";
 		jwt = auth ? auth.data.access_token : "";
@@ -57,14 +57,14 @@ export default {
 						success: true,
 						user: res.data.user,
 						jwt: res.data.access_token,
-						status: 200
+						status: 200,
 					};
 				} else if (res.data.user.status === "BANNED") {
 					return {
 						success: false,
 						user: "",
 						jwt: "",
-						status: 200 ,
+						status: 200,
 						message: "YOU ACCOUNT BANNED!!!",
 					};
 				}
@@ -74,7 +74,7 @@ export default {
 		} catch (e) {
 			// console.log("sad");
 			console.error(e);
-			// console.log(e.response.status);
+			console.log(e.response.status);
 			if (e.response.status === 401) {
 				console.log("sohard");
 				console.log(e.response.data);
@@ -82,7 +82,7 @@ export default {
 				return {
 					success: false,
 					message: e.response.data.error,
-					status: 401
+					status: 401,
 				};
 			} else if (e.response.status === 422) {
 				console.log("sohard");
@@ -90,9 +90,9 @@ export default {
 				console.log("sohard");
 				return {
 					success: false,
-					message1: "The email must be a valid email address" ,
+					message1: "The email must be a valid email address",
 					message2: "The password must be at least 6 characters.",
-					status: 422
+					status: 422,
 				};
 			}
 			// throw e
@@ -109,9 +109,8 @@ export default {
 		age,
 	}) {
 		try {
-			
 			let url = `${api_endpoint}/api/auth/register`;
-			
+
 			let body = {
 				email: email,
 				password: password,
@@ -123,18 +122,15 @@ export default {
 
 			let res = await Axios.post(url, body);
 			console.log("hard");
-			console.log("it it it res" , res);
-		
+			console.log("it it it res", res);
+
 			localStorage.setItem(auth_key, JSON.stringify(res));
 			this.setUser();
 			return {
 				success: true,
 				user: res.data.user,
 				jwt: res.data.access_token,
-				
 			};
-				
-			
 		} catch (e) {
 			console.log("error");
 			console.error(e);
@@ -143,7 +139,7 @@ export default {
 				// console.log(e.response.data.message[0].messages[0].message);
 				return {
 					success: false,
-					message: e.response.data
+					message: e.response.data,
 				};
 			} else {
 				return;
