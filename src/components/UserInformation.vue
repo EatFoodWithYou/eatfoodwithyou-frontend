@@ -19,6 +19,7 @@
 								transition
 								duration-250
 							"
+							id="editInfor"
 						>
 							<font-awesome-icon :icon="['fas', 'edit']" />
 							แก้ไขข้อมูล
@@ -237,6 +238,7 @@
 													p-4
 												"
 												@click="goToRecipe(food.id)"
+												id="foodName"
 											>
 												{{ food.name }}
 											</td>
@@ -286,6 +288,7 @@
 														hover:text-blue-500
 														duration-200
 													"
+													id="editFood"
 												>
 													Edit
 												</button>
@@ -309,6 +312,7 @@
 														hover:text-red-500
 														duration-200
 													"
+													id="deleteFood"
 												>
 													Delete
 												</button>

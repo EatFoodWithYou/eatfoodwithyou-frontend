@@ -19,6 +19,7 @@
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
+						id="random"
 					>
 						<path
 							stroke-linecap="round"
@@ -29,7 +30,7 @@
 					</svg>
 				</h1>
 			</div>
-			<div class="flex flex-wrap w-full">
+			<div class="flex flex-wrap w-full" id="randomDiv">
 				<div
 					class="pr-5"
 					v-for="(foodRecipe, index) in randomFoodRecipe"
@@ -56,7 +57,7 @@
 							v-else
 							src="https://via.placeholder.com/300x225"
 							alt=""
-							class="rounded-t-lg "
+							class="rounded-t-lg"
 						/>
 						<div class="p-6">
 							<h2 class="font-semibold mb-2 text-lg text-black">

@@ -5,6 +5,7 @@
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
+		"test:unit": "vue-cli-service test:unit",
 		"prepare": "husky install"
 	},
 	"dependencies": {
@@ -22,11 +23,16 @@
 		"vuex": "^3.4.0"
 	},
 	"devDependencies": {
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/vue": "^5.8.2",
 		"@vue/cli-plugin-babel": "~4.5.0",
 		"@vue/cli-plugin-router": "~4.5.0",
+		"@vue/cli-plugin-unit-jest": "^4.5.15",
 		"@vue/cli-plugin-vuex": "~4.5.0",
 		"@vue/cli-service": "~4.5.0",
+		"@vue/test-utils": "^1.0.3",
 		"autoprefixer": "^9.8.7",
+		"cypress": "^8.7.0",
 		"husky": "^7.0.2",
 		"lint-staged": "^11.2.3",
 		"node-sass": "^4.12.0",

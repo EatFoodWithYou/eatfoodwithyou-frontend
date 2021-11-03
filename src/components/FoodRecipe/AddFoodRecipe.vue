@@ -38,6 +38,7 @@
 									v-model="foodRecipeForm.name"
 									placeholder="Name"
 									minlength="3"
+									id="Name"
 								/>
 								<div class="w-full mt-6">
 									<textarea
@@ -59,6 +60,7 @@
 										rows="4"
 										v-model="foodRecipeForm.detail"
 										minlength="5"
+										id="detail"
 									/>
 								</div>
 								<div class="mt-5">
@@ -119,6 +121,7 @@
 									v-model="input.name"
 									placeholder="Ingredient"
 									minlength="3"
+									id="ingredientName"
 								/>
 								<input
 									class="
@@ -138,6 +141,7 @@
 									type="number"
 									v-model="input.quantity"
 									placeholder="Quantity"
+									id="ingredientQuantity"
 								/>
 								<input
 									class="
@@ -157,12 +161,14 @@
 									type="text"
 									v-model="input.unit"
 									placeholder="Unit"
+									id="ingredientUnit"
 								/>
 								<button
 									@click="removeIngredient(k)"
 									v-show="
 										k || (!k && allIngredient.length > 1)
 									"
+									id="removeIngredient"
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -191,6 +197,7 @@
 							<button
 								@click="addIngredient()"
 								class="text-xl font-semibold text-navbarColor"
+								id="addIngredient"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -263,6 +270,7 @@
 										placeholder="Process"
 										rows="3"
 										v-model="input.process"
+										id="process"
 									/>
 								</div>
 								<div class="mt-5">
@@ -281,6 +289,7 @@
 								v-show="
 									k || (!k && allCookingProcess.length > 1)
 								"
+								id="removeProcess"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -302,6 +311,7 @@
 							<button
 								@click="addProcess()"
 								class="text-xl font-semibold text-navbarColor"
+								id="addProcess"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -352,6 +362,7 @@
 											focus:border-gray-500
 										"
 										v-model="selectedCategory"
+										id="category"
 									>
 										<option
 											v-for="(item, k) in allCategory"
@@ -392,6 +403,7 @@
 									hover:text-blue-400
 									duration-200
 								"
+								id="categorySelect"
 							>
 								Select
 							</button>
@@ -429,6 +441,7 @@
 							transition
 							duration-250
 						"
+						id="addRecipe"
 					>
 						Add
 					</button>
