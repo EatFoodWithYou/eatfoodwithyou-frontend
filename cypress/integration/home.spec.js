@@ -4,7 +4,7 @@ describe("Home", () => {
 	});
 
 	it("Refresh Random foodRecipe", () => {
-		cy.wait(1000);
+		cy.wait(5000);
 		cy.get("#random").click({ force: true });
 	});
 
@@ -15,18 +15,18 @@ describe("Home", () => {
 	});
 
 	it("Search food Recipe by category", () => {
-		cy.wait(1000);
+		cy.wait(5000);
 		cy.get("nav div input").first().check();
 		cy.get("nav button").click();
 	});
 
 	it("Go to Food Recipe Detail from random Recipe list", () => {
-		cy.wait(1000);
+		cy.wait(5000);
 		cy.get("div#randomDiv div").first().click();
 	});
 
 	it("Go to Food Recipe Detail from recommend food", () => {
-		cy.wait(1000);
+		cy.wait(5000);
 		cy.get("div#recomendFood").first().click();
 	});
 });
