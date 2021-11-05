@@ -101,6 +101,7 @@
 									font-semibold
 									hover:text-red-500 hover:underline
 								"
+								id="register"
 							>
 								Sign up
 							</button>

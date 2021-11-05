@@ -40,6 +40,7 @@
 										v-model="registerForm.email"
 										autocomplete="off"
 										placeholder="Email"
+										id="email"
 									/>
 								</div>
 							</div>
@@ -53,7 +54,7 @@
 										mb-2
 									"
 								>
-									Password 
+									Password
 								</label>
 								<label
 									class="
@@ -85,6 +86,7 @@
 										v-model="registerForm.password"
 										autocomplete="off"
 										placeholder="Password"
+										id="password"
 									/>
 								</div>
 							</div>
@@ -119,6 +121,7 @@
 										v-model="confirm_password"
 										autocomplete="off"
 										placeholder="Confirm Password"
+										id="confirmPassword"
 									/>
 								</div>
 							</div>
@@ -154,6 +157,7 @@
 										v-model="registerForm.firstname"
 										autocomplete="off"
 										placeholder="Firstname"
+										id="firstname"
 									/>
 								</div>
 							</div>
@@ -189,6 +193,7 @@
 										v-model="registerForm.lastname"
 										autocomplete="off"
 										placeholder="lastname"
+										id="lastname"
 									/>
 								</div>
 							</div>
@@ -224,6 +229,7 @@
 										v-model="registerForm.age"
 										autocomplete="off"
 										placeholder="Age"
+										id="age"
 									/>
 								</div>
 							</div>
@@ -258,6 +264,7 @@
 											focus:border-gray-500
 										"
 										v-model="registerForm.gender"
+										id="gender"
 									>
 										<option value="MALE">Male</option>
 										<option value="FEMALE">Female</option>
@@ -322,6 +329,7 @@
 									transition
 									duration-250
 								"
+								id="signUp"
 							>
 								Sign up
 							</button>
@@ -357,9 +365,7 @@ export default {
 		async register() {
 			console.log(this.registerForm);
 			if (this.checkNull()) {
-				
-				if(this.registerForm.password.length >= 6)
-				{
+				if (this.registerForm.password.length >= 6) {
 					if (this.registerForm.password === this.confirm_password) {
 						let res = await AuthUser.dispatch(
 							"register",
@@ -375,7 +381,11 @@ export default {
 							);
 							this.$router.push("/");
 						} else {
-							this.$swal("Register Failed", res.message.email[0], "error");
+							this.$swal(
+								"Register Failed",
+								res.message.email[0],
+								"error"
+							);
 						}
 					} else {
 						this.$swal(
@@ -384,16 +394,13 @@ export default {
 							"error"
 						);
 					}
-				}
-				else
-				{
+				} else {
 					this.$swal(
 						"Register Failed",
 						"The password must be at least 6 characters.",
 						"error"
 					);
 				}
-				
 			} else {
 				this.$swal(
 					"Register Failed",

@@ -18,6 +18,7 @@
 			@click="isOpen = !isOpen"
 			tabindex="-1"
 			class="relative z-40 my-1"
+			id="openUserMenu"
 		>
 			<div>
 				<svg
@@ -144,6 +145,7 @@
 								hover:bg-red-500 hover:text-white
 								cursor-pointer
 							"
+							id="logout"
 						>
 							Log out
 						</button>

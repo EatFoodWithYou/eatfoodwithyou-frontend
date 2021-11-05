@@ -13,7 +13,7 @@ describe("Add FoodRecipe with guest", () => {
 describe("foodRecipeDetail with login", () => {
 	beforeEach(() => {
 		cy.visit("http://localhost:8080/login");
-		cy.get("#email").type("user@test.com");
+		cy.get("#email").type("cypressuser@test.com");
 		cy.get("#password").type("12345678");
 		cy.get("#submit").click();
 		cy.get(".swal-title").contains("Login Success");
@@ -60,5 +60,10 @@ describe("foodRecipeDetail with login", () => {
 		cy.get(".swal-title").contains("Add new Food Recipe Success");
 		cy.get(".swal-text").contains("แกงกะหรี่ทงคัตสึ");
 		cy.get(".swal-button-container button").click();
+	});
+
+	after(() => {
+		cy.get("#openUserMenu").click();
+		cy.get("#logout").click();
 	});
 });
