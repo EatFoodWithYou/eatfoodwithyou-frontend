@@ -78,9 +78,11 @@ export default new Vuex.Store({
 
 				let res = await axios.get(url);
 				commit("fetchCurrentRecipe", { res });
+				return 1;
 				// console.log("find", res.data)
 			} catch (e) {
 				console.log(e.message);
+				return 0;
 			}
 		},
 
@@ -102,7 +104,7 @@ export default new Vuex.Store({
 		},
 
 		// async postComment({ commit }, {user_id, food_recipe_id, comment}){
-			
+
 		// },
 	},
 

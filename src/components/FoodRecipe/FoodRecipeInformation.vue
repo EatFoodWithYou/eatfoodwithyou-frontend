@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-if="this.currentFood.deleted_at === null">
+		<div v-if="this.pageFound === 1">
 			<div class="flex justify-end text-xl font-medium text-gray-800 p-4">
 				<!-- Food Recipe ID : {{ this.id }} -->
 				<div v-show="isAuthen()" id="likeDiv">
@@ -545,14 +545,36 @@
 								</svg>
 								{{ comment.isComment }}
 							</div>
+							<div
+								class="flex font-normal py-2 ml-14"
+								v-if="!test(index)"
+							>
+								<p>{{ calTime(comment.created_at) }}</p>
+								<p
+									v-if="
+										comment.created_at !==
+										comment.updated_at
+									"
+									class="ml-4"
+								>
+									(edited {{ calTime(comment.updated_at) }})
+								</p>
+							</div>
 							<div v-if="test(index)">
-								<input
+								<!-- <input
 									class="bg-gray-200 w-4/12 px-4 py-2"
 									type="text"
 									placeholder=""
 									v-model="textCancel"
 									id="editCommendInput"
-								/>
+								/> -->
+								<textarea
+									rows="3"
+									class="border p-2 rounded w-full"
+									placeholder="Write a comment..."
+									v-model="textCancel"
+									id="commendTextarea"
+								></textarea>
 								<div>
 									<button
 										class="
@@ -703,12 +725,13 @@
 				</div>
 			</div>
 		</div> -->
-		<div v-else class="animate-fade-in-down">
-			<div class="text-center w-auto bg-white p-10 de">
+		<div v-if="this.pageFound === 0" class="animate-fade-in-down">
+			<!-- <div class="text-center w-auto bg-white p-10 de">
 				<h2 class="text-6xl font-bold text-red-500 py-16 delay-1000">
 					This Recipe has been Deleted.
 				</h2>
-			</div>
+			</div> -->
+			{{ pushHome() }}
 		</div>
 	</div>
 </template>
@@ -717,6 +740,7 @@
 import FoodRecipeStore from "@/store/FoodRecipe";
 import AuthUserStore from "@/store/AuthUser";
 import FoodRecipeService from "../../services/FoodRecipe";
+import moment from "moment";
 export default {
 	components: {},
 	data() {
@@ -740,6 +764,7 @@ export default {
 			commentList: "",
 			allComment: "",
 			inputServe: 1,
+			pageFound: "",
 		};
 	},
 	async created() {
@@ -767,6 +792,10 @@ export default {
 			let res = await FoodRecipeStore.dispatch("fetchFood", id);
 			const currentFood = FoodRecipeStore.getters.getCurrentFood;
 			this.currentFood = currentFood;
+
+			this.pageFound = res;
+			console.log("this res", this.pageFound);
+
 			// console.log("now", this.currentFood);
 			//  if(this.currentFood.photo_url !== null ){
 			//      let this //localhost:8000/storage/foodRecipe/'
@@ -921,6 +950,14 @@ export default {
 			} else {
 				this.$swal("Sorry", "More than 1 Serving.", "error");
 			}
+		},
+
+		calTime(time) {
+			return moment(time).fromNow();
+		},
+		async pushHome() {
+			await swal("This FoodRecipe doesn't exist", "please try again");
+			this.$router.push("/");
 		},
 	},
 };
