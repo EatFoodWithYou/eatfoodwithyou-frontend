@@ -3,7 +3,7 @@
 		<div v-if="this.currentFood.deleted_at === null">
 			<div class="flex justify-end text-xl font-medium text-gray-800 p-4">
 				<!-- Food Recipe ID : {{ this.id }} -->
-				<div v-show="isAuthen()">
+				<div v-show="isAuthen()" id="likeDiv">
 					<input
 						type="checkbox"
 						id="checkbox"
@@ -230,8 +230,125 @@
 				</div>
 			</div>
 
-			<div>
-				<div class="flex justify-center mt-10">
+			<div class="mt-10">
+				<div class="flex justify-center items-center space-x-2">
+					<label
+						class="font-normal text-lg text-navbarColor ml-40 mb-3"
+						>Per/Serving
+					</label>
+					<input
+						class="
+							w-1/12
+							appearance-none
+							block
+							bg-white
+							text-gray-700 text-lg
+							border
+							rounded
+							py-1
+							px-1
+							mb-3
+							leading-tight
+							text-center
+							focus:outline-none focus:bg-white
+						"
+						v-model="inputServe"
+						type="number"
+						placeholder="Serve"
+						id="ingredientQuantity"
+					/>
+					<button
+						@click="plusPerServing()"
+						class="text-xl font-semibold text-navbarColor"
+					>
+						<svg
+							version="1.1"
+							id="Layer_1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink"
+							x="0px"
+							y="0px"
+							width="36px"
+							height="36px"
+							viewBox="10 5 36 36"
+							enable-background="new 0 0 36 36"
+							xml:space="preserve"
+						>
+							<path
+								fill="#61B3C4"
+								d="M 32, 0
+           							h -28
+         							c -2.25, 0,   -4, 1.75,   -4, 4
+           							v 28
+           							c 0, 2.25,   1.75, 4,   4, 4
+           							h 28
+           							c 2.25, 0,   4, -1.75,   4, -4
+           							v -28
+           							c 0, -2.25,   -1.75, -4,   -4, -4
+           							z"
+							/>
+							<path
+								fill="#FFFFFF"
+								d="M 28, 20
+        						   	h -8
+        						   	v 8
+        						 	h -4
+        						   	v -8
+        						   	h -8
+        						   	v -4
+        						   	h 8
+        						   	v -8
+        						   	h 4
+        						   	v 8
+        						   	h 8
+        						   	v 4
+        						   	z"
+							/>
+						</svg>
+					</button>
+					<button
+						@click="minusPerServing()"
+						class="text-xl font-semibold text-navbarColor"
+					>
+						<svg
+							version="1.1"
+							id="Layer_1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink"
+							x="0px"
+							y="0px"
+							width="50px"
+							height="50px"
+							viewBox="35 5 50 50"
+							enable-background="new 0 0 50 50"
+							xml:space="preserve"
+						>
+							<path
+								fill="#61B3C4"
+								d="M 38.999, 7
+          					   	H 11
+          					   	c -2.25, 0,   -4, 1.75,   -4, 4
+          					   	v 27.999
+          					   	C 7, 41.249,   8.75, 43,   11, 43
+          					   	h 27.999
+          					   	C 41.249, 43,   43, 41.249,   43, 38.999
+          					   	V 11
+          					   	C 43, 8.75,   41.249, 7,   38.999, 7
+          					   	z"
+							/>
+							<path
+								fill="#FFFFFF"
+								d="M 14.999,26.999
+          					   	V 23
+          					   	h 20.002
+          					   	v 3.999
+          					   	H 14.999
+          					   	z"
+							/>
+						</svg>
+					</button>
+				</div>
+				<div class="flex justify-center">
 					<div class="w-1/3 bg-white rounded-lg shadow">
 						<h1 class="text-lg text-black p-3">Ingredients</h1>
 						<ul
@@ -243,7 +360,7 @@
 						>
 							<li class="p-3">
 								{{ ingredient.name }} -
-								{{ ingredient.quantity }}
+								{{ ingredient.quantity * inputServe }}
 								{{ ingredient.unit }}
 							</li>
 						</ul>
@@ -355,7 +472,10 @@
 					</div>
 				</div>
 			</div> -->
-			<div class="mt-10 text-2xl font-medium text-navbarColor p-4">
+			<div
+				class="mt-10 text-2xl font-medium text-navbarColor p-4"
+				id="commend"
+			>
 				<div class="pb-2 flex">Comment</div>
 				<div
 					v-for="(comment, index) in allComment"
@@ -378,6 +498,7 @@
 									!test(index)
 								"
 								@click="editComment(index, comment.isComment)"
+								id="editCommend"
 							>
 								EDIT
 							</button>
@@ -395,6 +516,7 @@
 									currentUser.user.role === 'ADMIN'
 								"
 								@click="removeComment(comment.id)"
+								id="deleteCommend"
 							>
 								DELETE
 							</button>
@@ -405,6 +527,7 @@
 							<div
 								v-if="!test(index)"
 								class="flex font-normal py-2"
+								id="commendText"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -428,6 +551,7 @@
 									type="text"
 									placeholder=""
 									v-model="textCancel"
+									id="editCommendInput"
 								/>
 								<div>
 									<button
@@ -444,6 +568,7 @@
 												index
 											)
 										"
+										id="ConfrimEditCommend"
 									>
 										Confirm
 									</button>
@@ -472,6 +597,7 @@
 							class="border p-2 rounded w-full"
 							placeholder="Write a comment..."
 							v-model="commentForm.comment"
+							id="commendTextarea"
 						></textarea>
 					</div>
 
@@ -494,6 +620,7 @@
 										commentForm.comment
 									)
 								"
+								id="post"
 							>
 								Post
 							</button>
@@ -590,9 +717,8 @@
 import FoodRecipeStore from "@/store/FoodRecipe";
 import AuthUserStore from "@/store/AuthUser";
 import FoodRecipeService from "../../services/FoodRecipe";
-//import Label from '../../../../laravel101/vendor/laravel/breeze/stubs/inertia-vue/resources/js/Components/Label.vue';
 export default {
-  //components: { Label },
+	components: {},
 	data() {
 		return {
 			id: "",
@@ -613,6 +739,7 @@ export default {
 			textCancel: "",
 			commentList: "",
 			allComment: "",
+			inputServe: 1,
 		};
 	},
 	async created() {
@@ -782,6 +909,18 @@ export default {
 					}
 				}
 			});
+		},
+
+		plusPerServing() {
+			this.inputServe += 1;
+		},
+
+		minusPerServing() {
+			if (this.inputServe > 1) {
+				this.inputServe -= 1;
+			} else {
+				this.$swal("Sorry", "More than 1 Serving.", "error");
+			}
 		},
 	},
 };

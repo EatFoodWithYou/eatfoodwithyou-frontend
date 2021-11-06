@@ -12,6 +12,7 @@
 			type="nameForSearch"
 			v-model="form.nameForSearch"
 			placeholder="Search.."
+			id="searchByName"
 		/>
 		<router-link
 			class="
@@ -30,6 +31,7 @@
 				name: 'SearchRecipes',
 				params: { name: this.form.nameForSearch },
 			}"
+			id="searchByNameBt"
 			>ค้นหา</router-link
 		>
 		<!--    <button class="p-1 bg-green-100">ค้นหา </button>-->
