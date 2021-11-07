@@ -55,7 +55,7 @@ export default {
 			this.user_name = this.FoodRecipes.user_name;
 			if (
 				this.FoodRecipes.photo_url !==
-				"http://localhost:8000/storage/foodRecipe/"
+				`${process.env.VUE_APP_SHOP_ENDPOINT}/storage/foodRecipe/`
 			)
 				this.imageURL = this.FoodRecipes.photo_url;
 			else {
