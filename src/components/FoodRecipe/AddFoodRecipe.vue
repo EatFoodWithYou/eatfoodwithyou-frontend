@@ -89,6 +89,17 @@
 								Quantity per 1 serving
 							</p>
 						</h2>
+						<div class="my-3.5">
+							<p class="inline ml-80 font-normal text-base">
+								Ingredient
+							</p>
+							<p class="inline ml-48 font-normal text-base">
+								Quantity
+							</p>
+							<p class="inline ml-28 font-normal text-base">
+								Unit
+							</p>
+						</div>
 						<div v-for="(input, k) in allIngredient" :key="k">
 							<label
 								for="number"
