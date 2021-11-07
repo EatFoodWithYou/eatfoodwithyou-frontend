@@ -149,6 +149,32 @@
 						>
 							Log out
 						</button>
+						<span
+							class="
+								py-4
+								w-full
+								transition
+								text-gray-400
+								duration-200
+								text-lg
+							"
+						>
+							Project Info
+						</span>
+
+						<button
+							@click="wiki(), (isOpen = !isOpen)"
+							class="
+								w-full
+								transition
+								duration-200
+								text-lg text-white
+								hover:text-gray-300
+								cursor-pointer
+							"
+						>
+							Wiki
+						</button>
 					</nav>
 				</div>
 			</div>
@@ -190,6 +216,9 @@ export default {
 		},
 		allRecipes() {
 			this.$router.push("/admin/foodrecipes");
+		},
+		wiki() {
+			this.$router.push("/wiki");
 		},
 	},
 	created() {

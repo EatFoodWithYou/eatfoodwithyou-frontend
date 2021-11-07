@@ -14,6 +14,7 @@ import AdminFoodRecipes from "@/views/Admin/AdminFoodRecipes.vue";
 import EditFoodRecipe from "@/views/FoodRecipe/EditRecipe.vue";
 import SearchCategories from "../views/FoodRecipe/SearchCategories.vue";
 import UserManage from "@/views/Admin/UserManagement.vue";
+import Wiki from "@/views/Wiki.vue";
 
 // import IsFoodRecipe from '@/views/Admin/IsFoodRecipe.vue'
 
@@ -114,6 +115,11 @@ const routes = [
 		path: "/recipes/category/:categories",
 		name: "SearchCategories",
 		component: SearchCategories,
+	},
+	{
+		path: "/wiki",
+		name: "Wiki",
+		component: Wiki,
 	},
 ];
 
