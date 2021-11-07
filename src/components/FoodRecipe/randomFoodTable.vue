@@ -80,28 +80,24 @@ export default {
 	data() {
 		return {
 			randomFoodRecipe: "",
-			endPoint: "http://localhost:8000",
+			endPoint: process.env.VUE_APP_SHOP_ENDPOINT,
 			foodRecipe: "",
 		};
 	},
 	methods: {
 		async fetchRandomFoodRecipes() {
-			let res = await axios.get(
-				"http://localhost:8000/api/recipes/randoms"
-			);
+			let res = await axios.get(`${this.endPoint}/api/recipes/randoms`);
 			// console.log(res);
 			this.randomFoodRecipe = res.data.data;
 			// console.log(this.randomFoodRecipe);
 		},
 		async fetchRandomFoodRecipe() {
-			let res = await axios.get(
-				"http://localhost:8000/api/recipes/random"
-			);
+			let res = await axios.get(`${this.endPoint}/api/recipes/random`);
 			// console.log(res);
 			this.foodRecipe = res.data.data;
 			if (
 				this.foodRecipe.photo_url ===
-				"http://localhost:8000/storage/foodRecipe/"
+				`${this.endPoint}/storage/foodRecipe/`
 			)
 				this.foodRecipe.photo_url =
 					"https://via.placeholder.com/250x250";
