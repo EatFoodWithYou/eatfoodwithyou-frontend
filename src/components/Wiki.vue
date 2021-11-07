@@ -21,6 +21,7 @@
 									UI Flow
 								</label>
 								<img src="../assets/uiflow.jpg" alt="uiflow" />
+
 								<label
 									class="
 										pt-3
@@ -31,18 +32,38 @@
 										mb-2
 									"
 								>
-									Full image size (11500 x 7579) :
+									Figma :
 									<a
 										class="
 											text-blue-700
 											hover:text-blue-900
 											underline
 										"
-										href="https://drive.google.com/file/d/1JLeTOdKl9YH3e-1w-EnJ5m2fETpNRndy/view?usp=sharing"
+										href="https://www.figma.com/file/ceDIY8c2GPewqG55w59N1L/eatfoodwithyou?node-id=108%3A905"
 										target="_blank"
 										>UI Flow</a
 									>
-									<span> (Download recommended)</span>
+								</label>
+								<label
+									class="
+										block
+										tracking-wide
+										text-black text-lg
+										font-medium
+										mb-2
+									"
+								>
+									Google Drive :
+									<a
+										class="
+											text-blue-700
+											hover:text-blue-900
+											underline
+										"
+										href="https://drive.google.com/file/d/1s--tK2LiPza7jn2audp3ixpSi4KucWhQ/view?usp=sharing"
+										target="_blank"
+										>UI Flow</a
+									>
 								</label>
 							</div>
 						</div>
@@ -74,7 +95,28 @@
 										mb-2
 									"
 								>
-									Full image size :
+									Miro :
+									<a
+										class="
+											text-blue-700
+											hover:text-blue-900
+											underline
+										"
+										href="https://miro.com/app/board/o9J_lzIVHG8=/?invite_link_id=781147198563"
+										target="_blank"
+										>Persona</a
+									>
+								</label>
+								<label
+									class="
+										block
+										tracking-wide
+										text-black text-lg
+										font-medium
+										mb-2
+									"
+								>
+									Google Drive :
 									<a
 										class="
 											text-blue-700
@@ -110,7 +152,7 @@
 											ml-2
 										"
 									>
-										pdf version :&nbsp;
+										PDF version :&nbsp;
 										<a
 											class="
 												text-blue-700

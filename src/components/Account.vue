@@ -149,7 +149,7 @@
 						>
 							Log out
 						</button>
-						<span
+						<!-- <span
 							class="
 								py-4
 								w-full
@@ -174,7 +174,7 @@
 							"
 						>
 							Wiki
-						</button>
+						</button> -->
 					</nav>
 				</div>
 			</div>
