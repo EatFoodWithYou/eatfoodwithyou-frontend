@@ -19,7 +19,7 @@
 ## Project setup
 **Clone this Repo**
 ```
-npm install
+https://github.com/EatFoodWithYou/eatfoodwithyou-frontend.git
 ```
 
 **Install Program**
