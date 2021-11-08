@@ -76,6 +76,7 @@ import Random from "@/components/FoodRecipe/randomFoodRecipe.vue";
 import RandomFoodTable from "@/components/FoodRecipe/randomFoodTable.vue";
 import SearchBar from "@/components/FoodRecipe/SearchForm.vue";
 import CategoriesService from "../services/Categories";
+import AuthUser from "@/store/AuthUser";
 export default {
 	components: {
 		Navbar,
@@ -99,7 +100,16 @@ export default {
 	},
 	methods: {
 		add() {
-			this.$router.push("/recipe/add");
+			if (this.isAuthen() === false) {
+				this.$swal(
+					"You are not logged in.",
+					"Please login and go to this page again",
+					"error"
+				);
+				this.$router.push("/login");
+			} else {
+				this.$router.push("/recipe/add");
+			}
 		},
 		searchCategory() {
 			let categorySearchList = "";
@@ -123,6 +133,9 @@ export default {
 		},
 		checkboxToggle(index) {
 			this.categoryCheckbox[index] = !this.categoryCheckbox[index];
+		},
+		isAuthen() {
+			return AuthUser.getters.isAuthen;
 		},
 	},
 };
