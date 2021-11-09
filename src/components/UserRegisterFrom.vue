@@ -378,8 +378,13 @@ export default {
 								"Register Success",
 								`Welcome ${res.user.name}`,
 								"success"
-							);
-							this.$router.push("/");
+							).then((result) => {
+							if (result) 
+							{
+								this.$router.push("/");
+								this.$router.go();
+							}
+							});
 						} else {
 							this.$swal(
 								"Register Failed",
