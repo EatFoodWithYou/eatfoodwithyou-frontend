@@ -6,13 +6,14 @@
 					<h2 class="text-7xl" data-testid="title">Log in</h2>
 				</div>
 				<div class="flex justify-center">
-					<form
+					<!-- <form
 						class="w-3/12 max-w-4xl"
 						@submit.prevent="
 							login(loginFrom.email, loginFrom.password)
 						"
 						id="login"
-					>
+					> -->
+					<div class="w-3/12 max-w-4xl">
 						<div class="flex flex-wrap -mx-3 mb-5 mt-4">
 							<div class="w-full md:w-full px-3 md:mb-0">
 								<label
@@ -121,11 +122,15 @@
 									duration-250
 								"
 								id="submit"
+								@click="
+									login(loginFrom.email, loginFrom.password)
+								"
 							>
 								Log in
 							</button>
 						</div>
-					</form>
+						<!-- </form> -->
+					</div>
 				</div>
 			</div>
 		</div>
