@@ -1,23 +1,38 @@
 # eatfoodwithyou-frontend
+## โปรแกรมสำหรับคนรักการทำอาหาร
 
+ * ทุกท่านสามารถมาแลกเปลี่ยนสูตรอาหาร หรือนำสูตรอาหารไปทำตามที่บ้านง่ายๆ เพียงกดหาเมนูที่ต้องการ หรือเลือกจาก catagories 
+ * หรือหากนึกไม่ออกว่าวันนี้จะทานอะไรก็มีระบบสุ่มเมนูอาหารมาให้
+ * เพิ่มฟังก์ชันพิเศษสำหรับคำนวณวัตถุดิบตามจำนวนผู้รับประทาน เพื่อให้ปริมาณอาหารเพียงพอต่อการรับประทาน
+ * หน้าเว็บสวยงามสบายตา อ่านง่าย 
+ 
+-----------------------
+### รายชื่อสมาชิก 
+1. นายธรรมสรณ์ ยิ้มสวัสดิ์     รหัสนิสิต 6210406602
+2. นางสาวแพรว ปักษานนท์    รหัสนิสิต 6210406645
+3. นายณัฐพงศ์  พิสุทธิรัตนพันธุ์ รหัสนิสิต 6210406548
+4. นายธรรศ    อาจารสิริ      รหัสนิสิต 6210402453
+5. นายสุภเวช   อมรรักษากุล   รหัสนิสิต 6210406734
+6. นายศุภวัชร   สาครรัตนวงศ์  รหัสนิสิต 6210406696
+
+-----------------------
 ## Project setup
+**Clone this Repo**
+```
+https://github.com/EatFoodWithYou/eatfoodwithyou-frontend.git
+```
 
+**Install Program**
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
-
+**Compiles and hot-reloads for development**
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-
+**Compiles and minifies for production**
 ```
 npm run build
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
