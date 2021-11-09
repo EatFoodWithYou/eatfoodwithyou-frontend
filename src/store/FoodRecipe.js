@@ -3,8 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import FoodRecipe from "../services/FoodRecipe";
 
-const end_point =
-	process.env.SHOP_VUE_APP_SHOP_ENDPOINT || "http://localhost:8000";
+const end_point = process.env.VUE_APP_SHOP_ENDPOINT || "http://localhost:8000";
 
 Vue.use(Vuex);
 
@@ -72,7 +71,8 @@ export default new Vuex.Store({
 		async fetchFood({ commit }, id) {
 			try {
 				const url = end_point + `/api/recipes/${id}`;
-				console.log(url);
+				//let res = await FoodRecipe.fetchRecipeByIdNumber2(id)
+				//console.log(res);
 				//const headers = AuthService.getApiHeader();
 				//console.log("find", res)
 

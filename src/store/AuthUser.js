@@ -4,8 +4,7 @@ import axios from "axios";
 
 import AuthService from "@/services/AuthService";
 
-const end_point =
-	process.env.SHOP_VUE_APP_SHOP_ENDPOINT || "http://localhost:8000";
+const end_point = process.env.VUE_APP_SHOP_ENDPOINT || "http://localhost:8000";
 
 Vue.use(Vuex);
 
@@ -32,8 +31,8 @@ export default new Vuex.Store({
 	mutations: {
 		setCurrentUser(state, body) {
 			(state.currentUser.user = body.user),
-			(state.currentUser.jwt = body.jwt),
-			(state.currentUser.isAuthen = true);
+				(state.currentUser.jwt = body.jwt),
+				(state.currentUser.isAuthen = true);
 			// if (body.user.role === "ADMIN")
 			// {
 			//     state.currentUser.isAdmin = true
@@ -95,7 +94,7 @@ export default new Vuex.Store({
 				role,
 				age,
 			});
-			console.log("res" ,res);
+			console.log("res", res);
 
 			if (res.success) {
 				commit("setCurrentUser", res);

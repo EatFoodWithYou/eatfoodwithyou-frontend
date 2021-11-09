@@ -2,7 +2,7 @@
 	<div class="sm:flex z-30 border-b-2 border-bgColor">
 		<div class="sm:flex sm:justify-between font-sans bg-white w-full py-1">
 			<div class="flex justify-between px-4 text-black text-2xl">
-				<a class="flex mb-3" :href="`${this.api_end_point}`">
+				<a class="flex mb-3" :href="`/`">
 					<img
 						class="block h-12 w-auto mt-1.5"
 						src="../assets/logo.svg"
@@ -48,7 +48,7 @@
 							transition
 							duration-250
 						"
-						:href="`${this.api_end_point}`"
+						:href="`/`"
 						>Home</a
 					>
 
