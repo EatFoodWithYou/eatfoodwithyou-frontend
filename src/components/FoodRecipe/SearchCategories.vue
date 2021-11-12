@@ -24,7 +24,7 @@
 						v-if="recipe.photo"
 						v-bind:src="recipe.photo_url"
 						alt=""
-						class="rounded-t-lg"
+						class="rounded-t-lg myImage"
 					/>
 					<img
 						v-else
@@ -125,4 +125,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.myImage {
+	height: 225px;
+	width: 300px;
+}
+</style>

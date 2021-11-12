@@ -27,13 +27,13 @@
 						v-if="recipe.photo"
 						v-bind:src="recipe.photo_url"
 						alt=""
-						class="rounded-t-lg"
+						class="rounded-t-lg myImage"
 					/>
 					<img
 						v-else
 						src="https://via.placeholder.com/300x225"
 						alt=""
-						class="rounded-t-lg"
+						class="rounded-t-lg myImage"
 					/>
 					<div class="p-6">
 						<h2 class="font-semibold mb-2 text-lg text-black">
@@ -127,4 +127,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.myImage {
+	height: 225px;
+	width: 300px;
+}
+</style>
